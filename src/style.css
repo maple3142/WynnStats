@@ -1,0 +1,19 @@
+/*horizontal list-group*/
+
+.hl.list-group {
+	flex-direction: row;
+	overflow-x: auto;
+}
+
+.hl.list-group > .list-group-item {
+	flex: 1;
+	margin: 0;
+}
+
+.hl.list-group > .list-group-item:first-child {
+	border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.hl.list-group > .list-group-item:last-child {
+	border-radius: 0 0.25rem 0.25rem 0;
+}

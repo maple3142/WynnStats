@@ -13,26 +13,21 @@
 		</b-progress>
 
 		<!--skills-->
-		<b-list-group class="hl text-center">
+		<b-list-group class="hl text-center pt-2">
 			<b-list-group-item>
-				✤Strength:
-				<b>{{data.skills.Strength}}</b>
+				✤Strength: <b>{{data.skills.Strength}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				✦Dexterity:
-				<b>{{data.skills.Dexterity}}</b>
+				✦Dexterity: <b>{{data.skills.Dexterity}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				❉Intelligence:
-				<b>{{data.skills.Intelligence}}</b>
+				❉Intelligence: <b>{{data.skills.Intelligence}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				✹Defense:
-				<b>{{data.skills.Defense}}</b>
+				✹Defense: <b>{{data.skills.Defense}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				❋Agility:
-				<b>{{data.skills.Agility}}</b>
+				❋Agility: <b>{{data.skills.Agility}}</b>
 			</b-list-group-item>
 		</b-list-group>
 
@@ -107,13 +102,3 @@ export default {
 	}
 }
 </script>
-<style scoped>
-.hl {
-	flex-direction: row;
-	overflow-x: auto;
-}
-
-.list-group-item {
-	flex: 1;
-}
-</style>

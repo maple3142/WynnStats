@@ -1,13 +1,14 @@
-class Cache {
+export class Cache {
 	constructor({
 		storage = window.localStorage,
 		expire = 10 * 60 * 1000, //10min
-		namespace = 'cache'
+		namespace = 'cache',
+		data = {}
 	} = {}) {
 		this.storage = storage
 		this.expire = expire
 		this.namespace = namespace
-		this.data = {}
+		this.data = data
 
 		let item = this.storage.getItem(this.namespace)
 		if (item !== null) {

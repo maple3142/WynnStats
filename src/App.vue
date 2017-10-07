@@ -20,7 +20,7 @@
 			</b-collapse>
 		</b-navbar>
 
-		<b-container>
+		<b-container fluid>
 			<!--force render when path change-->
 			<router-view :key="$route.path"></router-view>
 		</b-container>
