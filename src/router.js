@@ -7,7 +7,7 @@ import user from './vue/user'
 
 const routes = [
 	{ path: '/', component: home },
-	{ path: '/:id', component: user }
+	{ path: '/player/:id', component: user }
 ]
 
 const router = new VueRouter({ routes })

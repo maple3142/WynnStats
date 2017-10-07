@@ -37,6 +37,7 @@ class Cache {
 	set(key, value) {
 		value = JSON.stringify(value)
 		this.data[key] = { time: Date.now(), value }
+
 		this.storage.setItem(this.namespace,JSON.stringify(this.data))
 	}
 
@@ -47,8 +48,15 @@ class Cache {
 		return null
 	}
 
+	remove(key) {
+		delete this.data[key]
+
+		this.storage.setItem(this.namespace,JSON.stringify(this.data))
+	}
+
 	clear() {
 		this.data = {}
+		
 		this.storage.removeItem(this.namespace)
 	}
 

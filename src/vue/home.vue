@@ -2,7 +2,7 @@
 	<div>
 		<b-row class="justify-content-md-center pb-2">
 			<b-col cols="12" class="text-center">
-				<b-img :src="require('@/assets/logo.png')" fluid class="img-responsive p-2"/>
+				<b-img :src="require('@/assets/logo.png')" fluid class="img-responsive p-2" />
 			</b-col>
 			<b-col>
 				<b-input-group>
@@ -19,6 +19,11 @@
 				</b-input-group>
 			</b-col>
 		</b-row>
+		<b-row class="justify-content-md-center pb-2">
+			<b-col class="text-center">
+				<i><b>WynnStats</b> is a serverless client which can view <a href="https://wynncraft.com/" target="_blank">wynncraft</a> player's statistics.</i>
+			</b-col>
+		</b-row>
 	</div>
 </template>
 <script>
@@ -32,7 +37,7 @@ export default {
 		query() {
 			let id = this.id
 			this.id = ''
-			this.$router.push(`/${id}`)
+			this.$router.push(`/player/${id}`)
 		}
 	}
 }

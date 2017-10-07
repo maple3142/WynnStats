@@ -14,10 +14,15 @@
 			<!--right-->
 			<b-col v-if="user && !user.error">
 				<!--information-->
-				<userinfo :user="user" />
+				<userinfo :user="user" class="p-2"/>
 				<b-row class="text-center">
 					<b-col>
 						<a :href="`https://wynncraft.com/stats/player/${id}`" target="_blank">Official Stats</a>
+					</b-col>
+				</b-row>
+				<b-row class="text-center">
+					<b-col>
+						<b-button variant="danger" @click="clear" v-b-tooltip.hover title="WynnStats will cache data for 10min by default.">Clear {{this.id}} cache</b-button>
 					</b-col>
 				</b-row>
 			</b-col>
@@ -49,7 +54,7 @@ export default {
 		}
 		else {
 			//fetch user data, api provided by runkit, source: https://runkit.com/maple3142/wynncraft-stats
-			let url = `https://wynncraft-stats-r8xzkwk4zuht.runkit.sh/${id}`
+			let url = `https://api.wynncraft.com/public_api.php?action=playerStats&command=${id}`
 			try {
 				this.user = await fetch(url).then(r => r.json())
 				cache.set(id,this.user)
@@ -60,6 +65,12 @@ export default {
 		}
 
 	},
-	components: { userinfo, classes }
+	components: { userinfo, classes },
+	methods: {
+		clear() {
+			cache.remove(this.id)
+			this.$router.go(0)
+		}
+	}
 }
 </script>
