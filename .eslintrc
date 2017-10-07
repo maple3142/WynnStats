@@ -1,0 +1,40 @@
+{
+	"env": {
+		"browser": true,
+		"commonjs": true,
+		"node": true,
+		"es6": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:vue/recommended"
+	],
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaVersion": 8
+	},
+	"rules": {
+		"indent": [
+			"error",
+			"tab"
+		],
+		"linebreak-style": [
+			"error",
+			"unix"
+		],
+		"quotes": [
+			"error",
+			"single"
+		],
+		"semi": [
+			"error",
+			"never"
+		],
+		"no-unused-vars": "off",
+		"no-console": "off",
+		"vue/valid-v-if": "error"
+	},
+	"globals": {
+		"__DEV__": true
+	}
+}
