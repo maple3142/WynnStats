@@ -1,7 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 module.exports = {
-	entry: ['babel-polyfill','./src/index.js'],
+	entry: ['whatwg-fetch','babel-polyfill','./src/index.js'],
 	output: {
 		path: __dirname + '/dist',
 		filename: 'bundle.js'

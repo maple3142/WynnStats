@@ -1,15 +1,19 @@
 <template>
 	<div>
+		<!--top-->
 		<b-row>
 			<!--left-->
 			<b-col>
+				<!--skin-->
 				<b-row class="text-center">
 					<b-col>
 						<b-img :src="`https://visage.surgeplay.com/bust/350/${id}.png`" />
 					</b-col>
 				</b-row>
 			</b-col>
+			<!--right-->
 			<b-col v-if="user && !user.error">
+				<!--information-->
 				<userinfo :user="user" />
 				<b-row class="text-center">
 					<b-col>
@@ -18,6 +22,7 @@
 				</b-row>
 			</b-col>
 		</b-row>
+		<!--bottom-->
 		<b-row v-if="user && !user.error">
 			<classes :classes="user.classes" class="p-2"></classes>
 		</b-row>
@@ -26,6 +31,9 @@
 <script>
 import userinfo from './user/userinfo'
 import classes from './user/classes'
+
+import cache from '@/cache'
+
 export default {
 	data() {
 		return {
@@ -33,27 +41,25 @@ export default {
 			user: null
 		}
 	},
-	beforeRouteUpdate(to, from, next) {
-		this.id = to.params.id
-		next()
-		this.init()
-	},
-	methods: {
-		init: async function() {
+	async created() {
+		let id = this.id.trim()
 
-			//fetch user data
-			let url = `https://wynncraft-stats-r8xzkwk4zuht.runkit.sh/${this.id}`
+		if (cache.has(id)) {
+			this.user = cache.get(id)
+		}
+		else {
+			//fetch user data, api provided by runkit, source: https://runkit.com/maple3142/wynncraft-stats
+			let url = `https://wynncraft-stats-r8xzkwk4zuht.runkit.sh/${id}`
 			try {
 				this.user = await fetch(url).then(r => r.json())
+				cache.set(id,this.user)
 			}
 			catch (e) {
 				alert(e.message)
 			}
 		}
+
 	},
-	created() {
-		this.init()
-	},
-	components: { userinfo,classes }
+	components: { userinfo, classes }
 }
 </script>

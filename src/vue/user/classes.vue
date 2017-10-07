@@ -1,26 +1,38 @@
 <template>
 	<b-col>
+		<!--class tabs-->
 		<b-nav justified tabs class="pb-2">
 			<b-nav-item v-for="(cls,name) in classes" :key="name" :active="name===cur" @click="select(name)">{{name}}</b-nav-item>
 		</b-nav>
-		<b-progress :value="data.xp" :max="100" :precision="1" show-progress></b-progress>
+
+		<!--xp-->
+		<b-progress :max="100">
+			<b-progress-bar :value="data.xp">
+				XP: {{ data.xp }}%
+			</b-progress-bar>
+		</b-progress>
 
 		<!--skills-->
 		<b-list-group class="hl text-center">
 			<b-list-group-item>
-				<span class="sk">✤</span>Strength: {{data.skills.Strength}}
+				✤Strength:
+				<b>{{data.skills.Strength}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				<span class="sk">✦</span>Dexterity: {{data.skills.Dexterity}}
+				✦Dexterity:
+				<b>{{data.skills.Dexterity}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				<span class="sk">❉</span>Intelligence: {{data.skills.Intelligence}}
+				❉Intelligence:
+				<b>{{data.skills.Intelligence}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				<span class="sk">✹</span>Defense: {{data.skills.Defense}}
+				✹Defense:
+				<b>{{data.skills.Defense}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				<span class="sk">❋</span>Agility: {{data.skills.Agility}}
+				❋Agility:
+				<b>{{data.skills.Agility}}</b>
 			</b-list-group-item>
 		</b-list-group>
 
@@ -55,16 +67,18 @@
 			</b-list-group-item>
 			<b-list-group-item>
 				Dungeons({{data.dungeonsAmount}}):
-				<span v-for="(times,dungeon,idx) in data.dungeons" :key="idx">
+				<span v-for="(times,dungeon) in data.dungeons" :key="dungeon">
 					<br>
 					<span class="pl-4">{{dungeon}}: {{times}}</span>
 				</span>
 			</b-list-group-item>
 			<b-list-group-item>
 				Quests({{data.questsAmount}}):
-				<span v-for="(quest,idx) in data.quests" :key="idx">
+				<span v-for="quest in data.quests" :key="quest">
 					<br>
-					<span class="pl-4"><a :href="`https://wynncraft.gamepedia.com/${quest}`" target="_blank">{{quest}}</a></span>
+					<span class="pl-4">
+						<a :href="`https://wynncraft.gamepedia.com/${quest}`">{{quest}}</a>
+					</span>
 				</span>
 			</b-list-group-item>
 		</b-list-group>
@@ -94,10 +108,12 @@ export default {
 }
 </script>
 <style scoped>
-.hl{
+.hl {
 	flex-direction: row;
+	overflow-x: auto;
 }
-.list-group-item{
+
+.list-group-item {
 	flex: 1;
 }
 </style>
