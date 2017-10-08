@@ -41,17 +41,3 @@ export default {
 	}
 }
 </script>
-
-<style scoped>
-.inline-container {
-	white-space: nowrap
-}
-
-.inline {
-	display: inline;
-}
-
-.inline>img {
-	height: 25px;
-}
-</style>

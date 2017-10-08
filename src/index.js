@@ -13,12 +13,12 @@ import router from './router'
 Vue.use(BootstrapVue)
 Vue.use(vuejsStorage)
 
-import App from './App'
+import app from './app'
 
 Vue.filter('toHours', min => Math.round(min / 60))
 
 new Vue({
 	el: '#app',
-	components: { App },
+	components: { app },
 	router
 })

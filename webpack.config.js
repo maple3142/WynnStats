@@ -1,5 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 module.exports = {
 	entry: ['whatwg-fetch', 'babel-polyfill', './src/index.js'],
 	output: {
@@ -24,8 +27,11 @@ module.exports = {
 				test: /\.vue$/
 			},
 			{
-				loader: 'style-loader!css-loader',
-				test: /\.css/
+				test: /\.css/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: 'css-loader?minimize&sourceMap'
+				})
 			},
 			{
 				test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -50,6 +56,36 @@ module.exports = {
 					configFile: '.eslintrc'
 				}
 			}
+		}),
+		new HtmlWebpackPlugin({
+			title: 'WynnStats',
+			filename: 'index.html',
+			template: 'src/index.ejs',
+			inject: false,
+			minify: {
+				collapseWhitespace: true,
+				removeComments: true,
+				removeRedundantAttributes: true
+			}
+		}),
+		new ExtractTextPlugin({
+			filename: 'style.css',
+			allChunks: true
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			},
+			comments: false,
+			sourceMap: true
+		}),
+		new OptimizeCssAssetsPlugin({
+			cssProcessorOptions: {
+				safe: true,
+				discardComments: {
+					removeAll: true,
+				},
+			},
 		})
 	],
 	devServer: {
@@ -58,5 +94,5 @@ module.exports = {
 		inline: true,
 		stats: 'errors-only'
 	},
-	devtool: 'sourcemap'
+	devtool: 'source-map'
 }
