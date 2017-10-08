@@ -72,7 +72,7 @@
 				<span v-for="quest in data.quests" :key="quest">
 					<br>
 					<span class="pl-4">
-						<a :href="`https://wynncraft.gamepedia.com/${quest}`">{{quest}}</a>
+						<a :href="`https://wynncraft.gamepedia.com/${quest}`" rel="noopener">{{quest}}</a>
 					</span>
 				</span>
 			</b-list-group-item>

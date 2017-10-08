@@ -10,24 +10,26 @@
 				<!--top-->
 				<b-row class="pb-2">
 					<!--left-->
-					<b-col>
+					<b-col class="text-center">
 						<!--skin-->
-						<b-row class="text-center">
+						<b-row>
 							<b-col>
-								<b-img :src="`https://visage.surgeplay.com/bust/350/${id}.png`" v-show="user && !user.error" />
+								<b-img :src="`https://visage.surgeplay.com/bust/350/${id}.png`" v-show="user && !user.error" :alt="`${id} skin`" />
 							</b-col>
 						</b-row>
 					</b-col>
 					<!--right-->
-					<b-col v-if="user && !user.error">
+					<b-col v-if="user && !user.error" class="text-center">
 						<!--information-->
-						<userinfo :user="user" class="p-2" />
-						<b-row class="text-center">
+						<b-row>
+							<userinfo :user="user" class="p-2" />
+						</b-row>
+						<b-row>
 							<b-col>
-								<a :href="`https://wynncraft.com/stats/player/${id}`" target="_blank">Official Stats</a>
+								<a :href="`https://wynncraft.com/stats/player/${id}`" target="_blank" rel="noopener">Official Stats</a>
 							</b-col>
 						</b-row>
-						<b-row class="text-center">
+						<b-row>
 							<b-col>
 								<b-button variant="danger" @click="clear" v-b-tooltip.hover title="WynnStats will cache data for 10min by default.">Clear {{this.id}} cache</b-button>
 							</b-col>
@@ -35,20 +37,8 @@
 					</b-col>
 				</b-row>
 				<!--middle-->
-				<b-row v-if="user && !user.error">
-					<b-col>
-						<b-list-group class="hl text-center">
-							<b-list-group-item v-if="user.rankings.player">
-								Level Rank: #{{user.rankings.player}}
-							</b-list-group-item>
-							<b-list-group-item v-if="user.rankings.pvp">
-								PVP Rank: #{{user.rankings.pvp}}
-							</b-list-group-item>
-							<b-list-group-item v-if="user.rankings.guild">
-								Guild Rank: #{{user.rankings.guild}}
-							</b-list-group-item>
-						</b-list-group>
-					</b-col>
+				<b-row v-if="user && !user.error" class="text-center">
+					<ranking :rankings="user.rankings"></ranking>
 				</b-row>
 				<!--bottom-->
 				<b-row v-if="user && !user.error">
@@ -61,10 +51,12 @@
 <script>
 import userinfo from './user/userinfo'
 import classes from './user/classes'
+import ranking from './user/ranking'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
 import cache from '@/cache'
+import { getPlayerStats } from '@/wynn'
 
 export default {
 	data() {
@@ -82,13 +74,8 @@ export default {
 			this.user = cache.get(id)
 		}
 		else {
-			//fetch user data, api provided by runkit, source: https://runkit.com/maple3142/wynncraft-stats
-			let url = `https://api.wynncraft.com/public_api.php?action=playerStats&command=${id}`
 			try {
-				this.user = await fetch(url).then(r => r.json())
-				if (this.user.error) {
-					throw new Error(`Player ${id} not found`)
-				}
+				this.user = await getPlayerStats(this.id)
 				cache.set(id, this.user)
 			}
 			catch (e) {
@@ -98,7 +85,7 @@ export default {
 		this.loading = false
 
 	},
-	components: { userinfo, classes, PulseLoader },
+	components: { userinfo, classes, PulseLoader, ranking },
 	methods: {
 		clear() {
 			cache.remove(this.id)

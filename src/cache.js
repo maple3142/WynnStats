@@ -36,7 +36,6 @@ export class Cache {
 	}
 
 	set(key, value) {
-		value = JSON.stringify(value)
 		this.data[key] = { time: Date.now(), value }
 
 		this.storage.setItem(this.namespace,JSON.stringify(this.data))
@@ -44,7 +43,7 @@ export class Cache {
 
 	get(key) {
 		if (this.has(key)) {
-			return JSON.parse(this.data[key].value)
+			return this.data[key].value
 		}
 		return null
 	}
@@ -63,4 +62,6 @@ export class Cache {
 
 }
 
-export default new Cache()
+export default new Cache({
+	namespace: 'wynnstats-user-cache'
+})

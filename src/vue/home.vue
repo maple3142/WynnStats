@@ -2,7 +2,7 @@
 	<div>
 		<b-row class="justify-content-md-center pb-2">
 			<b-col cols="12" class="text-center p-2">
-				<b-img :src="require('@/assets/logo.png')" fluid class="img-responsive p-2" />
+				<b-img :src="require('@/assets/logo.png')" fluid class="img-responsive p-2" alt="wynncraft logo"/>
 			</b-col>
 			<b-col md="8">
 				<b-input-group>

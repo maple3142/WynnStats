@@ -2,6 +2,7 @@
 	<div>
 		<!--navbar-->
 		<b-navbar toggleable="md" type="dark" variant="info">
+			<b-nav-toggle target="nav_collapse"></b-nav-toggle>
 			<b-navbar-brand tag="router-link" to="/">WynnStats</b-navbar-brand>
 			<b-collapse is-nav id="nav_collapse">
 				<b-nav is-nav-bar class="ml-auto">
