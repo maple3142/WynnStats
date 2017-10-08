@@ -11,7 +11,7 @@
 					</template>
 					<template slot="name" scope="row">
 						<router-link v-if="type!=='guild'" :to="`/player/${row.value}`">
-							<b-img-lazy fluid :src="`https://crafatar.com/avatars/${row.value}?size=20`"/>
+							<b-img-lazy fluid :src="`https://crafatar.com/avatars/${row.value}?size=20`" :rel="`${row.value}'s head`"/>
 							{{row.value}}
 						</router-link>
 						<router-link v-else :to="`/guild/${row.value}`">{{row.value}}</router-link>

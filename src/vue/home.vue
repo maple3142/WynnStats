@@ -8,7 +8,7 @@
 				<b-input-group class="p-2">
 					<b-form-input v-model="id" @keypress.enter.native="searchPlayer" placeholder="Minecraft id"></b-form-input>
 
-					<b-input-group-button slot="right">
+					<b-input-group-button slot="right" aria-label="search player">
 						<b-btn variant="primary" @click="searchPlayer">
 							<i class="fa fa-search" aria-hidden="true"></i>
 						</b-btn>
@@ -18,7 +18,7 @@
 				<b-input-group class="p-2">
 					<b-form-input v-model="guild" @keypress.enter.native="searchGuild" placeholder="Guild name"></b-form-input>
 
-					<b-input-group-button slot="right">
+					<b-input-group-button slot="right" aria-label="search guild">
 						<b-btn variant="primary" @click="searchGuild">
 							<i class="fa fa-search" aria-hidden="true"></i>
 						</b-btn>

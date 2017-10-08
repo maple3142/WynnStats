@@ -37,6 +37,7 @@
 	},
 	"scripts": {
 		"build": "webpack",
-		"dev": "webpack-dev-server -d"
+		"dev": "webpack-dev-server -d",
+		"test": "webpack"
 	}
 }

@@ -3,7 +3,7 @@
 		<b-list-group class="info">
 			<b-list-group-item>
 				<h3>
-					<b-img-lazy fluid :src="`https://crafatar.com/avatars/${player.username}?size=20`" /> {{player.username}}
+					<b-img-lazy fluid :src="`https://crafatar.com/avatars/${player.username}?size=20`" :rel="`${player.username}'s head`"/> {{player.username}}
 					<span v-if="tag" :class="tag">{{tag | format}}</span>
 				</h3>
 			</b-list-group-item>
