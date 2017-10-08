@@ -1,5 +1,5 @@
 <template>
-	<b-col>
+	<b-col class="p-2">
 		<b-list-group class="hl">
 			<b-list-group-item v-if="rankings.player">
 				Level Rank: #{{rankings.player}}
