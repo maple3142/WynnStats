@@ -6,36 +6,38 @@
 
 				<b-alert :show="error" variant="danger">Fetching leaderboard error.</b-alert>
 
-				<b-row>
-					<b-col>
-						<h3 class="capitalize">{{type}} LeaderBoard</h3>
-					</b-col>
-				</b-row>
-				<b-row>
-					<b-col v-if="list" class="text-center">
-						<b-form-radio-group v-if="type==='pvp'" v-model="timeframe" :options="[{text: 'All Time',value: 'alltime'},{text: 'Weekly',value: 'week'}]" size="sm" @change="fetchdata" />
+				<div v-if="list">
+					<b-row>
+						<b-col>
+							<h3 class="capitalize">{{type}} LeaderBoard</h3>
+						</b-col>
+					</b-row>
+					<b-row>
+						<b-col v-if="list" class="text-center">
+							<b-form-radio-group v-if="type==='pvp'" v-model="timeframe" :options="[{text: 'All Time',value: 'alltime'},{text: 'Weekly',value: 'week'}]" size="sm" @change="fetchdata" />
 
-						<b-row class="justify-content-md-center p-2">
-							<b-col md="8">
-								<b-form-input v-model="filter" type="text" placeholder="filter" />
-							</b-col>
-						</b-row>
+							<b-row class="justify-content-md-center p-2">
+								<b-col md="8">
+									<b-form-input v-model="filter" type="text" placeholder="filter" />
+								</b-col>
+							</b-row>
 
-						<b-row class="text-center">
-							<list v-if="list" v-bind="{list,type,filter}" />
-						</b-row>
-					</b-col>
-				</b-row>
-				<b-row>
-					<b-col>
-						<a href="https://wynncraft.com/stats/" target="_blank" rel="noopener">Official Stats</a>
-					</b-col>
-				</b-row>
-				<b-row>
-					<b-col>
-						<b-button variant="danger" @click="clear" v-b-tooltip.hover title="WynnStats will cache data for 10min by default.">Force refresh</b-button>
-					</b-col>
-				</b-row>
+							<b-row class="text-center">
+								<list v-if="list" v-bind="{list,type,filter}" />
+							</b-row>
+						</b-col>
+					</b-row>
+					<b-row>
+						<b-col>
+							<a href="https://wynncraft.com/stats/" target="_blank" rel="noopener">Official Stats</a>
+						</b-col>
+					</b-row>
+					<b-row>
+						<b-col>
+							<b-button variant="danger" @click="clear" v-b-tooltip.hover title="WynnStats will cache data for 10min by default.">Force refresh</b-button>
+						</b-col>
+					</b-row>
+				</div>
 			</b-col>
 		</b-row>
 	</div>
