@@ -1,11 +1,10 @@
 <template>
 	<div>
 		<b-row class="justify-content-md-center pb-2">
-			<b-col md="10">
-
+			<b-col md="8">
 				<PulseLoader class="text-center" :loading="loading" size="100px"></PulseLoader>
 
-				<b-alert :show="error" variant="danger">Player {{id}} not found</b-alert>
+				<b-alert :show="error" variant="danger">Player {{id}} not found.</b-alert>
 
 				<!--top-->
 				<b-row class="pb-2">

@@ -33,19 +33,22 @@
 </template>
 <script>
 export default {
-	data() {
-		return {
+	storage: {
+		namespace: 'wynn-home',
+		data: {
 			id: '',
 			guild: ''
 		}
 	},
 	methods: {
 		searchPlayer() {
+			if(!this.id)return
 			let id = this.id
 			this.id = ''
 			this.$router.push(`/player/${id}`)
 		},
 		searchGuild() {
+			if(!this.guild)return
 			let guild = this.guild
 			this.guild = ''
 			this.$router.push(`/guild/${guild}`)

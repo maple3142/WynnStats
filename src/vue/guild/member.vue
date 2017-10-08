@@ -9,51 +9,35 @@
 				</b-card>
 			</b-col>
 		</b-row>
+		<!--upper row-->
 		<b-row>
-			<!--left col-->
-			<b-col class="pr-0">
+			<b-card-group class="w-100">
 				<!--chief-->
-				<b-row>
-					<b-col class="p-0">
-						<b-card>
-							<h5>♕ Chief</h5>
-							<id v-for="player in chief" :key="player.name" :id="player.name" />
-						</b-card>
-
-					</b-col>
-				</b-row>
-				<!--recruiter-->
-				<b-row>
-					<b-col class="p-0">
-						<b-card>
-							<h5>♘ Recruiter</h5>
-							<id v-for="player in recruiter" :key="player.name" :id="player.name" />
-						</b-card>
-
-					</b-col>
-				</b-row>
-			</b-col>
-			<!--right col-->
-			<b-col class="pl-0">
+				<b-card>
+					<h5>♕ Chief</h5>
+					<id v-for="player in chief" :key="player.name" :id="player.name" />
+				</b-card>
 				<!--captain-->
-				<b-row>
-					<b-col class="p-0">
-						<b-card>
-							<h5>♖ Captain</h5>
-							<id v-for="player in captain" :key="player.name" :id="player.name" />
-						</b-card>
-					</b-col>
-				</b-row>
+				<b-card>
+					<h5>♖ Captain</h5>
+					<id v-for="player in captain" :key="player.name" :id="player.name" />
+				</b-card>
+			</b-card-group>
+		</b-row>
+		<!--bottom row-->
+		<b-row>
+			<b-card-group class="w-100">
+				<!--recruiter-->
+				<b-card>
+					<h5>♘ Recruiter</h5>
+					<id v-for="player in recruiter" :key="player.name" :id="player.name" />
+				</b-card>
 				<!--recruit-->
-				<b-row>
-					<b-col class="p-0">
-						<b-card>
-							<h5>♙ Recruit</h5>
-							<id v-for="player in recruit" :key="player.name" :id="player.name" />
-						</b-card>
-					</b-col>
-				</b-row>
-			</b-col>
+				<b-card>
+					<h5>♙ Recruit</h5>
+					<id v-for="player in recruit" :key="player.name" :id="player.name" />
+				</b-card>
+			</b-card-group>
 		</b-row>
 	</b-col>
 </template>

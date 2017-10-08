@@ -1,0 +1,61 @@
+{
+	"guild": {
+		"num": {
+			"label": "#",
+			"sortable": true
+		},
+		"name": {},
+		"territories": {
+			"sortable": true
+		},
+		"level": {
+			"sortable": true
+		},
+		"prefix": {
+			"label": "Tag"
+		},
+		"membersCount": {
+			"label": "Members",
+			"sortable": true
+		}
+	},
+	"player": {
+		"num": {
+			"label": "#",
+			"sortable": true
+		},
+		"name": {},
+		"level": {
+			"label": "Lv. Total",
+			"sortable": true
+		},
+		"xp": {
+			"label": "Total XP",
+			"sortable": true
+		},
+		"minPlayed": {
+			"label": "Time Played",
+			"sortable": true
+		},
+		"guildTag": {
+			"label": "Guild"
+		}
+	},
+	"pvp": {
+		"num": {
+			"label": "#",
+			"sortable": true
+		},
+		"name": {},
+		"level": {
+			"label": "Lv. Total",
+			"sortable": true
+		},
+		"kills": {
+			"sortable": true
+		},
+		"guildTag": {
+			"label": "Guild"
+		}
+	}
+}

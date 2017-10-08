@@ -10,7 +10,7 @@
 				Total Level: {{totallv}}
 			</b-list-group-item>
 			<b-list-group-item>
-				Total Playtime: {{totalplaytime}} hours
+				Total Playtime: {{this.player.playtime | toHours}} hours
 			</b-list-group-item>
 			<b-list-group-item>
 				Joined: {{joined}}
@@ -35,9 +35,6 @@ export default {
 				lv += cls.level
 			}
 			return lv
-		},
-		totalplaytime() {
-			return Math.floor(this.player.playtime / 60)
 		},
 		joined() {
 			return this.player.first_join_friendly

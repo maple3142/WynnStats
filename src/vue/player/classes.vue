@@ -96,9 +96,6 @@ export default {
 		}
 	},
 	filters: {
-		toHours(min) {
-			return Math.floor(min / 60)
-		},
 		strip(s) {
 			let lch = s.charCodeAt(s.length - 1)
 			if (lch >=48 && lch <= 57) { //is number

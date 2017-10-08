@@ -1,7 +1,7 @@
-export const APIURL='https://api.wynncraft.com/public_api.php'
+export const APIURL = 'https://api.wynncraft.com/public_api.php'
 
 export async function get(action, command) {
-	return await fetch(`${APIURL}?action=${action}&command=${command}`).then(r=>r.json())
+	return await fetch(`${APIURL}?action=${action}&command=${command}`).then(r => r.json())
 }
 
 export async function getPlayerStats(player) {
@@ -18,4 +18,8 @@ export async function getGuildStats(guild) {
 		throw new Error(res.error)
 	}
 	return res
+}
+
+export async function getLeaderBoard(type, timeframe = 'alltime') {
+	return await fetch(`${APIURL}?action=statsLeaderboard&type=${type}&timeframe=${timeframe}`).then(r => r.json()).then(j => j.data)
 }
