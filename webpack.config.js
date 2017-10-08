@@ -1,7 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 module.exports = {
-	entry: ['whatwg-fetch','babel-polyfill','./src/index.js'],
+	entry: ['whatwg-fetch', 'babel-polyfill', './src/index.js'],
 	output: {
 		path: __dirname + '/dist',
 		filename: 'bundle.js'
@@ -28,32 +28,8 @@ module.exports = {
 				test: /\.css/
 			},
 			{
-				test: /\.(jpe?g|png|gif|svg)$/i,
-				loaders: [
-					'file-loader', {
-						loader: 'image-webpack-loader',
-						options: {
-							gifsicle: {
-								interlaced: false,
-							},
-							optipng: {
-								optimizationLevel: 7,
-							},
-							pngquant: {
-								quality: '65-90',
-								speed: 4
-							},
-							mozjpeg: {
-								progressive: true,
-								quality: 65
-							},
-							// Specifying webp here will create a WEBP version of your JPG/PNG images
-							webp: {
-								quality: 75
-							}
-						}
-					}
-				]
+				test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+				loader: 'url-loader?limit=10000000'
 			}
 		]
 	},

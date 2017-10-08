@@ -7,18 +7,18 @@
 				<b-alert :show="error" variant="danger">Player {{id}} not found.</b-alert>
 
 				<!--top-->
-				<b-row class="pb-2">
+				<b-row v-if="player" class="pb-2">
 					<!--left-->
 					<b-col class="text-center">
 						<!--skin-->
 						<b-row>
 							<b-col>
-								<b-img :src="`https://visage.surgeplay.com/bust/350/${id}.png`" v-show="player" :alt="`${id} skin`" />
+								<b-img-lazy :src="`https://visage.surgeplay.com/bust/350/${id}.png`" :alt="`${id} skin`" />
 							</b-col>
 						</b-row>
 					</b-col>
 					<!--right-->
-					<b-col v-if="player" class="text-center">
+					<b-col class="text-center">
 						<!--information-->
 						<b-row>
 							<playerinfo :player="player" class="p-2" />
@@ -30,7 +30,9 @@
 						</b-row>
 						<b-row>
 							<b-col>
-								<b-button variant="danger" @click="clear" v-b-tooltip.hover title="WynnStats will cache data for 10min by default.">Force refresh</b-button>
+								<b-button variant="danger" @click="clear" v-b-tooltip.hover title="WynnStats will cache data for 10min by default.">
+									<i class="fa fa-refresh" aria-hidden="true"></i> Force refresh
+								</b-button>
 							</b-col>
 						</b-row>
 					</b-col>

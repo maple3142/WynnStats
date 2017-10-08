@@ -1,5 +1,5 @@
 # [WynnStats](https://maple3142.github.io/wynn/)
-*WynnStats is a serverless client which can view [wynncraft](https://wynncraft.com/) player's statistics.*
+*WynnStats is a serverless client which can view [wynncraft](https://wynncraft.com/) statistics.*
 
 ## Build
 ### yarn

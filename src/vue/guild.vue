@@ -24,7 +24,9 @@
 							</b-row>
 							<b-row>
 								<b-col>
-									<b-button variant="danger" @click="clear" v-b-tooltip.hover title="WynnStats will cache data for 10min by default.">Force refresh</b-button>
+									<b-button variant="danger" @click="clear" v-b-tooltip.hover title="WynnStats will cache data for 10min by default.">
+										<i class="fa fa-refresh" aria-hidden="true"></i> Force refresh
+									</b-button>
 								</b-col>
 							</b-row>
 						</b-col>

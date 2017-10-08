@@ -10,7 +10,10 @@
 						</span>
 					</template>
 					<template slot="name" scope="row">
-						<router-link v-if="type!=='guild'" :to="`/player/${row.value}`">{{row.value}}</router-link>
+						<router-link v-if="type!=='guild'" :to="`/player/${row.value}`">
+							<b-img-lazy fluid :src="`https://crafatar.com/avatars/${row.value}?size=20`"/>
+							{{row.value}}
+						</router-link>
 						<router-link v-else :to="`/guild/${row.value}`">{{row.value}}</router-link>
 					</template>
 					<template slot="minPlayed" scope="row">
@@ -49,11 +52,6 @@ export default {
 	}
 }
 </script>
-<style>
-th>div {
-	text-align: center !important;
-}
-</style>
 <style scoped>
 .rank1{
 	color: #F9FF00;

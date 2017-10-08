@@ -17,3 +17,17 @@
 .hl.list-group > .list-group-item:last-child {
 	border-radius: 0 0.25rem 0.25rem 0;
 }
+
+
+/*remove dropdown toggle icon*/
+
+.dropdown-toggle::after {
+	border: initial;
+}
+
+
+/*center table header*/
+
+th>div {
+	text-align: center !important;
+}
