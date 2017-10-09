@@ -13,7 +13,7 @@
 						<!--skin-->
 						<b-row>
 							<b-col>
-								<b-img :src="`https://visage.surgeplay.com/bust/350/${id}.png`" :alt="`${id} skin`" class="img-responsive"/>
+								<b-img :src="`https://visage.surgeplay.com/bust/350/${id}.png`" fluid :alt="`${id} skin`" class="img-responsive"/>
 							</b-col>
 						</b-row>
 					</b-col>

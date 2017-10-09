@@ -51,14 +51,14 @@ export default {
 			type: this.$route.params.type,
 			list: null,
 			error: false,
-			loading: true
+			loading: true,
+			filter: ''
 		}
 	},
 	storage: {
 		namespace: 'wynn-leaderboard',
 		data: {
-			timeframe: 'alltime',
-			filter: ''
+			timeframe: 'alltime'
 		}
 	},
 	components: { PulseLoader, List, Clear },

@@ -2,14 +2,14 @@
 	<div>
 		<b-row class="justify-content-md-center pb-2">
 			<b-col cols="12" class="text-center p-2">
-				<b-img :src="require('@/assets/logo.png')" fluid class="img-responsive p-2" alt="wynncraft logo" />
+				<b-img :src="require('@/assets/logo.png')" fluid class="p-2" alt="wynncraft logo" />
 			</b-col>
 			<b-col md="8">
 				<b-input-group class="p-2">
 					<b-input-group-button>
 						<Dropdown :text="type" variant="success">
-							<b-dropdown-item @click="type = 'player'">Player</b-dropdown-item>
-							<b-dropdown-item @click="type = 'guild'">Guild</b-dropdown-item>
+							<b-dropdown-item @click="type = 'player'" :class="{active: type==='player'}">Player</b-dropdown-item>
+							<b-dropdown-item @click="type = 'guild'" :class="{active: type==='guild'}">Guild</b-dropdown-item>
 						</Dropdown>
 					</b-input-group-button>
 
@@ -26,15 +26,20 @@
 		</b-row>
 		<b-row class="justify-content-md-center pb-2">
 			<b-col class="text-center">
-				<i>
-					<b>WynnStats</b> is a serverless client which can view
-					<a href="https://wynncraft.com/" target="_blank" rel="noopener">WynnCraft</a> statistics.</i>
+				<b>WynnStats</b> is a serverless client which can view
+				<a href="https://wynncraft.com/" target="_blank" rel="noopener">WynnCraft</a> statistics.</i>
+			</b-col>
+		</b-row>
+		<b-row class="justify-content-md-center pb-2">
+			<b-col class="text-center">
+				<a href="javascript:void(0)" @click="clear">Clear cache</a>
 			</b-col>
 		</b-row>
 	</div>
 </template>
 <script>
 import Dropdown from './widget/Dropdown'
+import Clear from './widget/Clear'
 export default {
 	data() {
 		return {
@@ -51,9 +56,11 @@ export default {
 	methods: {
 		search() {
 			if (!this.id) return
-			let id = this.id
-			this.id = ''
-			this.$router.push(`/${this.type}/${id}`)
+			this.$router.push(`/${this.type}/${this.id}`)
+		},
+		clear() {
+			localStorage.clear()
+			location.reload(true)
 		}
 	},
 	computed: {
@@ -66,6 +73,6 @@ export default {
 			}
 		}
 	},
-	components: { Dropdown }
+	components: { Dropdown, Clear }
 }
 </script>
