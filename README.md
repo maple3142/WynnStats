@@ -19,7 +19,7 @@ npm run dev #start dev server
 After build success, open `dist/index.html` in browser.
 
 ## TODO
-- [ ] Online Players List
+- [x] Online Players List
 - [x] True search system
 - [ ] Guild Territories
 - [ ] Item Database
