@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<b-row class="justify-content-md-center pb-2">
+		<b-row class="justify-content-md-center p-2">
 			<b-col cols="12" class="text-center p-2">
 				<b-img :src="require('@/assets/logo.png')" fluid class="p-2" alt="wynncraft logo" />
 			</b-col>
@@ -8,6 +8,7 @@
 				<b-input-group class="p-2">
 					<b-input-group-button>
 						<Dropdown :text="type" variant="success">
+							<b-dropdown-item @click="type = 'search'" :class="{active: type==='search'}">Search</b-dropdown-item>
 							<b-dropdown-item @click="type = 'player'" :class="{active: type==='player'}">Player</b-dropdown-item>
 							<b-dropdown-item @click="type = 'guild'" :class="{active: type==='guild'}">Guild</b-dropdown-item>
 						</Dropdown>
@@ -50,7 +51,7 @@ export default {
 	storage: {
 		namespace: 'wynn-home',
 		data: {
-			type: 'player'
+			type: 'search'
 		}
 	},
 	methods: {
@@ -65,10 +66,12 @@ export default {
 	},
 	computed: {
 		placeholder() {
-			if (this.type === 'player') {
+			switch (this.type) {
+			case 'search':
+				return 'Search'
+			case 'player':
 				return 'Minecraft ID'
-			}
-			else {
+			case 'guild':
 				return 'Guild Name'
 			}
 		}

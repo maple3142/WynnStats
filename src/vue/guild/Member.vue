@@ -44,7 +44,7 @@
 <script>
 import _ from 'lodash'
 
-import Id from './Id'
+import Id from '../widget/Id'
 export default {
 	props: {
 		members: Array

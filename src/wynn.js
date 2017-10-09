@@ -23,3 +23,7 @@ export async function getGuildStats(guild) {
 export async function getLeaderBoard(type, timeframe = 'alltime') {
 	return await fetch(`${APIURL}?action=statsLeaderboard&type=${type}&timeframe=${timeframe}`).then(r => r.json()).then(j => j.data)
 }
+
+export async function search(str) {
+	return await fetch(`${APIURL}?action=statsSearch&search=${str}`).then(r=>r.json())
+}

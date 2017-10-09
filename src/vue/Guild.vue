@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<b-row class="justify-content-md-center pb-2">
+		<b-row class="justify-content-md-center p-2">
 			<b-col md="8">
 				<PulseLoader class="text-center" :loading="loading" size="100px"></PulseLoader>
 
