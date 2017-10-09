@@ -4,7 +4,9 @@
 			<b-col md="8">
 				<PulseLoader class="text-center" :loading="loading" size="100px"></PulseLoader>
 
-				<b-alert :show="error" variant="danger">Player {{id}} not found.</b-alert>
+				<b-alert :show="error" variant="danger">
+					Player "{{id}}" not found.Try to <b-link :to="`/search/${id}`">search</b-link> it?
+				</b-alert>
 
 				<!--top-->
 				<b-row v-if="player" class="pb-2">

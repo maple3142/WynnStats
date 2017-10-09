@@ -6,23 +6,25 @@
 
 				<b-alert :show="error" variant="danger">Search failed.</b-alert>
 
+				<b-alert :show="error2" variant="danger">Search string need to be longer than 3 character.</b-alert>
+
 				<div v-if="result">
 					<b-row class="justify-content-md-center p-2 text-center">
 						<b-col cols="12" md="6" v-if="result.guilds.length">
-							<h4>Guilds</h4>
-							<List :list="result.guilds">
+							<h4>Guilds({{result.guilds.length}})</h4>
+							<PageList :list="result.guilds">
 								<template scope="row">
 									<b-link :to="`/guild/${row.value}`">{{row.value}}</b-link>
 								</template>
-							</List>
+							</PageList>
 						</b-col>
 						<b-col cols="12" md="6" v-if="result.players.length">
-							<h4>Players</h4>
-							<List :list="result.players">
+							<h4>Players({{result.players.length}})</h4>
+							<PageList :list="result.players">
 								<template scope="row">
-									<Id :id="row.value"/>
+									<Id :id="row.value" />
 								</template>
-							</List>
+							</PageList>
 						</b-col>
 					</b-row>
 				</div>
@@ -31,8 +33,8 @@
 	</div>
 </template>
 <script>
-import Id from './widget/Id.vue'
-import List from './search/List.vue'
+import Id from './widget/Id'
+import PageList from './widget/PageList'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
@@ -46,12 +48,18 @@ export default {
 			search: this.$route.params.search,
 			result: null,
 			error: false,
+			error2: false,
 			loading: true
 		}
 	},
-	components: { PulseLoader, Id, List },
+	components: { PulseLoader, Id, PageList },
 	async created() {
 		let s = this.search
+		if (s.length < 3) {
+			this.loading = false
+			this.error2 = true
+			return
+		}
 		if (cache.has(s)) {
 			this.result = cache.get(s)
 		}
@@ -61,6 +69,7 @@ export default {
 				cache.set(s, this.result)
 			}
 			catch (e) {
+				console.error(e)
 				this.error = true
 			}
 		}

@@ -20,7 +20,7 @@ After build success, open `dist/index.html` in browser.
 
 ## TODO
 - [ ] Online Players List
-- [ ] True search system
+- [x] True search system
 - [ ] Guild Territories
 - [ ] Item Database
 - [ ] Show your id and location if you are in game

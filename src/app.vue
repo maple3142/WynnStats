@@ -6,6 +6,7 @@
 			<b-navbar-brand tag="router-link" to="/">WynnStats</b-navbar-brand>
 			<b-collapse is-nav id="nav_collapse">
 				<b-nav is-nav-bar>
+					<b-nav-item to="/online">OnlinePlayers</b-nav-item>
 					<Dropdown text="LeaderBoard" nav>
 						<b-dropdown-item to="/leaderboard/guild">Guild</b-dropdown-item>
 						<b-dropdown-item to="/leaderboard/player">Player</b-dropdown-item>

@@ -4,7 +4,9 @@
 			<b-col md="8">
 				<PulseLoader class="text-center" :loading="loading" size="100px"></PulseLoader>
 
-				<b-alert :show="error" variant="danger">Guild {{name}} not found.</b-alert>
+				<b-alert :show="error" variant="danger">
+					Guild "{{name}}" not found.Try to <b-link :to="`/search/${name}`">search</b-link> it?
+				</b-alert>
 
 				<div v-if="guild">
 					<!--information-->

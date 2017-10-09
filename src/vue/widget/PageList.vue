@@ -4,7 +4,7 @@
 			<b-col>
 				<b-list-group>
 					<b-list-group-item v-for="item in items" :key="item">
-						<slot :value="item" />
+						<slot :value="item"/>
 					</b-list-group-item>
 				</b-list-group>
 			</b-col>
