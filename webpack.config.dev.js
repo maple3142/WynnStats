@@ -3,6 +3,12 @@ var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+
+var extcss = ExtractTextPlugin.extract({
+	fallback: 'style-loader',
+	use: 'css-loader?sourceMap'
+})
+
 module.exports = {
 	entry: ['whatwg-fetch', 'babel-polyfill', './src/index.js'],
 	output: {
@@ -24,14 +30,16 @@ module.exports = {
 			},
 			{
 				loader: 'vue-loader',
-				test: /\.vue$/
+				test: /\.vue$/,
+				options: {
+					loaders: {
+						css: extcss
+					}
+				}
 			},
 			{
 				test: /\.css/,
-				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: 'css-loader?minimize&sourceMap'
-				})
+				use: extcss
 			},
 			{
 				test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -41,7 +49,7 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
-			vue: process.env.NODE_ENV === 'development' ? 'vue/dist/vue.js' : 'vue/dist/vue.min.js',
+			vue: 'vue/dist/vue.esm.js',
 			'@': path.resolve('./src')
 		},
 		extensions: ['*', '.js', '.vue', '.css']
@@ -61,31 +69,11 @@ module.exports = {
 			title: 'WynnStats',
 			filename: 'index.html',
 			template: 'src/index.ejs',
-			inject: false,
-			minify: {
-				collapseWhitespace: true,
-				removeComments: true,
-				removeRedundantAttributes: true
-			}
+			inject: false
 		}),
 		new ExtractTextPlugin({
 			filename: 'style.css',
 			allChunks: true
-		}),
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			},
-			comments: false,
-			sourceMap: true
-		}),
-		new OptimizeCssAssetsPlugin({
-			cssProcessorOptions: {
-				safe: true,
-				discardComments: {
-					removeAll: true,
-				},
-			},
 		})
 	],
 	devServer: {
