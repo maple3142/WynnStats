@@ -37,6 +37,9 @@
 			"label": "Time Played",
 			"sortable": true
 		},
+		"tag": {
+			"label": "Tag"
+		},
 		"guildTag": {
 			"label": "Guild"
 		}
@@ -47,12 +50,19 @@
 			"sortable": true
 		},
 		"name": {},
+		"kills": {
+			"sortable": true
+		},
 		"level": {
 			"label": "Lv. Total",
 			"sortable": true
 		},
-		"kills": {
+		"minPlayed": {
+			"label": "Time Played",
 			"sortable": true
+		},
+		"tag": {
+			"label": "Tag"
 		},
 		"guildTag": {
 			"label": "Guild"

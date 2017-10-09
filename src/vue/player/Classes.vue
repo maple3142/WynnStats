@@ -2,7 +2,7 @@
 	<b-col>
 		<!--class tabs-->
 		<b-nav justified tabs class="pb-2">
-			<b-nav-item v-for="(cls,name) in classes" :key="name" :active="name===cur" @click="select(name)" class="classname">{{name | strip }} (Lv.{{classes[name].level}})</b-nav-item>
+			<b-nav-item v-for="(cls,name) in classes" :key="name" :active="name===cur" @click="select(name)" class="capitalize">{{name | strip }} (Lv.{{classes[name].level}})</b-nav-item>
 		</b-nav>
 
 		<!--xp-->
@@ -108,8 +108,3 @@ export default {
 	}
 }
 </script>
-<style scoped>
-.classname{
-	text-transform: capitalize;
-}
-</style>

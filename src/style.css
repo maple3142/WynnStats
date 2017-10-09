@@ -31,3 +31,7 @@
 th>div {
 	text-align: center !important;
 }
+
+.capitalize{
+	text-transform: capitalize;
+}

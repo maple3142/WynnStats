@@ -3,8 +3,8 @@
 		<b-list-group class="info">
 			<b-list-group-item>
 				<h3>
-					<b-img-lazy fluid :src="`https://crafatar.com/avatars/${player.username}?size=20`" :rel="`${player.username}'s head`"/> {{player.username}}
-					<span v-if="tag" :class="tag">{{tag | format}}</span>
+					<b-img-lazy fluid :src="`https://crafatar.com/avatars/${player.username}?size=20`" :rel="`${player.username}'s head`" /> {{player.username}}
+					<Tag :tag="player.tag" :rank="player.rank"/>
 				</h3>
 			</b-list-group-item>
 			<b-list-group-item>
@@ -27,6 +27,7 @@
 	</b-col>
 </template>
 <script>
+import Tag from '../widget/Tag'
 export default {
 	props: {
 		player: Object
@@ -44,52 +45,8 @@ export default {
 		},
 		lastlogin() {
 			return this.player.last_join_friendly
-		},
-		tag() {
-			if (this.player.rank === 'Moderator') {
-				return 'MODERATOR'
-			}
-			if (this.player.rank === 'Builder') {
-				return 'BUILDER'
-			}
-			if (this.player.rank === 'Game Master') {
-				return 'GAME_MASTER'
-			}
-			if (this.player.tag === 'VIP+') {
-				return 'VIP_PLUS'
-			}
-			return this.player.tag
 		}
 	},
-	filters: {
-		format(tag) {
-			if (tag === 'VIP_PLUS') {
-				return 'VIP+'
-			}
-			return tag
-		}
-	}
+	components: { Tag }
 }
 </script>
-<style scoped>
-.HERO {
-	color: #AA00AA;
-}
-
-.VIP_PLUS {
-	color: #00C3FF;
-}
-
-.VIP {
-	color: #48F147;
-}
-
-.MODERATOR {
-	color: #F9C700;
-}
-
-.BUILDER,
-.GAME_MASTER {
-	color: #0099C7;
-}
-</style>

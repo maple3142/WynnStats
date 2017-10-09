@@ -2,26 +2,22 @@
 	<div>
 		<b-row class="justify-content-md-center pb-2">
 			<b-col cols="12" class="text-center p-2">
-				<b-img :src="require('@/assets/logo.png')" fluid class="img-responsive p-2" alt="wynncraft logo"/>
+				<b-img :src="require('@/assets/logo.png')" fluid class="img-responsive p-2" alt="wynncraft logo" />
 			</b-col>
 			<b-col md="8">
 				<b-input-group class="p-2">
-					<b-form-input v-model="id" @keypress.enter.native="searchPlayer" placeholder="Minecraft id"></b-form-input>
+					<b-input-group-button>
+						<Dropdown :text="type" variant="success">
+							<b-dropdown-item @click="type = 'player'">Player</b-dropdown-item>
+							<b-dropdown-item @click="type = 'guild'">Guild</b-dropdown-item>
+						</Dropdown>
+					</b-input-group-button>
+
+					<b-form-input v-model="id" @keypress.enter.native="search" :placeholder="placeholder"></b-form-input>
 
 					<b-input-group-button slot="right" aria-label="search player">
 						<label for="ps" class="sr-only">Search Player</label>
-						<b-btn variant="primary" @click="searchPlayer" id="ps">
-							<i class="fa fa-search" aria-hidden="true"></i>
-						</b-btn>
-					</b-input-group-button>
-				</b-input-group>
-
-				<b-input-group class="p-2">
-					<b-form-input v-model="guild" @keypress.enter.native="searchGuild" placeholder="Guild name"></b-form-input>
-
-					<b-input-group-button slot="right" aria-label="search guild">
-						<label for="gs" class="sr-only">Search Guild</label>
-						<b-btn variant="primary" @click="searchGuild" id="gs">
+						<b-btn variant="primary" @click="search" id="ps">
 							<i class="fa fa-search" aria-hidden="true"></i>
 						</b-btn>
 					</b-input-group-button>
@@ -38,6 +34,7 @@
 	</div>
 </template>
 <script>
+import Dropdown from './widget/Dropdown'
 export default {
 	data() {
 		return {
@@ -45,19 +42,30 @@ export default {
 			guild: ''
 		}
 	},
+	storage: {
+		namespace: 'wynn-home',
+		data: {
+			type: 'player'
+		}
+	},
 	methods: {
-		searchPlayer() {
+		search() {
 			if (!this.id) return
 			let id = this.id
 			this.id = ''
-			this.$router.push(`/player/${id}`)
-		},
-		searchGuild() {
-			if (!this.guild) return
-			let guild = this.guild
-			this.guild = ''
-			this.$router.push(`/guild/${guild}`)
+			this.$router.push(`/${this.type}/${id}`)
 		}
-	}
+	},
+	computed: {
+		placeholder() {
+			if (this.type === 'player') {
+				return 'Minecraft ID'
+			}
+			else {
+				return 'Guild Name'
+			}
+		}
+	},
+	components: { Dropdown }
 }
 </script>

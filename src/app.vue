@@ -6,15 +6,11 @@
 			<b-navbar-brand tag="router-link" to="/">WynnStats</b-navbar-brand>
 			<b-collapse is-nav id="nav_collapse">
 				<b-nav is-nav-bar>
-					<b-nav-item-dropdown @shown="dropdown = true" @hidden="dropdown = false">
-						<template slot="button-content">
-							LeaderBoard
-							<i class="fa" :class="{'fa-caret-down': !dropdown,'fa-caret-up': dropdown}" aria-hidden="true"></i>
-						</template>
+					<Dropdown text="LeaderBoard" nav>
 						<b-dropdown-item to="/leaderboard/guild">Guild</b-dropdown-item>
 						<b-dropdown-item to="/leaderboard/player">Player</b-dropdown-item>
 						<b-dropdown-item to="/leaderboard/pvp">PVP</b-dropdown-item>
-					</b-nav-item-dropdown>
+					</Dropdown>
 				</b-nav>
 
 				<b-nav is-nav-bar class="ml-auto">
@@ -33,11 +29,13 @@
 	</div>
 </template>
 <script>
+import Dropdown from './vue/widget/Dropdown'
 export default {
 	data() {
 		return {
 			dropdown: false
 		}
-	}
+	},
+	components: { Dropdown }
 }
 </script>

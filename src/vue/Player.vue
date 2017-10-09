@@ -9,16 +9,16 @@
 				<!--top-->
 				<b-row v-if="player" class="pb-2">
 					<!--left-->
-					<b-col class="text-center">
+					<b-col class="text-center" cols="12" md="6">
 						<!--skin-->
 						<b-row>
 							<b-col>
-								<b-img-lazy :src="`https://visage.surgeplay.com/bust/350/${id}.png`" :alt="`${id} skin`" />
+								<b-img :src="`https://visage.surgeplay.com/bust/350/${id}.png`" :alt="`${id} skin`" class="img-responsive"/>
 							</b-col>
 						</b-row>
 					</b-col>
 					<!--right-->
-					<b-col class="text-center">
+					<b-col class="text-center" md="6">
 						<!--information-->
 						<b-row>
 							<PlayerInfo :player="player" class="p-2" />

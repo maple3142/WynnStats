@@ -19,6 +19,9 @@
 					<template slot="minPlayed" scope="row">
 						{{row.value | toHours}} hours
 					</template>
+					<template slot="tag" scope="row">
+						<Tag :tag="row.value" :rank="row.item.rank" :veteran="row.item.veteran"/>
+					</template>
 				</b-table>
 			</b-col>
 		</b-row>
@@ -30,6 +33,8 @@
 	</b-col>
 </template>
 <script>
+import Tag from '../widget/Tag'
+
 import fields from './fields.json'
 export default {
 	props: {
@@ -53,7 +58,8 @@ export default {
 			this.rows=data.length
 			this.page=1
 		}
-	}
+	},
+	components: {Tag}
 }
 </script>
 <style scoped>
