@@ -9,9 +9,9 @@
 				</b-list-group>
 			</b-col>
 		</b-row>
-		<b-row>
+		<b-row v-if="filtered.length>perpage">
 			<b-col>
-				<b-pagination size="md" :total-rows="filtered.length" v-model="page" :per-page="perpage" align="center" />
+				<b-pagination :size="size" :total-rows="filtered.length" v-model="page" :per-page="perpage" align="center" />
 			</b-col>
 		</b-row>
 	</div>
@@ -33,6 +33,11 @@ export default {
 		startPage: {
 			type: Number,
 			default: 1
+		},
+		size: {
+			type: String,
+			default: 'md',
+			vaildator: /^(sm|md|lg)$/
 		}
 	},
 	data() {
@@ -46,6 +51,9 @@ export default {
 			if (this.filter) {
 				ar = ar.filter(e => e.includes(this.filter))
 			}
+
+			this.$emit('filtered', ar)
+
 			return ar
 		},
 		items() {

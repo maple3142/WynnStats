@@ -11,7 +11,8 @@
 						<b-col md="8">
 							<b-input-group class="p-2">
 								<b-input-group-button>
-									<Dropdown :text="cur" variant="success">
+									<!--format: servername(server player count)-->
+									<Dropdown :text="`${cur}(${result[cur].length})`" variant="success">
 										<b-dropdown-item v-for="(srv,srvname) in result" :key="srvname" v-if="srv.length" :class="{active: cur === srvname}" @click="cur = srvname">
 											{{srvname}}({{srv.length}})
 										</b-dropdown-item>
@@ -69,7 +70,7 @@ export default {
 	storage: {
 		namespace: 'wynn-onlineplayers',
 		data: {
-			cur: '' //selected server
+			cur: '' //selected server name
 		}
 	},
 	components: { PulseLoader, Id, PageList, Dropdown, Clear },

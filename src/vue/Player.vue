@@ -5,7 +5,8 @@
 				<PulseLoader class="text-center" :loading="loading" size="100px"></PulseLoader>
 
 				<b-alert :show="error" variant="danger">
-					Player "{{id}}" not found.Try to <b-link :to="`/search/${id}`">search</b-link> it?
+					Player "{{id}}" not found.Try to
+					<b-link :to="`/search/${id}`">search</b-link> it?
 				</b-alert>
 
 				<!--top-->
@@ -15,7 +16,7 @@
 						<!--skin-->
 						<b-row>
 							<b-col>
-								<b-img :src="`https://visage.surgeplay.com/bust/350/${id}.png`" fluid :alt="`${id} skin`" class="img-responsive"/>
+								<b-img :src="`https://visage.surgeplay.com/bust/350/${id}.png`" fluid :alt="`${id} skin`" class="img-responsive" />
 							</b-col>
 						</b-row>
 					</b-col>
@@ -26,7 +27,7 @@
 							<PlayerInfo :player="player" class="p-2" />
 						</b-row>
 						<b-row>
-							<Clear :href="`https://wynncraft.com/stats/player/${id}`" @clear="clear"/>
+							<Clear :href="`https://wynncraft.com/stats/player/${id}`" @clear="clear" />
 						</b-row>
 					</b-col>
 				</b-row>

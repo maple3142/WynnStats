@@ -5,7 +5,8 @@
 				<PulseLoader class="text-center" :loading="loading" size="100px"></PulseLoader>
 
 				<b-alert :show="error" variant="danger">
-					Guild "{{name}}" not found.Try to <b-link :to="`/search/${name}`">search</b-link> it?
+					Guild "{{name}}" not found.Try to
+					<b-link :to="`/search/${name}`">search</b-link> it?
 				</b-alert>
 
 				<div v-if="guild">
@@ -36,8 +37,8 @@
 						</b-col>
 					</b-row>
 
-					<b-row class="pt-2">
-						<b-col class="text-center">
+					<b-row class="justify-content-md-center pt-2">
+						<b-col lg="8" class="text-center">
 							<Member :members="guild.members" />
 						</b-col>
 					</b-row>

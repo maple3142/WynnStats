@@ -5,14 +5,13 @@
 				<b-table responsive striped hover :items="list" :current-page="page" :per-page="10" :fields="field" :filter="filter" @filtered="filtered">
 					<template slot="num" scope="row">
 						<span>
-							<span v-if="row.value<=3" :class="`rank${row.value}`">♛</span>
+							<span v-if="row.value<=3" :class="`rank${row.value}`" aria-hidden="true">♛</span>
 							{{row.value}}
 						</span>
 					</template>
 					<template slot="name" scope="row">
 						<b-link v-if="type!=='guild'" :to="`/player/${row.value}`">
-							<b-img-lazy fluid :src="`https://crafatar.com/avatars/${row.value}?size=20`" :rel="`${row.value}'s head`"/>
-							{{row.value}}
+							<b-img-lazy fluid :src="`https://crafatar.com/avatars/${row.value}?size=20`" :rel="`${row.value}'s head`" /> {{row.value}}
 						</b-link>
 						<b-link v-else :to="`/guild/${row.value}`">{{row.value}}</b-link>
 					</template>
@@ -20,7 +19,7 @@
 						{{row.value | toHours}} hours
 					</template>
 					<template slot="tag" scope="row">
-						<Tag :tag="row.value" :rank="row.item.rank" :veteran="row.item.veteran"/>
+						<Tag :tag="row.value" :rank="row.item.rank" :veteran="row.item.veteran" />
 					</template>
 				</b-table>
 			</b-col>
@@ -55,21 +54,23 @@ export default {
 	},
 	methods: {
 		filtered(data) {
-			this.rows=data.length
-			this.page=1
+			this.rows = data.length
+			this.page = 1
 		}
 	},
-	components: {Tag}
+	components: { Tag }
 }
 </script>
 <style scoped>
-.rank1{
+.rank1 {
 	color: #F9FF00;
 }
-.rank2{
+
+.rank2 {
 	color: #969696;
 }
-.rank3{
+
+.rank3 {
 	color: #A26A21;
 }
 </style>

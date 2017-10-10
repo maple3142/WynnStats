@@ -25,17 +25,6 @@
 				</b-input-group>
 			</b-col>
 		</b-row>
-		<b-row class="justify-content-md-center pb-2">
-			<b-col class="text-center">
-				<b>WynnStats</b> is a serverless client which can view
-				<BlankLink href="https://wynncraft.com/">WynnCraft</BlankLink> statistics.</i>
-			</b-col>
-		</b-row>
-		<b-row class="justify-content-md-center pb-2">
-			<b-col class="text-center">
-				<a href="javascript:void(0)" @click="clear">Clear cache</a>
-			</b-col>
-		</b-row>
 	</div>
 </template>
 <script>
@@ -59,10 +48,6 @@ export default {
 		search() {
 			if (!this.id) return
 			this.$router.push(`/${this.type}/${this.id}`)
-		},
-		clear() {
-			localStorage.clear()
-			location.reload(true)
 		}
 	},
 	computed: {
