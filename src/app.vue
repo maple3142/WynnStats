@@ -16,7 +16,7 @@
 
 				<b-nav is-nav-bar class="ml-auto">
 					<!--right github link-->
-					<b-nav-item href="https://github.com/maple3142/wynnstats" target="_blank">
+					<b-nav-item href="https://github.com/maple3142/wynnstats" target="_blank" rel="noopener noreferrer">
 						<i class="fa fa-github" aria-hidden="true"></i> GitHub
 					</b-nav-item>
 				</b-nav>
@@ -31,12 +31,14 @@
 </template>
 <script>
 import Dropdown from './vue/widget/Dropdown'
+import BlankLink from './vue/widget/BlankLink'
+
 export default {
 	data() {
 		return {
 			dropdown: false
 		}
 	},
-	components: { Dropdown }
+	components: { Dropdown, BlankLink }
 }
 </script>

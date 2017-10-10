@@ -15,19 +15,24 @@
 		<!--skills-->
 		<b-list-group class="hl text-center pt-2">
 			<b-list-group-item>
-				✤Strength: <b>{{data.skills.Strength}}</b>
+				✤Strength:
+				<b>{{data.skills.Strength}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				✦Dexterity: <b>{{data.skills.Dexterity}}</b>
+				✦Dexterity:
+				<b>{{data.skills.Dexterity}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				❉Intelligence: <b>{{data.skills.Intelligence}}</b>
+				❉Intelligence:
+				<b>{{data.skills.Intelligence}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				✹Defense: <b>{{data.skills.Defense}}</b>
+				✹Defense:
+				<b>{{data.skills.Defense}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
-				❋Agility: <b>{{data.skills.Agility}}</b>
+				❋Agility:
+				<b>{{data.skills.Agility}}</b>
 			</b-list-group-item>
 		</b-list-group>
 
@@ -72,7 +77,7 @@
 				<span v-for="quest in data.quests" :key="quest">
 					<br>
 					<span class="pl-4">
-						<a :href="`https://wynncraft.gamepedia.com/${quest}`" rel="noopener" target="_blank">{{quest}}</a>
+						<BlankLink :href="`https://wynncraft.gamepedia.com/${quest}`">{{quest}}</BlankLink>
 					</span>
 				</span>
 			</b-list-group-item>
@@ -80,6 +85,7 @@
 	</b-col>
 </template>
 <script>
+import BlankLink from '../widget/BlankLink'
 export default {
 	props: {
 		classes: Object
@@ -100,11 +106,12 @@ export default {
 	filters: {
 		strip(s) {
 			let lch = s.charCodeAt(s.length - 1)
-			if (lch >=48 && lch <= 57) { //is number
-				return s.slice(0,-1)
+			if (lch >= 48 && lch <= 57) { //is number
+				return s.slice(0, -1)
 			}
 			return s
 		}
-	}
+	},
+	components: { BlankLink }
 }
 </script>

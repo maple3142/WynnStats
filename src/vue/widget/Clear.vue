@@ -1,7 +1,7 @@
 <template>
 	<b-col>
 		<div v-if="href">
-			<a :href="href" target="_blank" rel="noopener">Official Stats</a>
+			<BlankLink :href="href">Official Stats</BlankLink>
 		</div>
 		<div>
 			<a href="javascript:void(0)" @click="clear" v-html="text"></a>
@@ -9,6 +9,7 @@
 	</b-col>
 </template>
 <script>
+import BlankLink from './BlankLink'
 export default {
 	props: {
 		href: String,
@@ -21,6 +22,7 @@ export default {
 		clear() {
 			this.$emit('clear')
 		}
-	}
+	},
+	components: { BlankLink }
 }
 </script>

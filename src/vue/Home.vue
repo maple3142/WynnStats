@@ -2,7 +2,7 @@
 	<div>
 		<b-row class="justify-content-md-center p-2">
 			<b-col cols="12" class="text-center p-2">
-				<b-img :src="require('@/assets/logo.png')" fluid class="p-2" alt="wynncraft logo" />
+				<b-img :src="require('@/assets/logo.png')" fluid class="p-2 disable" alt="wynncraft logo" />
 			</b-col>
 			<b-col md="8">
 				<b-input-group class="p-2">
@@ -28,7 +28,7 @@
 		<b-row class="justify-content-md-center pb-2">
 			<b-col class="text-center">
 				<b>WynnStats</b> is a serverless client which can view
-				<a href="https://wynncraft.com/" target="_blank" rel="noopener">WynnCraft</a> statistics.</i>
+				<BlankLink href="https://wynncraft.com/">WynnCraft</BlankLink> statistics.</i>
 			</b-col>
 		</b-row>
 		<b-row class="justify-content-md-center pb-2">
@@ -41,6 +41,7 @@
 <script>
 import Dropdown from './widget/Dropdown'
 import Clear from './widget/Clear'
+import BlankLink from './widget/BlankLink'
 export default {
 	data() {
 		return {
@@ -67,15 +68,21 @@ export default {
 	computed: {
 		placeholder() {
 			switch (this.type) {
-			case 'search':
-				return 'Search'
-			case 'player':
-				return 'Minecraft ID'
-			case 'guild':
-				return 'Guild Name'
+				case 'search':
+					return 'Search'
+				case 'player':
+					return 'Minecraft ID'
+				case 'guild':
+					return 'Guild Name'
 			}
 		}
 	},
-	components: { Dropdown, Clear }
+	components: { Dropdown, Clear, BlankLink }
 }
 </script>
+<style scoped>
+img.disable {
+	user-select: none;
+	-webkit-user-drag: none; 
+}
+</style>

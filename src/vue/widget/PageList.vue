@@ -4,14 +4,14 @@
 			<b-col>
 				<b-list-group>
 					<b-list-group-item v-for="item in items" :key="item">
-						<slot :value="item"/>
+						<slot :value="item" />
 					</b-list-group-item>
 				</b-list-group>
 			</b-col>
 		</b-row>
 		<b-row>
 			<b-col>
-				<b-pagination size="md" :total-rows="list.length" v-model="page" :per-page="perpage" align="center" />
+				<b-pagination size="md" :total-rows="filtered.length" v-model="page" :per-page="perpage" align="center" />
 			</b-col>
 		</b-row>
 	</div>
@@ -26,17 +26,36 @@ export default {
 		perpage: {
 			type: Number,
 			default: 10
+		},
+		filter: {
+			type: String
+		},
+		startPage: {
+			type: Number,
+			default: 1
 		}
 	},
 	data() {
 		return {
-			page: 1
+			page: this.startPage
 		}
 	},
 	computed: {
+		filtered() {
+			let ar = this.list
+			if (this.filter) {
+				ar = ar.filter(e => e.includes(this.filter))
+			}
+			return ar
+		},
 		items() {
-			let ar = this.list.slice() //copy array
+			let ar = this.filtered.slice() //copy array
 			return ar.splice((this.page - 1) * 10, this.perpage)
+		}
+	},
+	watch: {
+		list() {
+			this.page = this.startPage
 		}
 	}
 }

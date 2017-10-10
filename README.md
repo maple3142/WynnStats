@@ -10,12 +10,6 @@ yarn
 yarn build #build
 yarn dev #start dev server
 ```
-### npm
-```sh
-npm install
-npm run build #build
-npm run dev #start dev server
-```
 After build success, open `dist/index.html` in browser.
 
 ## TODO
@@ -24,3 +18,5 @@ After build success, open `dist/index.html` in browser.
 - [ ] Guild Territories
 - [ ] Item Database
 - [ ] Show your id and location if you are in game
+
+[WynnCraft forums thread](https://forums.wynncraft.com/threads/unoffical-wynnstats.205622/)

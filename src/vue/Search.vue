@@ -27,6 +27,11 @@
 							</PageList>
 						</b-col>
 					</b-row>
+					<b-row>
+						<b-col class="text-center">
+							<Clear @clear="clear"/>
+						</b-col>
+					</b-row>
 				</div>
 			</b-col>
 		</b-row>
@@ -35,6 +40,7 @@
 <script>
 import Id from './widget/Id'
 import PageList from './widget/PageList'
+import Clear from './widget/Clear'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
@@ -48,11 +54,11 @@ export default {
 			search: this.$route.params.search,
 			result: null,
 			error: false,
-			error2: false,
+			error2: false, //search string should be longer than 3 character
 			loading: true
 		}
 	},
-	components: { PulseLoader, Id, PageList },
+	components: { PulseLoader, Id, PageList,Clear },
 	async created() {
 		let s = this.search
 		if (s.length < 3) {
@@ -74,6 +80,12 @@ export default {
 			}
 		}
 		this.loading = false
+	},
+	methods: {
+		clear() {
+			cache.remove(this.search)
+			this.$router.go(0)
+		}
 	}
 }
 </script>

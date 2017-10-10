@@ -18,7 +18,7 @@
 
 							<b-row class="justify-content-md-center p-2">
 								<b-col md="8">
-									<b-form-input v-model="filter" type="text" placeholder="filter" />
+									<b-form-input v-model="filter" type="text" placeholder="Filter" />
 								</b-col>
 							</b-row>
 
