@@ -4,7 +4,7 @@
 			<b-list-group-item>
 				<h3>
 					<b-img-lazy fluid :src="`https://crafatar.com/avatars/${player.username}?size=20`" :rel="`${player.username}'s head`" /> {{player.username}}
-					<Tag :tag="player.tag" :rank="player.rank"/>
+					<tag :tag="player.tag" :rank="player.rank"/>
 				</h3>
 			</b-list-group-item>
 			<b-list-group-item>

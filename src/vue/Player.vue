@@ -2,7 +2,7 @@
 	<div>
 		<b-row class="justify-content-md-center p-2">
 			<b-col md="8">
-				<PulseLoader class="text-center" :loading="loading" size="100px"></PulseLoader>
+				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
 
 				<b-alert :show="error" variant="danger">
 					Player "{{id}}" not found.Try to
@@ -24,7 +24,7 @@
 					<b-col class="text-center" md="6">
 						<!--information-->
 						<b-row>
-							<PlayerInfo :player="player" class="p-2" />
+							<player-info :player="player" class="p-2" />
 						</b-row>
 						<b-row>
 							<Clear :href="`https://wynncraft.com/stats/player/${id}`" @clear="clear" />
@@ -33,13 +33,11 @@
 				</b-row>
 				<!--middle-->
 				<b-row v-if="player" class="text-center">
-					<Ranking :rankings="player.rankings">
-					</ranking>
+					<ranking :rankings="player.rankings" />
 				</b-row>
 				<!--bottom-->
 				<b-row v-if="player">
-					<Classes :classes="player.classes" class="p-2">
-					</classes>
+					<classes :classes="player.classes" class="p-2" />
 				</b-row>
 			</b-col>
 		</b-row>

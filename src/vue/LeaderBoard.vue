@@ -2,7 +2,7 @@
 	<div>
 		<b-row class="justify-content-md-center p-2">
 			<b-col md="10" class="text-center">
-				<PulseLoader class="text-center" :loading="loading" size="100px"></PulseLoader>
+				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
 
 				<b-alert :show="error" variant="danger">Fetching leaderboard error.</b-alert>
 
@@ -23,12 +23,12 @@
 							</b-row>
 
 							<b-row class="text-center">
-								<List v-if="list" v-bind="{list,type,filter}" />
+								<list v-if="list" v-bind="{list,type,filter}" />
 							</b-row>
 						</b-col>
 					</b-row>
 					<b-row>
-						<Clear href="https://wynncraft.com/stats/" @clear="clear" />
+						<clear href="https://wynncraft.com/stats/" @clear="clear" />
 					</b-row>
 				</div>
 			</b-col>

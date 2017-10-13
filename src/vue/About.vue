@@ -7,14 +7,14 @@
 						<h3>About WynnStats</h3>
 						<p>
 							<b>WynnStats</b> is a serverless client which can view
-							<BlankLink href="https://wynncraft.com/">WynnCraft</BlankLink> statistics.
+							<blank-link href="https://wynncraft.com/">WynnCraft</blank-link> statistics.
 							<br> It is open source on
-							<BlankLink href="https://github.com/maple3142/wynnstats">
-								<i class="fa fa-github" aria-hidden="true"></i>GitHub</BlankLink>, everyone can contribute to it.
+							<blank-link href="https://github.com/maple3142/wynnstats">
+								<i class="fa fa-github" aria-hidden="true"></i> GitHub</blank-link>, everyone can contribute to it.
 							<br> Created by
 							<b-link to="/player/maple3142">maple3142</b-link>
 							<br>
-							<BlankLink href="https://forums.wynncraft.com/threads/unoffical-wynnstats.205622/">Forum thread</BlankLink>
+							<blank-link href="https://forums.wynncraft.com/threads/unoffical-wynnstats.205622/">Forum thread</blank-link>
 						</p>
 					</b-col>
 				</b-row>
@@ -23,13 +23,13 @@
 						<h3>What's tools is used?</h3>
 						<p>
 							JavaScript framework:
-							<BlankLink href="https://github.com/vuejs/vue">Vue.js</BlankLink>
+							<blank-link href="https://github.com/vuejs/vue">Vue.js</blank-link>
 							<br> UI framework:
-							<BlankLink href="https://github.com/bootstrap-vue/bootstrap-vue/">BootstrapVue</BlankLink>
+							<blank-link href="https://github.com/bootstrap-vue/bootstrap-vue/">BootstrapVue</blank-link>
 							<br> Bundler:
-							<BlankLink href="https://github.com/webpack/webpack">webpack</BlankLink>
+							<blank-link href="https://github.com/webpack/webpack">webpack</blank-link>
 							<br> And many tools in
-							<BlankLink href="https://github.com/maple3142/WynnStats/blob/master/package.json">package.json</BlankLink>
+							<blank-link href="https://github.com/maple3142/WynnStats/blob/master/package.json">package.json</blank-link>
 						</p>
 					</b-col>
 				</b-row>

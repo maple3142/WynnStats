@@ -19,7 +19,7 @@
 						{{row.value | toHours}} hours
 					</template>
 					<template slot="tag" scope="row">
-						<Tag :tag="row.value" :rank="row.item.rank" :veteran="row.item.veteran" />
+						<tag :tag="row.value" :rank="row.item.rank" :veteran="row.item.veteran" />
 					</template>
 				</b-table>
 			</b-col>

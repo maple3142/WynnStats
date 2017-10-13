@@ -2,7 +2,7 @@
 	<div>
 		<b-row class="justify-content-md-center p-2">
 			<b-col md="8">
-				<PulseLoader class="text-center" :loading="loading" size="100px"></PulseLoader>
+				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
 
 				<b-alert :show="error" variant="danger">
 					Guild "{{name}}" not found.Try to
@@ -14,14 +14,14 @@
 					<b-row class="pb-2">
 						<b-col class="text-center">
 							<b-row>
-								<GuildInfo :guild="guild" />
+								<guild-info :guild="guild" />
 							</b-row>
 						</b-col>
 					</b-row>
 					<b-row class="pb-2">
 						<b-col class="text-center">
 							<b-row>
-								<Clear :href="`https://wynncraft.com/stats/guild/${name}`" @clear="clear" />
+								<clear :href="`https://wynncraft.com/stats/guild/${name}`" @clear="clear" />
 							</b-row>
 						</b-col>
 					</b-row>
@@ -39,7 +39,7 @@
 
 					<b-row class="justify-content-md-center pt-2">
 						<b-col lg="8" class="text-center">
-							<Member :members="guild.members" />
+							<member :members="guild.members" />
 						</b-col>
 					</b-row>
 				</div>

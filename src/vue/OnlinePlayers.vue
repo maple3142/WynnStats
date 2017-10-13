@@ -2,7 +2,7 @@
 	<div>
 		<b-row class="justify-content-md-center p-2">
 			<b-col md="8">
-				<PulseLoader class="text-center" :loading="loading" size="100px"></PulseLoader>
+				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
 
 				<b-alert :show="error" variant="danger">Getting onlineplayers failed.</b-alert>
 
@@ -12,11 +12,11 @@
 							<b-input-group class="p-2">
 								<b-input-group-button>
 									<!--format: servername(server player count)-->
-									<Dropdown :text="`${cur}(${result[cur].length})`" variant="success">
+									<dropdown :text="`${cur}(${result[cur].length})`" variant="success">
 										<b-dropdown-item v-for="(srv,srvname) in result" :key="srvname" v-if="srv.length" :class="{active: cur === srvname}" @click="cur = srvname">
 											{{srvname}}({{srv.length}})
 										</b-dropdown-item>
-									</Dropdown>
+									</dropdown>
 								</b-input-group-button>
 
 								<b-form-input v-model="filter" placeholder="Filter"></b-form-input>
@@ -27,11 +27,11 @@
 						<b-col md="6" class="text-center">
 							<b-row>
 								<b-col>
-									<PageList :list="result[cur]" :filter="filter">
+									<page-list :list="result[cur]" :filter="filter">
 										<template scope="row">
 											<Id :id="row.value" />
 										</template>
-									</PageList>
+									</page-list>
 								</b-col>
 							</b-row>
 							<b-row>

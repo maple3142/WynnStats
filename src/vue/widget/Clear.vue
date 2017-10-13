@@ -1,7 +1,7 @@
 <template>
 	<b-col>
 		<div v-if="href">
-			<BlankLink :href="href">Official Stats</BlankLink>
+			<blank-link :href="href">Official Stats</blank-link>
 		</div>
 		<div>
 			<a href="javascript:void(0)" @click="clear" v-html="text"></a>

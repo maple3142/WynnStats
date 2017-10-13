@@ -7,11 +7,11 @@
 			<b-col md="8">
 				<b-input-group class="p-2">
 					<b-input-group-button>
-						<Dropdown :text="type" variant="success">
+						<dropdown :text="type" variant="success">
 							<b-dropdown-item @click="type = 'search'" :class="{active: type==='search'}">Search</b-dropdown-item>
 							<b-dropdown-item @click="type = 'player'" :class="{active: type==='player'}">Player</b-dropdown-item>
 							<b-dropdown-item @click="type = 'guild'" :class="{active: type==='guild'}">Guild</b-dropdown-item>
-						</Dropdown>
+						</dropdown>
 					</b-input-group-button>
 
 					<b-form-input v-model="id" @keypress.enter.native="search" :placeholder="placeholder"></b-form-input>
@@ -29,8 +29,6 @@
 </template>
 <script>
 import Dropdown from './widget/Dropdown'
-import Clear from './widget/Clear'
-import BlankLink from './widget/BlankLink'
 export default {
 	data() {
 		return {
@@ -62,12 +60,12 @@ export default {
 			}
 		}
 	},
-	components: { Dropdown, Clear, BlankLink }
+	components: { Dropdown }
 }
 </script>
 <style scoped>
 img.disable {
 	user-select: none;
-	-webkit-user-drag: none; 
+	-webkit-user-drag: none;
 }
 </style>
