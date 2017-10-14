@@ -17,6 +17,36 @@ import App from './App'
 
 Vue.filter('toHours', min => Math.round(min / 60))
 
+// vue router jump to anchor in hash mode
+Vue.mixin({
+	mounted() {
+		let hash, hs = location.hash.split('#')
+		if (hs.length >= 2) {
+			hash = hs.pop()
+			try {
+				let el = this.$el
+				if (el !== null && el.querySelector && (el = el.querySelector(`#${hash}`))) { //if exists
+
+
+					let bodyTop = document.body.getBoundingClientRect().top
+					let elemTop = el.getBoundingClientRect().top
+
+					setTimeout(() => {
+						window.scrollTo(0, elemTop - bodyTop) //scroll to element
+					}, 100)
+				}
+				else {
+					window.scrollTo(0, 0)
+				}
+			}
+			catch (e) {
+				void (0) //empty statment for eslint
+			}
+		}
+
+	}
+})
+
 new Vue({
 	el: '#app',
 	components: { App },

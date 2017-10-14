@@ -19,7 +19,7 @@
 			<b-list-group-item>
 				Last Login: {{lastlogin}}
 			</b-list-group-item>
-			<b-list-group-item v-if="player.guild.name!=='None'">
+			<b-list-group-item v-if="player.guild.name!=='None'" :to="`/guild/${player.guild.name}#${player.guild.rank}`">
 				{{player.guild.rank}} of
 				<b-link :to="`/guild/${player.guild.name}`">{{player.guild.name}}</b-link>
 			</b-list-group-item>

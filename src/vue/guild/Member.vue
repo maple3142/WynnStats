@@ -3,7 +3,7 @@
 		<b-row class="pb-2">
 			<!--owner-->
 			<b-col>
-				<h4>♔ Owner</h4>
+				<h4 id="Owner">♔ Owner</h4>
 				<page-list :list="owner" size="sm">
 					<template scope="row">
 						<id :id="row.value" />
@@ -15,7 +15,7 @@
 		<b-row>
 			<b-col cols="12" md="6">
 				<!--chief-->
-				<h5>♕ Chief({{chief.length}})</h5>
+				<h5 id="Chief">♕ Chief({{chief.length}})</h5>
 				<page-list :list="chief" size="sm">
 					<template scope="row">
 						<id :id="row.value" />
@@ -24,7 +24,7 @@
 			</b-col>
 			<b-col cols="12" md="6">
 				<!--captain-->
-				<h5>♖ Captain({{captain.length}})</h5>
+				<h5 id="Captain">♖ Captain({{captain.length}})</h5>
 				<page-list :list="captain" size="sm">
 					<template scope="row">
 						<id :id="row.value" />
@@ -36,7 +36,7 @@
 		<b-row>
 			<b-col cols="12" md="6">
 				<!--recruiter-->
-				<h5>♘ Recruiter({{recruiter.length}})</h5>
+				<h5 id="Recruiter">♘ Recruiter({{recruiter.length}})</h5>
 				<page-list :list="recruiter" size="sm">
 					<template scope="row">
 						<id :id="row.value" />
@@ -45,7 +45,7 @@
 			</b-col>
 			<b-col cols="12" md="6">
 				<!--recruit-->
-				<h5>♙ Recruit({{recruit.length}})</h5>
+				<h5 id="Recruit">♙ Recruit({{recruit.length}})</h5>
 				<page-list :list="recruit" size="sm">
 					<template scope="row">
 						<id :id="row.value" />
