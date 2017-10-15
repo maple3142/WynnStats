@@ -13,7 +13,7 @@
 						<b-col cols="12" md="6" v-if="result.guilds.length">
 							<h4>Guilds({{result.guilds.length}})</h4>
 							<page-list :list="result.guilds">
-								<template scope="row">
+								<template slot-scope="row">
 									<b-link :to="`/guild/${row.value}`">{{row.value}}</b-link>
 								</template>
 							</page-list>
@@ -21,7 +21,7 @@
 						<b-col cols="12" md="6" v-if="result.players.length">
 							<h4>Players({{result.players.length}})</h4>
 							<page-list :list="result.players">
-								<template scope="row">
+								<template slot-scope="row">
 									<Id :id="row.value" />
 								</template>
 							</page-list>

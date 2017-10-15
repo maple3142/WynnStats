@@ -23,8 +23,14 @@ export default {
 			type: Boolean,
 			default: false
 		},
-		text: String,
-		variant: String
+		text: {
+			type: String,
+			default: ''
+		},
+		variant: {
+			type: String,
+			default: ''
+		}
 	},
 	data() {
 		return {

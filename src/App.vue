@@ -7,11 +7,11 @@
 			<b-collapse is-nav id="nav_collapse">
 				<b-nav is-nav-bar>
 					<b-nav-item to="/online">OnlinePlayers</b-nav-item>
-					<Dropdown text="LeaderBoard" nav>
+					<dropdown text="LeaderBoard" nav>
 						<b-dropdown-item to="/leaderboard/guild">Guild</b-dropdown-item>
 						<b-dropdown-item to="/leaderboard/player">Player</b-dropdown-item>
 						<b-dropdown-item to="/leaderboard/pvp">PVP</b-dropdown-item>
-					</Dropdown>
+					</dropdown>
 					<b-nav-item to="/about">About</b-nav-item>
 				</b-nav>
 

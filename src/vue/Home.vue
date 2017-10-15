@@ -7,11 +7,9 @@
 			<b-col md="8">
 				<b-input-group class="p-2">
 					<b-input-group-button>
-						<dropdown :text="type" variant="success">
-							<b-dropdown-item @click="type = 'search'" :class="{active: type==='search'}">Search</b-dropdown-item>
-							<b-dropdown-item @click="type = 'player'" :class="{active: type==='player'}">Player</b-dropdown-item>
-							<b-dropdown-item @click="type = 'guild'" :class="{active: type==='guild'}">Guild</b-dropdown-item>
-						</dropdown>
+						<dropdown-select :list="['search','player','guild']" :text="type" v-model="type" variant="success">
+							<span slot-scope="row" class="capitalize">{{row.value}}</span>
+						</dropdown-select>
 					</b-input-group-button>
 
 					<b-form-input v-model="id" @keypress.enter.native="search" :placeholder="placeholder"></b-form-input>
@@ -29,6 +27,7 @@
 </template>
 <script>
 import Dropdown from './widget/Dropdown'
+import DropdownSelect from './widget/DropdownSelect'
 export default {
 	data() {
 		return {
@@ -60,7 +59,7 @@ export default {
 			}
 		}
 	},
-	components: { Dropdown }
+	components: { Dropdown, DropdownSelect }
 }
 </script>
 <style scoped>

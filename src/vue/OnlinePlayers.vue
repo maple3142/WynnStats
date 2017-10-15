@@ -12,11 +12,10 @@
 							<b-input-group class="p-2">
 								<b-input-group-button>
 									<!--format: servername(server player count)-->
-									<dropdown :text="`${cur}(${result[cur].length})`" variant="success">
-										<b-dropdown-item v-for="(srv,srvname) in result" :key="srvname" v-if="srv.length" :class="{active: cur === srvname}" @click="cur = srvname">
-											{{srvname}}({{srv.length}})
-										</b-dropdown-item>
-									</dropdown>
+									<dropdown-select :list="serverlist" :text="`${cur}(${result[cur].length})`" v-model="cur" variant="success">
+										<span slot-scope="row">{{row.value}}({{result[row.value].length}})</span>
+									</dropdown-select>
+
 								</b-input-group-button>
 
 								<b-form-input v-model="filter" placeholder="Filter"></b-form-input>
@@ -28,7 +27,7 @@
 							<b-row>
 								<b-col>
 									<page-list :list="result[cur]" :filter="filter">
-										<template scope="row">
+										<template slot-scope="row">
 											<Id :id="row.value" />
 										</template>
 									</page-list>
@@ -51,6 +50,7 @@ import PageList from './widget/PageList'
 import Id from './widget/Id'
 import Dropdown from './widget/Dropdown'
 import Clear from './widget/Clear'
+import DropdownSelect from './widget/DropdownSelect'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
@@ -73,7 +73,7 @@ export default {
 			cur: '' //selected server name
 		}
 	},
-	components: { PulseLoader, Id, PageList, Dropdown, Clear },
+	components: { PulseLoader, Id, PageList, Dropdown, Clear, DropdownSelect },
 	async created() {
 		let s = 'onlineplayer'
 		if (cache.has(s)) {
@@ -100,6 +100,11 @@ export default {
 		clear() {
 			cache.remove('onlineplayer')
 			this.$router.go(0)
+		}
+	},
+	computed: {
+		serverlist() {
+			return Object.keys(this.result).filter(s=>this.result[s].length>0)
 		}
 	}
 }
