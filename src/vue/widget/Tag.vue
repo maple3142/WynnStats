@@ -30,7 +30,8 @@ export default {
 			if (this.rank !== 'Player') {
 				return this.rank.toUpperCase().replace(' ', '_')
 			}
-			if (this.tag === 'VIP+') { //special case, because of '+' character
+			if (this.tag === 'VIP+') {
+				//special case, because of '+' character
 				return 'VIP_PLUS'
 			}
 			return this.tag.toUpperCase().replace(' ', '_')
@@ -40,31 +41,35 @@ export default {
 </script>
 <style scoped>
 .HERO {
-	color: #AA00AA;
+	color: #aa00aa;
 }
 
 .VIP_PLUS {
-	color: #00C3FF;
+	color: #00c3ff;
 }
 
 .VIP {
-	color: #48F147;
+	color: #48f147;
 }
 
 .MODERATOR {
-	color: #F9C700;
+	color: #f9c700;
 }
 
 .BUILDER,
 .GAME_MASTER {
-	color: #0099C7;
+	color: #0099c7;
 }
 
 .MEDIA {
-	color: #4000D4;
+	color: #4000d4;
 }
 
 .MUSIC {
-	color: #E0E000;
+	color: #e0e000;
+}
+
+.CMD {
+	color: #0099c7;
 }
 </style>
