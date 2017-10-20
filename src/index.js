@@ -24,11 +24,7 @@ Vue.component = originalVueComponent
 
 Vue.use(vuejsStorage)
 
-import App from './App'
-
-Vue.filter('toHours', min => Math.round(min / 60))
-
-// vue router jump to anchor in hash mode
+// vue router #anchor
 Vue.mixin({
 	mounted() {
 		let hash, hs = location.hash.split('#')
@@ -58,8 +54,21 @@ Vue.mixin({
 	}
 })
 
-new Vue({
+// custom globals
+Vue.filter('toHours', min => Math.round(min / 60))
+
+// app
+import App from './App'
+
+const app = new Vue({
 	el: '#app',
-	components: { App },
-	router
+	router,
+	render: h => h(App)
 })
+
+// github pages spa polyfill
+if ('rdr' in sessionStorage) {
+	let rdr = sessionStorage.rdr
+	delete sessionStorage.rdr
+	app.$router.replace(rdr)
+}

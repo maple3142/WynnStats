@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 var extcss = ExtractTextPlugin.extract({
 	fallback: 'style-loader',
@@ -94,7 +95,11 @@ module.exports = {
 					removeAll: true,
 				},
 			},
-		})
+		}),
+		new CopyWebpackPlugin([{
+			from: './src/404.html',
+			to: '404.html'
+		}])
 	],
 	devServer: {
 		port: process.env.PORT || 3000,

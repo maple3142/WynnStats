@@ -1,11 +1,11 @@
-# [WynnStats](https://maple3142.github.io/wynn/)
+# [WynnStats](https://wynnstats.github.io/)
 *WynnStats is a serverless client which can view [wynncraft](https://wynncraft.com/) statistics.*
 
 [![Build Status](https://travis-ci.org/maple3142/WynnStats.svg?branch=master)](https://travis-ci.org/maple3142/WynnStats)
 
 ## Build
 ### yarn
-```sh
+```shhttps://wynnstats.github.io/
 yarn
 yarn build #build
 yarn dev #start dev server

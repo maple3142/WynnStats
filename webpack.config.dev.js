@@ -80,7 +80,10 @@ module.exports = {
 		port: process.env.PORT || 3000,
 		contentBase: './dist',
 		inline: true,
-		stats: 'errors-only'
+		stats: 'errors-only',
+		historyApiFallback: {
+			index: 'index.html'
+		}
 	},
 	devtool: 'source-map'
 }
