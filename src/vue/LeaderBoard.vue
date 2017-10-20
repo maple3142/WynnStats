@@ -89,6 +89,11 @@ export default {
 			cache.remove(this.type + (this.type === 'pvp' ? this.timeframe : ''))
 			this.$router.go(0)
 		}
+	},
+	watch: {
+		timeframe(v){
+			this.fetchdata()
+		}
 	}
 }
 </script>
