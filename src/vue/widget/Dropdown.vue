@@ -10,7 +10,7 @@
 	<!--navbar version-->
 	<b-nav-item-dropdown v-else @shown="expand = true" @hidden="expand = false" :variant="variant">
 		<template slot="button-content">
-			<span class="capitalize">{{text}}</span>
+			<span :class="{capitalize: capitalize}">{{text}}</span>
 			<i class="fa" :class="{'fa-caret-down': !expand,'fa-caret-up': expand}" aria-hidden="true"></i>
 		</template>
 		<slot/>
@@ -30,6 +30,10 @@ export default {
 		variant: {
 			type: String,
 			default: ''
+		},
+		capitalize: {
+			type: Boolean,
+			default: true
 		}
 	},
 	data() {

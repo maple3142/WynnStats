@@ -95,16 +95,29 @@ export default {
 		if (!(this.cur in this.result)) {
 			this.cur = _.findKey(this.result, ar => ar.length > 0) //first server has player
 		}
+
+		this.updateCur()
 	},
 	methods: {
 		clear() {
 			cache.remove('onlineplayer')
 			this.$router.go(0)
+		},
+		updateCur(){
+			if (this.$route.query.srv) {
+				this.cur = this.$route.query.srv
+				this.$router.replace(this.$route.path) //remove query
+			}
 		}
 	},
 	computed: {
 		serverlist() {
-			return Object.keys(this.result).filter(s=>this.result[s].length>0)
+			return Object.keys(this.result).filter(s => this.result[s].length > 0)
+		}
+	},
+	watch: {
+		$route() {
+			this.updateCur()
 		}
 	}
 }

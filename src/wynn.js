@@ -31,3 +31,7 @@ export async function getLeaderBoard(type, timeframe = 'alltime') {
 export async function search(str) {
 	return await fetch(`${APIURL}?action=statsSearch&search=${str}`).then(r => r.json())
 }
+
+export async function getMyLocation() {
+	return await fetch('https://api.wynncraft.com/map/getMyLocation').then(r => r.json())
+}
