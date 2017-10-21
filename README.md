@@ -15,8 +15,8 @@ After build success, open `dist/index.html` in browser.
 ## TODO
 - [x] Online Players List
 - [x] True search system
+- [x] Show your id and location if you are in game
 - [ ] Guild Territories
 - [ ] Item Database
-- [ ] Show your id and location if you are in game
 
 [WynnCraft forums thread](https://forums.wynncraft.com/threads/unoffical-wynnstats.205622/)
