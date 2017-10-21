@@ -41,43 +41,42 @@ import Clear from './widget/Clear'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
-import { Cache } from '@/cache'
-const cache = new Cache({ namespace: 'leaderboard-cache' })
+import cache from '@/cacheStorage'
 import { getLeaderBoard } from '@/wynn'
 
 export default {
 	data() {
 		return {
 			type: this.$route.params.type,
-			list: null,
 			error: false,
 			loading: true,
 			filter: ''
 		}
 	},
 	storage: {
-		namespace: 'wynn-leaderboard',
+		storage: cache(),
+		namespace: 'LeaderBoard',
 		data: {
-			timeframe: 'alltime'
+			timeframe: 'alltime',
+			lists: {}
 		}
 	},
 	components: { PulseLoader, List, Clear },
 	created() {
 		this.fetchdata()
 	},
+	computed: {
+		list() {
+			return this.lists[this.type + (this.type === 'pvp' ? this.timeframe : '')]
+		}
+	},
 	methods: {
 		async fetchdata() {
-			this.list = null
 			this.loading = true
-			let type = this.type
-			let name = type + (type === 'pvp' ? this.timeframe : '')
-			if (cache.has(name)) {
-				this.list = cache.get(name)
-			}
-			else {
+			let name = this.type + (this.type === 'pvp' ? this.timeframe : '')
+			if (!this.lists[name]) {
 				try {
-					this.list = await getLeaderBoard(type, this.timeframe)
-					cache.set(name, this.list)
+					this.$set(this.lists, name, await getLeaderBoard(this.type, this.timeframe))
 				}
 				catch (e) {
 					this.error = true
@@ -86,12 +85,12 @@ export default {
 			this.loading = false
 		},
 		clear() {
-			cache.remove(this.type + (this.type === 'pvp' ? this.timeframe : ''))
+			this.lists = {}
 			this.$router.go(0)
 		}
 	},
 	watch: {
-		timeframe(v){
+		timeframe(v) {
 			this.fetchdata()
 		}
 	}

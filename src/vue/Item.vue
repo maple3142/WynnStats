@@ -28,30 +28,29 @@ import PulseLoader from 'vue-spinner/src/PulseLoader'
 
 import ItemInfo from './item/ItemInfo'
 
-import { Cache } from '@/cache'
-const cache = new Cache({ namespace: 'itemDB-cache', expire: 7 * 24 * 60 * 60 * 1000 }) //timeout: 7 days
+import cache from '@/cacheStorage'
 import { getAllItem } from '@/wynn'
 
 export default {
 	data() {
 		return {
-			items: null,
 			error: false,
 			loading: true,
 			name: '',
 			item: null
 		}
 	},
-	async created() {
-
-		let s = 'itemDB'
-		if (cache.has(s)) {
-			this.items = cache.get(s)
+	storage: {
+		storage: cache(7 * 24 * 60 * 60 * 1000), //7days
+		namespace: 'Item',
+		data: {
+			items: null
 		}
-		else {
+	},
+	async created() {
+		if (!this.items) {
 			try {
 				this.items = await getAllItem()
-				cache.set(s, this.items)
 			}
 			catch (e) {
 				this.error = true

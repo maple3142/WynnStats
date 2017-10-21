@@ -1,5 +1,5 @@
 /* simple cache storage */
-const ls=localStorage
+const ls = localStorage
 export class CacheStorage {
 	constructor({
 		expire = 10 * 60 * 1000, //10min
@@ -33,4 +33,6 @@ export class CacheStorage {
 
 }
 
-export default new CacheStorage()
+export default function create(expire) {
+	return new CacheStorage({ expire })
+}

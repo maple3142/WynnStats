@@ -10,7 +10,7 @@
 				<span>{{item.attackSpeed | titleCase}} Attack Speed</span>
 			</b-col>
 		</b-row>
-		<b-row class="pl-2">
+		<b-row class="pl-2" v-if="item.damage">
 			<b-col class="neutual">
 				Neutral Damage: {{item.damage}}
 			</b-col>

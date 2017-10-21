@@ -54,8 +54,6 @@ import PulseLoader from 'vue-spinner/src/PulseLoader'
 import cache from '@/cacheStorage'
 import { getPlayerStats } from '@/wynn'
 
-import vs from 'vuejs-storage'
-
 export default {
 	data() {
 		return {
@@ -64,10 +62,21 @@ export default {
 			loading: true
 		}
 	},
-	storage: vs({ storage: cache, namespace: 'Player', data: { players: {} } }),
+	storage: {
+		storage: cache(),
+		namespace: 'Player',
+		data: {
+			players: {}
+		}
+	},
 	async created() {
 		if (!this.players[this.id]) {
-			this.$set(this.players, this.id, await getPlayerStats(this.id))
+			try {
+				this.$set(this.players, this.id, await getPlayerStats(this.id))
+			}
+			catch (e) {
+				this.error = true
+			}
 		}
 		this.loading = false
 	},

@@ -54,29 +54,29 @@ import Clear from './widget/Clear'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
-import { Cache } from '@/cache'
-const cache = new Cache({ namespace: 'guild-cache' })
+import cache from '@/cacheStorage'
 import { getGuildStats } from '@/wynn'
 
 export default {
 	data() {
 		return {
 			name: this.$route.params.name,
-			guild: null,
 			error: false,
 			loading: true
 		}
 	},
+	storage: {
+		storage: cache(),
+		namespace: 'Guild',
+		data: {
+			guilds: {}
+		}
+	},
 	components: { PulseLoader, GuildInfo, Member, Clear },
 	async created() {
-		let name = this.name.trim()
-		if (cache.has(name)) {
-			this.guild = cache.get(name)
-		}
-		else {
+		if (!this.guilds[this.name]) {
 			try {
-				this.guild = await getGuildStats(name)
-				cache.set(name, this.guild)
+				this.$set(this.guilds, this.name, await getGuildStats(this.name))
 			}
 			catch (e) {
 				this.error = true
@@ -84,9 +84,14 @@ export default {
 		}
 		this.loading = false
 	},
+	computed: {
+		guild() {
+			return this.guilds[this.name]
+		}
+	},
 	methods: {
 		clear() {
-			cache.remove(this.name)
+			this.guilds = {}
 			this.$router.go(0)
 		}
 	}
