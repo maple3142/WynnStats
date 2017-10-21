@@ -35,3 +35,7 @@ export async function search(str) {
 export async function getMyLocation() {
 	return await fetch('https://api.wynncraft.com/map/getMyLocation').then(r => r.json())
 }
+
+export async function getAllItem() {
+	return await fetch(`${APIURL}?action=itemDB&category=all`).then(r => r.json()).then(j => j.items)
+}
