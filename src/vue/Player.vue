@@ -51,42 +51,35 @@ import Clear from './widget/Clear'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
-import { Cache } from '@/cache'
-const cache = new Cache({ namespace: 'player-cache' })
+import cache from '@/cacheStorage'
 import { getPlayerStats } from '@/wynn'
 
+import vs from 'vuejs-storage'
 
 export default {
 	data() {
 		return {
 			id: this.$route.params.id,
-			player: null,
 			error: false,
 			loading: true
 		}
 	},
+	storage: vs({ storage: cache, namespace: 'Player', data: { players: {} } }),
 	async created() {
-		let id = this.id.trim()
-
-		if (cache.has(id)) {
-			this.player = cache.get(id)
-		}
-		else {
-			try {
-				this.player = await getPlayerStats(id)
-				cache.set(id, this.player)
-			}
-			catch (e) {
-				this.error = true
-			}
+		if (!this.players[this.id]) {
+			this.$set(this.players, this.id, await getPlayerStats(this.id))
 		}
 		this.loading = false
-
+	},
+	computed: {
+		player() {
+			return this.players[this.id]
+		}
 	},
 	components: { PlayerInfo, Classes, PulseLoader, Ranking, Clear },
 	methods: {
 		clear() {
-			cache.remove(this.id)
+			cache.clear()
 			this.$router.go(0)
 		}
 	}

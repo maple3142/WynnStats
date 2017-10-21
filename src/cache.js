@@ -38,7 +38,7 @@ export class Cache {
 	set(key, value) {
 		this.data[key] = { time: Date.now(), value }
 
-		this.storage.setItem(this.namespace,JSON.stringify(this.data))
+		this.storage.setItem(this.namespace, JSON.stringify(this.data))
 	}
 
 	get(key) {
@@ -51,13 +51,18 @@ export class Cache {
 	remove(key) {
 		delete this.data[key]
 
-		this.storage.setItem(this.namespace,JSON.stringify(this.data))
+		this.storage.setItem(this.namespace, JSON.stringify(this.data))
 	}
 
 	clear() {
 		this.data = {}
-		
+
 		this.storage.removeItem(this.namespace)
 	}
 
 }
+
+//localStorage like api
+Cache.prototype.setItem = Cache.prototype.set
+Cache.prototype.getItem = Cache.prototype.get
+Cache.prototype.removeItem = Cache.prototype.remove
