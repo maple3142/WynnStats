@@ -28,7 +28,7 @@
 
 /*center table header*/
 
-th>div {
+.table th>div {
 	text-align: center !important;
 }
 
