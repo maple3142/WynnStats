@@ -88,7 +88,7 @@ export default {
 	components: { PlayerInfo, Classes, PulseLoader, Ranking, Clear },
 	methods: {
 		clear() {
-			cache.clear()
+			this.$delete(this.players,this.id)
 			this.$router.go(0)
 		}
 	}

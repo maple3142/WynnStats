@@ -85,7 +85,7 @@ export default {
 			this.loading = false
 		},
 		clear() {
-			this.lists = {}
+			this.$delete(this.lists, this.type + (this.type === 'pvp' ? this.timeframe : ''))
 			this.$router.go(0)
 		}
 	},

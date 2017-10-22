@@ -91,7 +91,7 @@ export default {
 	},
 	methods: {
 		clear() {
-			this.guilds = {}
+			this.$delete(this.guilds,this.name)
 			this.$router.go(0)
 		}
 	}
