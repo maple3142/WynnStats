@@ -4,7 +4,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
-var GoogleFontsPlugin = require('google-fonts-webpack-plugin')
 
 var extcss = ExtractTextPlugin.extract({
 	fallback: 'style-loader',
@@ -100,12 +99,7 @@ module.exports = {
 		new CopyWebpackPlugin([{
 			from: './src/404.html',
 			to: '404.html'
-		}]),
-		new GoogleFontsPlugin({
-            fonts: [
-                { family: 'Nunito' }
-            ]
-        })
+		}])
 	],
 	devServer: {
 		port: process.env.PORT || 3000,

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<b-row class="justify-content-md-center p-2">
+		<b-row align-h="center" class="p-2">
 			<b-col md="8">
 				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
 
@@ -37,7 +37,7 @@
 						</b-col>
 					</b-row>
 
-					<b-row class="justify-content-md-center pt-2">
+					<b-row align-h="center" class="pt-2">
 						<b-col lg="8" class="text-center">
 							<member :members="guild.members" />
 						</b-col>

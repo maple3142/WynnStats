@@ -1,5 +1,5 @@
 <template>
-	<b-col class="item" md="6">
+	<b-col class="item" :md="md" :cols="cols">
 		<b-row class="p-4">
 			<b-col class="text-center">
 				<h3 :class="item.tier">{{item.name}}</h3>
@@ -12,12 +12,13 @@
 						<span>{{item.attackSpeed | titleCase}} Attack Speed</span>
 					</b-col>
 				</b-row>
+				<b-row class="pt-2"></b-row>
 				<b-row v-if="item.health">
 					<b-col>
 						<span class="health">Health: {{item.health}}</span>
 					</b-col>
 				</b-row>
-				<b-row v-if="item.damage">
+				<b-row v-if="item.damage&&item.damage!=='0-0'">
 					<b-col class="neutual">
 						Neutral Damage: {{item.damage}}
 					</b-col>
@@ -63,7 +64,7 @@
 				<b-row v-for="(v,k) in positiveID" :key="k">
 					<b-col class="capitalize">
 						<span>{{k | format}}:</span>
-						<template v-if="!item.restrictions">
+						<template v-if="!item.identified">
 							<span class="positive">{{getFormat(k,v.min)}}</span>
 							~
 							<span class="positive">{{getFormat(k,v.max)}}</span>
@@ -74,7 +75,7 @@
 				<b-row v-for="(v,k) in negativeID" :key="k">
 					<b-col class="capitalize">
 						<span>{{k | format}}:</span>
-						<template v-if="!item.restrictions">
+						<template v-if="!item.identified">
 							<span class="negative">{{getFormat(k,v.min)}}</span>
 							~
 							<span class="negative">{{getFormat(k,v.max)}}</span>
@@ -82,11 +83,11 @@
 						<span v-else class="negative">{{getFormat(k,v.base)}}</span>
 					</b-col>
 				</b-row>
-				<b-row v-for="(v,k) in bonusDamage" :key="k">
+				<b-row v-for="(v,k) in bonusDamage" v-if="v.base" :key="k">
 					<b-col class="capitalize">
 						<span :class="getClassFromBonus(k)">{{k | format}}</span>
 						<span>Damage:</span>
-						<template v-if="!item.restrictions">
+						<template v-if="!item.identified">
 							<span :class="v.min>0?'positive':'negative'">{{getFormat(k,v.min)}}</span>
 							~
 							<span :class="v.max>0?'positive':'negative'">{{getFormat(k,v.max)}}</span>
@@ -94,11 +95,11 @@
 						<span v-else :class="v.base>0?'positive':'negative'">{{getFormat(k,v.base)}}</span>
 					</b-col>
 				</b-row>
-				<b-row v-for="(v,k) in bonusDefense" :key="k">
+				<b-row v-for="(v,k) in bonusDefense" v-if="v.base" :key="k">
 					<b-col class="capitalize">
 						<span :class="getClassFromBonus(k)">{{k | format}}</span>
 						<span>Defense:</span>
-						<template v-if="!item.restrictions">
+						<template v-if="!item.identified">
 							<span :class="v.min>0?'positive':'negative'">{{getFormat(k,v.min)}}</span>
 							~
 							<span :class="v.max>0?'positive':'negative'">{{getFormat(k,v.max)}}</span>
@@ -122,6 +123,15 @@
 						{{item.restrictions}}
 					</b-col>
 				</b-row>
+				<b-col class="pt-2"></b-col>
+				<b-row v-if="full && item.addedLore">
+					<b-col class="lore">{{item.addedLore}}</b-col>
+				</b-row>
+				<b-row v-if="!full" align-h="end">
+					<b-col cols="6">
+						<b-link :to="`/item/${item.name}`">show details...</b-link>
+					</b-col>
+				</b-row>
 			</b-col>
 		</b-row>
 		<b-row class="pb-4"></b-row>
@@ -143,6 +153,18 @@ export default {
 		item: {
 			type: Object,
 			required: true
+		},
+		full: {
+			type: Boolean,
+			default: false
+		},
+		md: {
+			type: String,
+			default: '6'
+		},
+		cols: {
+			type: String,
+			default: '12'
 		}
 	},
 	filters: {
@@ -200,7 +222,7 @@ export default {
 		negativeID() {
 			return _(this.ids).pickBy(v => v < 0).mapValues(v => {
 				return {
-					min: Math.floor(v * 0.3),
+					min: Math.floor(v * 0.7),
 					base: v,
 					max: Math.floor(v * 1.3)
 				}
@@ -215,7 +237,7 @@ export default {
 						max: Math.ceil(v * 1.3)
 					} :
 					{
-						min: Math.floor(v * 0.3),
+						min: Math.floor(v * 0.7),
 						base: v,
 						max: Math.floor(v * 1.3)
 					})
@@ -230,7 +252,7 @@ export default {
 						max: Math.ceil(v * 1.3)
 					} :
 					{
-						min: Math.floor(v * 0.3),
+						min: Math.floor(v * 0.7),
 						base: v,
 						max: Math.floor(v * 1.3)
 					})
@@ -343,5 +365,10 @@ export default {
 }
 .health::before{
 	content: '❤ ';
+}
+
+.lore{
+	color: #555;
+	font-style: italic;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<b-row class="justify-content-md-center p-2">
+		<b-row align-h="center" class="p-2">
 			<b-col md="10" class="text-center">
 				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
 
@@ -16,7 +16,7 @@
 						<b-col v-if="list" class="text-center">
 							<b-form-radio-group v-if="type==='pvp'" v-model="timeframe" :options="[{text: 'All Time',value: 'alltime'},{text: 'Weekly',value: 'week'}]" size="sm" @change="fetchdata" />
 
-							<b-row class="justify-content-md-center p-2">
+							<b-row align-h="center" class="p-2">
 								<b-col md="8">
 									<b-form-input v-model="filter" type="text" placeholder="Filter" />
 								</b-col>

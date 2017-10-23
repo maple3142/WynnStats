@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<b-row class="justify-content-md-center p-2">
+		<b-row align-h="center" class="p-2">
 			<b-col md="8">
 				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
 
 				<b-alert :show="error" variant="danger">Getting onlineplayers failed.</b-alert>
 
 				<div v-if="result">
-					<b-row class="justify-content-md-center p-2">
+					<b-row align-h="center" class="p-2">
 						<b-col md="8">
 							<b-input-group class="p-2">
 								<b-input-group-button>
@@ -22,7 +22,7 @@
 							</b-input-group>
 						</b-col>
 					</b-row>
-					<b-row class="justify-content-md-center p-2">
+					<b-row align-h="center" class="p-2">
 						<b-col md="6" class="text-center">
 							<b-row>
 								<b-col>

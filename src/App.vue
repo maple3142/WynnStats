@@ -12,6 +12,7 @@
 						<b-dropdown-item to="/leaderboard/player">Player</b-dropdown-item>
 						<b-dropdown-item to="/leaderboard/pvp">PVP</b-dropdown-item>
 					</dropdown>
+					<b-nav-item to="/item">ItemDB</b-nav-item>
 					<b-nav-item href="https://map.wynncraft.com/" target="_blank" rel="noopener noreferrer">Map</b-nav-item>
 					<b-nav-item to="/about">About</b-nav-item>
 				</b-nav>
