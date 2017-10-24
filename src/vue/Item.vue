@@ -54,11 +54,11 @@
 						<b-row align-h="center" class="p-2">
 							<b-col md="9">
 								<div class="row">
-									<b-col>
-										<item-info md="12" v-for="(i,idx) in displayedItems" :key="i.name" v-if="idx%2===1" class="mb-4" :item="i"></item-info>
-									</b-col>
-									<b-col>
+									<b-col cols="12" md="6">
 										<item-info md="12" v-for="(i,idx) in displayedItems" :key="i.name" v-if="idx%2===0" class="mb-4" :item="i"></item-info>
+									</b-col>
+									<b-col cols="12" md="6">
+										<item-info md="12" v-for="(i,idx) in displayedItems" :key="i.name" v-if="idx%2===1" class="mb-4" :item="i"></item-info>
 									</b-col>
 								</div>
 							</b-col>
@@ -92,6 +92,8 @@ import { getAllItem } from '@/wynn'
 
 import _ from 'lodash'
 import escRegex from 'escape-string-regexp'
+
+const params = ['search', 'rarity', 'type', 'min', 'max'] //url params
 
 export default {
 	data() {
@@ -143,8 +145,20 @@ export default {
 			}
 		}
 
-		window.items = this.items
 		this.filter.items = this.items //initial
+	},
+	mounted() {
+		// query behavior
+		let cnt = 0
+		for (let k in this.$route.query) {
+			if (params.includes(k)) {
+				this.filter[k] = this.$route.query[k]
+				cnt++
+			}
+		}
+		if (cnt) {
+			this.search()
+		}
 	},
 	components: { PulseLoader, ItemInfo, InfiniteLoading },
 	methods: {
@@ -173,7 +187,7 @@ export default {
 			try {
 				reg = new RegExp(f.search, 'i')
 			}
-			catch (e) {
+			catch (e) { //if not a vaild regex
 				reg = new RegExp(escRegex(f.search), 'i')
 			}
 
@@ -184,6 +198,10 @@ export default {
 				.filter(i => i.level >= f.min && i.level <= f.max)
 				.value()
 			this.rerender()
+
+			//generate querystring and append
+			let qs = params.map(p => `${p}=${this.filter[p]}`).join('&')
+			this.$router.replace(`?${qs}`)
 		}
 	}
 }
