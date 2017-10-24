@@ -36,7 +36,7 @@ export default {
 		}
 	},
 	storage: {
-		namespace: 'wynn-home',
+		namespace: 'Home',
 		data: {
 			type: 'search'
 		}

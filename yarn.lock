@@ -3397,6 +3397,10 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+javascript-detect-element-resize@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/javascript-detect-element-resize/-/javascript-detect-element-resize-0.5.3.tgz#1a71cd51dfe565907f299012fe73a294104025de"
+
 js-base64@^2.1.9:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.3.2.tgz#a79a923666372b580f8e27f51845c6f7e8fbfbaf"
@@ -5990,6 +5994,12 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-clusterize@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/vue-clusterize/-/vue-clusterize-0.5.1.tgz#fce9b817788b13733d39f87af64d63fbfd82c0ae"
+  dependencies:
+    vue-mixins "^0.2.10"
+
 vue-eslint-parser@^2.0.1-beta.0:
   version "2.0.1-beta.1"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.1-beta.1.tgz#7e1b3c0865905264605169497fe9e42d27c1ae60"
@@ -6025,6 +6035,12 @@ vue-loader@^13.3.0:
     vue-hot-reload-api "^2.2.0"
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
+
+vue-mixins@^0.2.10:
+  version "0.2.20"
+  resolved "https://registry.yarnpkg.com/vue-mixins/-/vue-mixins-0.2.20.tgz#f58cf2af25dd012cd81afdd3a0daf77005634a78"
+  dependencies:
+    javascript-detect-element-resize "^0.5.3"
 
 vue-router@^2.7.0:
   version "2.7.0"
