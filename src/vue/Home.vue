@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<b-row class="justify-content-md-center p-2">
+		<b-row align-h="center" class="p-2">
 			<b-col cols="12" class="text-center p-2">
 				<b-img :src="require('@/assets/logo.png')" fluid class="p-2 disable" alt="wynncraft logo" />
 			</b-col>
@@ -36,7 +36,7 @@ export default {
 		}
 	},
 	storage: {
-		namespace: 'wynn-home',
+		namespace: 'Home',
 		data: {
 			type: 'search'
 		}

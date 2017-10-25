@@ -8,6 +8,7 @@ import Guild from './vue/Guild'
 import LeaderBoard from './vue/LeaderBoard'
 import Search from './vue/Search'
 import OnlinePlayers from './vue/OnlinePlayers'
+import Item from './vue/Item'
 import About from './vue/About'
 
 const routes = [
@@ -17,6 +18,8 @@ const routes = [
 	{ path: '/leaderboard/:type(player|guild|pvp)', component: LeaderBoard },
 	{ path: '/search/:search', component: Search },
 	{ path: '/online', component: OnlinePlayers },
+	{ path: '/item', component: Item },
+	{ path: '/item/:name', component: Item },
 	{ path: '/about', component: About }
 ]
 

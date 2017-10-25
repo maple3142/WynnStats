@@ -44,46 +44,72 @@ import Clear from './widget/Clear'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
-import { Cache } from '@/cache'
-const cache = new Cache({ namespace: 'search-cache', expire: 60 * 1000 }) //timeout: 1 min
+import cache from '@/cacheStorage'
 import { search } from '@/wynn'
 
 export default {
 	data() {
 		return {
 			search: this.$route.params.search,
-			result: null,
 			error: false,
 			error2: false, //search string should be longer than 3 character
 			loading: true
 		}
 	},
-	components: { PulseLoader, Id, PageList,Clear },
+	storage: {
+		storage: cache(60 * 1000),
+		namespace: 'Search',
+		data: {
+			results: {}
+		}
+	},
+	components: { PulseLoader, Id, PageList, Clear },
 	async created() {
-		let s = this.search
-		if (s.length < 3) {
+		if (this.search.length < 3) {
 			this.loading = false
 			this.error2 = true
 			return
 		}
-		if (cache.has(s)) {
-			this.result = cache.get(s)
-		}
-		else {
+		if (!this.results[this.search]) {
 			try {
-				this.result = await search(s)
-				cache.set(s, this.result)
+				this.$set(this.results, this.search, await search(this.search))
 			}
 			catch (e) {
-				console.error(e)
 				this.error = true
 			}
 		}
 		this.loading = false
 	},
+	computed: {
+		result() {
+			return this.results[this.search]
+		}
+	},
+	// async created() {
+	// 	let s = this.search
+	// 	if (s.length < 3) {
+	// 		this.loading = false
+	// 		this.error2 = true
+	// 		return
+	// 	}
+	// 	if (cache.has(s)) {
+	// 		this.result = cache.get(s)
+	// 	}
+	// 	else {
+	// 		try {
+	// 			this.result = await search(s)
+	// 			cache.set(s, this.result)
+	// 		}
+	// 		catch (e) {
+	// 			console.error(e)
+	// 			this.error = true
+	// 		}
+	// 	}
+	// 	this.loading = false
+	// },
 	methods: {
 		clear() {
-			cache.remove(this.search)
+			this.$delete(this.results, this.search)
 			this.$router.go(0)
 		}
 	}

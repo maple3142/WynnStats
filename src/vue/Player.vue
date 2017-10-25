@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<b-row class="justify-content-md-center p-2">
+		<b-row align-h="center" class="p-2">
 			<b-col md="8">
 				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
 
@@ -51,42 +51,44 @@ import Clear from './widget/Clear'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
-import { Cache } from '@/cache'
-const cache = new Cache({ namespace: 'player-cache' })
+import cache from '@/cacheStorage'
 import { getPlayerStats } from '@/wynn'
-
 
 export default {
 	data() {
 		return {
 			id: this.$route.params.id,
-			player: null,
 			error: false,
 			loading: true
 		}
 	},
-	async created() {
-		let id = this.id.trim()
-
-		if (cache.has(id)) {
-			this.player = cache.get(id)
+	storage: {
+		storage: cache(),
+		namespace: 'Player',
+		data: {
+			players: {}
 		}
-		else {
+	},
+	async created() {
+		if (!this.players[this.id]) {
 			try {
-				this.player = await getPlayerStats(id)
-				cache.set(id, this.player)
+				this.$set(this.players, this.id, await getPlayerStats(this.id))
 			}
 			catch (e) {
 				this.error = true
 			}
 		}
 		this.loading = false
-
+	},
+	computed: {
+		player() {
+			return this.players[this.id]
+		}
 	},
 	components: { PlayerInfo, Classes, PulseLoader, Ranking, Clear },
 	methods: {
 		clear() {
-			cache.remove(this.id)
+			this.$delete(this.players,this.id)
 			this.$router.go(0)
 		}
 	}

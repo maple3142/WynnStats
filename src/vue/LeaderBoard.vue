@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<b-row class="justify-content-md-center p-2">
+		<b-row align-h="center" class="p-2">
 			<b-col md="10" class="text-center">
 				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
 
@@ -16,7 +16,7 @@
 						<b-col v-if="list" class="text-center">
 							<b-form-radio-group v-if="type==='pvp'" v-model="timeframe" :options="[{text: 'All Time',value: 'alltime'},{text: 'Weekly',value: 'week'}]" size="sm" @change="fetchdata" />
 
-							<b-row class="justify-content-md-center p-2">
+							<b-row align-h="center" class="p-2">
 								<b-col md="8">
 									<b-form-input v-model="filter" type="text" placeholder="Filter" />
 								</b-col>
@@ -41,43 +41,42 @@ import Clear from './widget/Clear'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
-import { Cache } from '@/cache'
-const cache = new Cache({ namespace: 'leaderboard-cache' })
+import cache from '@/cacheStorage'
 import { getLeaderBoard } from '@/wynn'
 
 export default {
 	data() {
 		return {
 			type: this.$route.params.type,
-			list: null,
 			error: false,
 			loading: true,
 			filter: ''
 		}
 	},
 	storage: {
-		namespace: 'wynn-leaderboard',
+		storage: cache(),
+		namespace: 'LeaderBoard',
 		data: {
-			timeframe: 'alltime'
+			timeframe: 'alltime',
+			lists: {}
 		}
 	},
 	components: { PulseLoader, List, Clear },
 	created() {
 		this.fetchdata()
 	},
+	computed: {
+		list() {
+			return this.lists[this.type + (this.type === 'pvp' ? this.timeframe : '')]
+		}
+	},
 	methods: {
 		async fetchdata() {
-			this.list = null
 			this.loading = true
-			let type = this.type
-			let name = type + (type === 'pvp' ? this.timeframe : '')
-			if (cache.has(name)) {
-				this.list = cache.get(name)
-			}
-			else {
+			let name = this.type + (this.type === 'pvp' ? this.timeframe : '')
+			if (!this.lists[name]) {
 				try {
-					this.list = await getLeaderBoard(type, this.timeframe)
-					cache.set(name, this.list)
+					this.$set(this.lists, name, await getLeaderBoard(this.type, this.timeframe))
 				}
 				catch (e) {
 					this.error = true
@@ -86,12 +85,12 @@ export default {
 			this.loading = false
 		},
 		clear() {
-			cache.remove(this.type + (this.type === 'pvp' ? this.timeframe : ''))
+			this.$delete(this.lists, this.type + (this.type === 'pvp' ? this.timeframe : ''))
 			this.$router.go(0)
 		}
 	},
 	watch: {
-		timeframe(v){
+		timeframe(v) {
 			this.fetchdata()
 		}
 	}

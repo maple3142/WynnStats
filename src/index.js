@@ -7,7 +7,6 @@ import './style.css'
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import vuejsStorage from 'vuejs-storage'
-
 import router from './router'
 
 //bootstrap-vue polyfill
@@ -23,6 +22,7 @@ Vue.use(BootstrapVue)
 Vue.component = originalVueComponent
 
 Vue.use(vuejsStorage)
+
 
 // vue router #anchor
 Vue.mixin({

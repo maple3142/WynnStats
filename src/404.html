@@ -11,7 +11,7 @@
 
 <body>
 	<script>
-		sessionStorage.rdr = location.pathname
+		sessionStorage.rdr = location.pathname + location.search + location.hash
 		location.replace('/')
 	</script>
 </body>
