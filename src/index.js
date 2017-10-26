@@ -72,3 +72,9 @@ if ('rdr' in sessionStorage) {
 	delete sessionStorage.rdr
 	app.$router.replace(rdr)
 }
+
+
+
+
+import OfflinePluginRuntime from 'offline-plugin/runtime'
+OfflinePluginRuntime.install()

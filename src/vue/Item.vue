@@ -201,7 +201,7 @@ export default {
 
 			//generate querystring and append
 			let qs = params.map(p => `${p}=${this.filter[p]}`).join('&')
-			this.$router.replace(`?${qs}`)
+			this.$router.push(`?${qs}`)
 		}
 	}
 }

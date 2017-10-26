@@ -4,6 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
+var OfflinePlugin = require('offline-plugin')
 
 var extcss = ExtractTextPlugin.extract({
 	fallback: 'style-loader',
@@ -97,6 +98,9 @@ module.exports = {
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor',
 			filename: 'vendor.js'
+		}),
+		new OfflinePlugin({
+			caches: 'all'
 		})
 	],
 	devServer: {

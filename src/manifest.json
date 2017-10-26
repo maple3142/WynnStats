@@ -1,8 +1,8 @@
 {
 	"name": "WynnStats",
-	"start_url": ".",
+	"start_url": "/index.html",
 	"lang": "en-US",
-	​​"orientation": "portrait",
+	"orientation": "portrait",
 	"display": "standalone",
 	"background_color": "#fff",
 	"description": "A browser client can view WynnCraft stats.",
@@ -15,7 +15,8 @@
 	],
 	"related_applications": [
 		{
-			"platform": "web"
+			"platform": "web",
+			"url": "https://wynnstats.github.io/"
 		}
 	]
 }
