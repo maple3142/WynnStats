@@ -18,7 +18,7 @@
 				</b-nav>
 
 				<b-nav is-nav-bar class="ml-auto">
-					<dropdown v-if="loc!==null" :text="`${loc.name}(${loc.health}/${loc.maxHealth})`" nav :capitalize="false">
+					<dropdown v-if="loc" :text="`${loc.name}(${loc.health}/${loc.maxHealth})`" nav :capitalize="false">
 						<b-dropdown-item :to="`/player/${loc.name}`">Profile</b-dropdown-item>
 						<b-dropdown-item :to="`/online?srv=${loc.server}`">Current Server</b-dropdown-item>
 						<b-dropdown-item :href="`https://map.wynncraft.com/#/${loc.x}/${loc.y}/${loc.z}/min/0/0`" target="_blank" rel="noopener noreferrer">Current Location</b-dropdown-item>
@@ -53,12 +53,18 @@ export default {
 	},
 	components: { Dropdown, BlankLink },
 	methods: {
-		async fetchPlayer(){
-			let loc = await getMyLocation()
-			this.loc = loc.error ? null : loc
-			if(this.loc){
-				this.loc.health=Math.floor(this.loc.health)
-				this.loc.maxHealth=Math.floor(this.loc.maxHealth)
+		async fetchPlayer() {
+			let loc
+			try {
+				await getMyLocation()
+			}
+			catch (e) {
+				void 0
+			}
+			if (loc && !loc.error) {
+				this.loc = loc
+				this.loc.health = Math.floor(this.loc.health)
+				this.loc.maxHealth = Math.floor(this.loc.maxHealth)
 			}
 		}
 	},

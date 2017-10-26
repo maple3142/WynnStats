@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<b-row class="justify-content-md-center p-2">
-			<b-col md="8">
+			<b-col md="10">
 				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
 
 				<b-alert :show="error" variant="danger">Getting itemDB failed or item not found.</b-alert>

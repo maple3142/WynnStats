@@ -100,7 +100,18 @@ module.exports = {
 			filename: 'vendor.js'
 		}),
 		new OfflinePlugin({
-			caches: 'all'
+			caches: 'all',
+			responseStrategy: 'network-first',
+			ServiceWorker: {
+				entry: './src/swhandler.js',
+				publicPath: '/swhandler.js',
+				output: 'swhandler.js',
+				navigateFallbackURL: '/'
+			},
+			publicPath: '/',
+			rewrites: function (asset) {
+				return 'index.html'
+			}
 		})
 	],
 	devServer: {
