@@ -50,14 +50,16 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
-			vue: 'vue/dist/vue.esm.js',
+			vue: 'vue/dist/vue.runtime.esm.js',
 			'@': path.resolve('./src')
 		},
 		extensions: ['*', '.js', '.vue', '.css']
 	},
 	plugins: [
 		new webpack.DefinePlugin({
-			'__DEV__': process.env.NODE_ENV === 'development'
+			'process.env': {
+				NODE_ENV: '"production"'
+			}
 		}),
 		new webpack.LoaderOptionsPlugin({
 			options: {
@@ -85,8 +87,7 @@ module.exports = {
 			compress: {
 				warnings: false
 			},
-			comments: false,
-			sourceMap: true
+			comments: false
 		}),
 		new OptimizeCssAssetsPlugin({
 			cssProcessorOptions: {
@@ -106,6 +107,5 @@ module.exports = {
 		contentBase: './dist',
 		inline: true,
 		stats: 'errors-only'
-	},
-	devtool: 'source-map'
+	}
 }

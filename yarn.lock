@@ -6072,9 +6072,9 @@ vue@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.2.tgz#fd367a87bae7535e47f9dc5c9ec3b496e5feb5a4"
 
-vuejs-storage@^0.8.2:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/vuejs-storage/-/vuejs-storage-0.8.2.tgz#292f230a9b4eff1de20febdd8a85c9144630696a"
+vuejs-storage@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/vuejs-storage/-/vuejs-storage-0.9.0.tgz#995e8fe5fa04e6a1ed1c4f721652a25065ae938a"
   dependencies:
     lodash.assignin "^4.2.0"
 

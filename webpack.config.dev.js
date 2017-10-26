@@ -49,14 +49,16 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
-			vue: 'vue/dist/vue.esm.js',
+			vue: 'vue/dist/vue.runtime.esm.js',
 			'@': path.resolve('./src')
 		},
 		extensions: ['*', '.js', '.vue', '.css']
 	},
 	plugins: [
 		new webpack.DefinePlugin({
-			'__DEV__': process.env.NODE_ENV === 'development'
+			'process.env': {
+				NODE_ENV: '"development"'
+			}
 		}),
 		new webpack.LoaderOptionsPlugin({
 			options: {
