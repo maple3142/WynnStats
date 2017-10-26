@@ -12,12 +12,14 @@
 						</dropdown-select>
 					</b-input-group-button>
 
-					<b-form-input v-model="id" @keypress.enter.native="search" :placeholder="placeholder"></b-form-input>
+					<label for="input" class="sr-only">{{type}}</label>
+					<b-form-input v-model="id" id="input" @keypress.enter.native="search" :placeholder="placeholder"></b-form-input>
 
 					<b-input-group-button slot="right" aria-label="search player">
 						<label for="ps" class="sr-only">Search Player</label>
 						<b-btn variant="primary" @click="search" id="ps">
 							<i class="fa fa-search" aria-hidden="true"></i>
+							<span class="sr-only">Search</span>
 						</b-btn>
 					</b-input-group-button>
 				</b-input-group>

@@ -11,7 +11,10 @@ var extcss = ExtractTextPlugin.extract({
 })
 
 module.exports = {
-	entry: ['whatwg-fetch', 'babel-polyfill', './src/index.js'],
+	entry: {
+		app: ['whatwg-fetch', 'babel-polyfill', './src/index.js'],
+		vendor: ['vue', 'bootstrap-vue', 'vue-router']
+	},
 	output: {
 		path: __dirname + '/dist',
 		filename: 'bundle.js'
@@ -100,7 +103,20 @@ module.exports = {
 		new CopyWebpackPlugin([{
 			from: './src/404.html',
 			to: '404.html'
-		}])
+		}, {
+			from: './src/manifest.json',
+			to: 'manifest.json'
+		}, {
+			from: './src/favicon.ico',
+			to: 'favicon.ico'
+		}, {
+			from: './src/appicon.png',
+			to: 'appicon.png'
+		}]),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendor',
+			filename: 'vendor.js'
+		})
 	],
 	devServer: {
 		port: process.env.PORT || 3000,
