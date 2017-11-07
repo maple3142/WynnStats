@@ -5,7 +5,7 @@
 			<b-nav-toggle target="nav_collapse"></b-nav-toggle>
 			<b-navbar-brand tag="router-link" to="/">WynnStats</b-navbar-brand>
 			<b-collapse is-nav id="nav_collapse">
-				<b-nav is-nav-bar>
+				<b-navbar-nav>
 					<b-nav-item to="/online">OnlinePlayers</b-nav-item>
 					<dropdown text="LeaderBoard" nav>
 						<b-dropdown-item to="/leaderboard/guild">Guild</b-dropdown-item>
@@ -15,9 +15,9 @@
 					<b-nav-item to="/item">ItemDB</b-nav-item>
 					<b-nav-item href="https://map.wynncraft.com/" target="_blank" rel="noopener noreferrer">Map</b-nav-item>
 					<b-nav-item to="/about">About</b-nav-item>
-				</b-nav>
+				</b-navbar-nav>
 
-				<b-nav is-nav-bar class="ml-auto">
+				<b-navbar-nav class="ml-auto">
 					<dropdown v-if="loc" :text="`${loc.name}(${loc.health}/${loc.maxHealth})`" nav :capitalize="false">
 						<b-dropdown-item :to="`/player/${loc.name}`">Profile</b-dropdown-item>
 						<b-dropdown-item :to="`/online?srv=${loc.server}`">Current Server</b-dropdown-item>
@@ -28,7 +28,7 @@
 					<b-nav-item href="https://github.com/maple3142/wynnstats" target="_blank" rel="noopener noreferrer">
 						<i class="fa fa-github" aria-hidden="true"></i> GitHub
 					</b-nav-item>
-				</b-nav>
+				</b-navbar-nav>
 			</b-collapse>
 		</b-navbar>
 
