@@ -8,5 +8,6 @@ deploy:
   local_dir: dist
   target_branch: master
   project_name: WynnStats
+  repo: WynnStats/WynnStats.github.io
   on:
     branch: master
