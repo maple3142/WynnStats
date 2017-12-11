@@ -42,7 +42,7 @@
 				Blocks walked: {{data.blocks_walked}}
 			</b-list-group-item>
 			<b-list-group-item>
-				Chests founded: {{data.chests_found}}
+				Chests found: {{data.chests_found}}
 			</b-list-group-item>
 			<b-list-group-item>
 				Deaths: {{data.deaths}}
