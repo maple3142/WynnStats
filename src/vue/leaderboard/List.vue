@@ -8,9 +8,7 @@
 						{{row.value}}
 					</template>
 					<template slot="name" slot-scope="row">
-						<b-link v-if="type!=='guild'" :to="`/player/${row.value}`">
-							<b-img-lazy fluid :src="`https://crafatar.com/avatars/${row.value}?size=20`" :rel="`${row.value}'s head`" /> {{row.value}}
-						</b-link>
+						<id v-if="type!=='guild'" :id="row.value" />
 						<b-link v-else :to="`/guild/${row.value}`">{{row.value}}</b-link>
 					</template>
 					<span slot="minPlayed" slot-scope="row">{{row.value | toHours}} hours</span>
@@ -27,6 +25,7 @@
 </template>
 <script>
 import Tag from '../widget/Tag'
+import Id from '../widget/Id'
 
 import fields from './fields.json'
 export default {
@@ -52,7 +51,7 @@ export default {
 			this.page = 1
 		}
 	},
-	components: { Tag }
+	components: { Tag, Id }
 }
 </script>
 <style scoped>

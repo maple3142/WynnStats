@@ -3,8 +3,10 @@
 		<b-list-group class="info">
 			<b-list-group-item>
 				<h3>
-					<b-img-lazy fluid :src="`https://crafatar.com/avatars/${player.username}?size=20`" :rel="`${player.username}'s head`" /> {{player.username}}
-					<tag :tag="player.tag" :rank="player.rank"/>
+					<id :id="player.username">
+						<span>{{player.username}}</span>
+					</id>
+					<tag :tag="player.tag" :rank="player.rank" />
 				</h3>
 			</b-list-group-item>
 			<b-list-group-item>
@@ -28,6 +30,8 @@
 </template>
 <script>
 import Tag from '../widget/Tag'
+import Id from '../widget/Id'
+
 export default {
 	props: {
 		player: Object
@@ -47,6 +51,6 @@ export default {
 			return this.player.last_join_friendly
 		}
 	},
-	components: { Tag }
+	components: { Tag, Id }
 }
 </script>
