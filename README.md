@@ -1,4 +1,6 @@
 # [WynnStats](https://wynnstats.github.io/)
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/maple3142/WynnStats.svg)](https://greenkeeper.io/)
 *WynnStats is a serverless client which can view [wynncraft](https://wynncraft.com/) statistics.*
 
 [![Build Status](https://travis-ci.org/maple3142/WynnStats.svg?branch=master)](https://travis-ci.org/maple3142/WynnStats)
