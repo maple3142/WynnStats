@@ -17,16 +17,17 @@
 	<meta property="og:image" content="https://cdn.wynncraft.com/img/ico/android-icon-192x192.png" />
 	<meta name="google-site-verification" content="-dERAmvWuI1YRBjlW81JizUIoS6Arb34SYDpKP8GNTE" />
 
-	<% for(var css of htmlWebpackPlugin.files.css ){ %>
+	<% for(const css of htmlWebpackPlugin.files.css ){ %>
 		<link rel="stylesheet" href="/<%= css %>">
 	<% } %>
 
-	
+	<link rel="stylesheet" href="/style.css">
+
 	<title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
 	<div id="app"></div>
-	<% for(var js of htmlWebpackPlugin.files.js ){ %>
+	<% for(const js of htmlWebpackPlugin.files.js ){ %>
 		<script async src="/<%= js %>"></script>
 	<% } %>
 </body>
