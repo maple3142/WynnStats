@@ -25,7 +25,9 @@ export async function getOnlinePlayers() {
 }
 
 export async function getLeaderBoard(type, timeframe = 'alltime') {
-	return await fetch(`${APIURL}?action=statsLeaderboard&type=${type}&timeframe=${timeframe}`).then(r => r.json()).then(j => j.data)
+	return await fetch(`${APIURL}?action=statsLeaderboard&type=${type}&timeframe=${timeframe}`)
+		.then(r => r.json())
+		.then(j => j.data)
 }
 
 export async function search(str) {
@@ -37,5 +39,14 @@ export async function getMyLocation() {
 }
 
 export async function getAllItem() {
-	return await fetch(`${APIURL}?action=itemDB&category=all`).then(r => r.json()).then(j => j.items)
+	const r = await fetch(`${APIURL}?action=itemDB&category=all`)
+		.then(r => r.json())
+		.then(j => j.items)
+	return r.map(x => {
+		if (x.accessoryType) {
+			x.type = x.accessoryType
+			delete x.accessoryType
+		}
+		return x
+	})
 }

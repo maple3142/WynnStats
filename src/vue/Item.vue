@@ -19,13 +19,13 @@
 									<b-col>
 										<b-input-group>
 											<b-input-group-text>Rarity</b-input-group-text>
-											<b-form-select v-model="filter.rarity" :options="['Any','Normal','Unique','Set','Rare','Legendary','Mythic']"/>
+											<b-form-select v-model="filter.rarity" :options="RARITY"/>
 										</b-input-group>
 									</b-col>
 									<b-col>
 										<b-input-group>
 											<b-input-group-text>Type</b-input-group-text>
-											<b-form-select v-model="filter.type" :options="['Any','Spear','Wand','Dagger','Bow','Helmet','Chestplate','Leggings','Boots','Ring','Necklace','Bracelet']"/>
+											<b-form-select v-model="filter.type" :options="TYPE"/>
 										</b-input-group>
 									</b-col>
 								</b-row>
@@ -50,7 +50,7 @@
 								</b-row>
 								<b-row class="pb-2">
 									<b-col class="text-center">
-										Total {{filter.items.length}} Result<template v-if="filter.items.length>1">s</template>
+										Total {{items.length}} Result<template v-if="items.length>1">s</template>
 									</b-col>
 								</b-row>
 							</b-col>
@@ -100,9 +100,9 @@ import escRegex from 'escape-string-regexp'
 
 const db = new Dexie('ItemDB')
 db.version(1).stores({
-	items:
-		'name,tier,set,sockets,type,armorType,armorColor,addedLore,dropType,restrictions,health,fireDefense,waterDefense,airDefense,thunderDefense,earthDefense,level,quest,classRequirement,strength,dexterity,intelligence,agility,defense,healthRegen,manaRegen,spellDamage,damageBonus,lifeSteal,manaSteal,xpBonus,lootBonus,reflection,strengthPoints,dexterityPoints,intelligencePoints,agilityPoints,defensePoints,thorns,exploding,speed,attackSpeedBonus,poison,healthBonus,soulPoints,emeraldStealing,healthRegenRaw,spellDamageRaw,damageBonusRaw,bonusFireDamage,bonusWaterDamage,bonusAirDamage,bonusThunderDamage,bonusEarthDamage,bonusFireDefense,bonusWaterDefense,bonusAirDefense,bonusThunderDefense,bonusEarthDefense,category,material,damage,fireDamage,waterDamage,airDamage,thunderDamage,earthDamage,attackSpeed,accessoryType,identified,sropType,droptype'
+	items: 'name,type,level,tier'
 })
+window.db = db
 
 const params = ['search', 'rarity', 'type', 'min', 'max'] //url params
 
@@ -113,15 +113,30 @@ export default {
 			loading: true,
 			name: '',
 			item: null,
+			items: [],
 			// filter
 			filter: {
 				search: '',
 				rarity: 'Any',
 				type: 'Any',
 				min: 0,
-				max: 100,
-				items: []
+				max: 100
 			},
+			RARITY: ['Any', 'Normal', 'Unique', 'Set', 'Rare', 'Legendary', 'Mythic'],
+			TYPE: [
+				'Any',
+				'Spear',
+				'Wand',
+				'Dagger',
+				'Bow',
+				'Helmet',
+				'Chestplate',
+				'Leggings',
+				'Boots',
+				'Ring',
+				'Necklace',
+				'Bracelet'
+			],
 			// infinite scroll
 			displayedItems: [],
 			page: 0
@@ -147,12 +162,9 @@ export default {
 			}
 			return
 		}
-
-		this.items = await db.items.toArray()
-		this.filter.items = this.items //initial
 	},
-	mounted() {
-		// query behavior
+	async mounted() {
+		// parse query to filters
 		let cnt = 0
 		for (let k in this.$route.query) {
 			if (params.includes(k)) {
@@ -162,19 +174,19 @@ export default {
 		}
 		if (cnt) {
 			this.search()
+		} else {
+			this.items = await db.items.toArray()
 		}
 	},
 	components: { PulseLoader, ItemInfo, InfiniteLoading },
 	methods: {
 		loadMore($state) {
 			setTimeout(() => {
-				if (this.page * 4 > this.filter.items.length && $state) {
+				if (this.page * 2 > this.items.length && $state) {
 					$state.complete()
 					return
 				}
-				this.displayedItems = this.displayedItems.concat(
-					this.filter.items.slice(this.page * 2, this.page * 2 + 2)
-				) // 2 item per scroll
+				this.displayedItems = this.displayedItems.concat(this.items.slice(this.page * 2, this.page * 2 + 2)) // 2 item per scroll
 				this.page++
 				if ($state) {
 					$state.loaded()
@@ -187,7 +199,7 @@ export default {
 			this.page = 0
 			this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset')
 		},
-		search() {
+		async search() {
 			let f = this.filter
 			let reg
 			try {
@@ -197,12 +209,15 @@ export default {
 				reg = new RegExp(escRegex(f.search), 'i')
 			}
 
-			this.filter.items = _(this.items)
-				.filter(i => reg.test(i.name))
-				.filter(i => i.tier === f.rarity || f.rarity === 'Any')
-				.filter(i => i.type === f.type || i.accessoryType === f.type || f.type === 'Any')
-				.filter(i => i.level >= f.min && i.level <= f.max)
-				.value()
+			const whereobj = {}
+			let query = db.items
+			if (f.rarity !== 'Any') whereobj.tier = f.rarity
+			if (f.type !== 'Any') whereobj.type = f.type
+			if (Object.keys(whereobj).length !== 0) {
+				query = query.where(whereobj)
+			}
+			const items = await query.toArray()
+			this.items = items.filter(i => reg.test(i.name) && i.level >= f.min && i.level <= f.max)
 			this.rerender()
 
 			//generate querystring and append
