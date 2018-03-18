@@ -70,7 +70,6 @@ export default {
 	},
 	created() {
 		setInterval(this.fetchPlayer.bind(this), 10 * 1000)
-		this.fetchPlayer()
 	}
 }
 </script>
