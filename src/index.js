@@ -56,9 +56,10 @@ const app = new Vue({
 	render: h => h(App)
 })
 
-// github pages spa polyfill
+/* github pages spa polyfill
 if ('rdr' in sessionStorage) {
 	let rdr = sessionStorage.rdr
 	delete sessionStorage.rdr
 	app.$router.replace(rdr)
 }
+*/
