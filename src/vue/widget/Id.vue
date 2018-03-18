@@ -12,16 +12,37 @@ export default {
 			uuid: null
 		}
 	},
+	storage: {
+		data: {
+			uuids: {}
+		},
+		namespace: 'uuid-cache'
+	},
 	props: {
 		id: {
 			type: String,
 			required: true
 		}
 	},
-	async created() {
-		const { id: uuid } = await fetch(`https://api.minetools.eu/uuid/${this.id}`).then(r => r.json())
-		if (uuid !== 'null') this.uuid = uuid
-		else this.uuid = '8667ba71b85a4004af54457a9734eed7' //a steve skin uuid
+	created() {
+		this.load(this.id)
+	},
+	methods: {
+		async load(id) {
+			if (id in this.uuids) {
+				this.uuid = this.uuids[this.id]
+				return
+			}
+			const { id: uuid } = await fetch(`https://api.minetools.eu/uuid/${this.id}`).then(r => r.json())
+			if (uuid !== 'null') this.uuid = uuid
+			else this.uuid = '8667ba71b85a4004af54457a9734eed7' //a steve skin uuid
+			this.uuids[id] = this.uuid
+		}
+	},
+	watch: {
+		id(id) {
+			this.load(id)
+		}
 	}
 }
 </script>
