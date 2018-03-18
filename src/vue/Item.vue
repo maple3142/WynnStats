@@ -17,24 +17,28 @@
 								</b-row>
 								<b-row class="pb-2">
 									<b-col>
-										<b-input-group left="Rarity">
+										<b-input-group>
+											<b-input-group-text>Rarity</b-input-group-text>
 											<b-form-select v-model="filter.rarity" :options="['Any','Normal','Unique','Set','Rare','Legendary','Mythic']"/>
 										</b-input-group>
 									</b-col>
 									<b-col>
-										<b-input-group left="Type">
+										<b-input-group>
+											<b-input-group-text>Type</b-input-group-text>
 											<b-form-select v-model="filter.type" :options="['Any','Spear','Wand','Dagger','Bow','Helmet','Chestplate','Leggings','Boots','Ring','Necklace','Bracelet']"/>
 										</b-input-group>
 									</b-col>
 								</b-row>
 								<b-row class="pb-2">
 									<b-col>
-										<b-input-group left="Min lv.">
+										<b-input-group>
+											<b-input-group-text>Min lv.</b-input-group-text>
 											<b-form-input type="number" min="0" :max="filter.max" v-model="filter.min"/>
 										</b-input-group>
 									</b-col>
 									<b-col>
-										<b-input-group left="Max lv.">
+										<b-input-group>
+											<b-input-group-text>Max lv.</b-input-group-text>
 											<b-form-input type="number" :min="filter.min" max="100" v-model="filter.max"/>
 										</b-input-group>
 									</b-col>
@@ -84,6 +88,7 @@
 <script>
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 import InfiniteLoading from 'vue-infinite-loading'
+import Dexie from 'dexie'
 
 import ItemInfo from './item/ItemInfo'
 
@@ -92,6 +97,12 @@ import { getAllItem } from '@/wynn'
 
 import _ from 'lodash'
 import escRegex from 'escape-string-regexp'
+
+const db = new Dexie('ItemDB')
+db.version(1).stores({
+	items:
+		'name,tier,set,sockets,type,armorType,armorColor,addedLore,dropType,restrictions,health,fireDefense,waterDefense,airDefense,thunderDefense,earthDefense,level,quest,classRequirement,strength,dexterity,intelligence,agility,defense,healthRegen,manaRegen,spellDamage,damageBonus,lifeSteal,manaSteal,xpBonus,lootBonus,reflection,strengthPoints,dexterityPoints,intelligencePoints,agilityPoints,defensePoints,thorns,exploding,speed,attackSpeedBonus,poison,healthBonus,soulPoints,emeraldStealing,healthRegenRaw,spellDamageRaw,damageBonusRaw,bonusFireDamage,bonusWaterDamage,bonusAirDamage,bonusThunderDamage,bonusEarthDamage,bonusFireDefense,bonusWaterDefense,bonusAirDefense,bonusThunderDefense,bonusEarthDefense,category,material,damage,fireDamage,waterDamage,airDamage,thunderDamage,earthDamage,attackSpeed,accessoryType,identified,sropType,droptype'
+})
 
 const params = ['search', 'rarity', 'type', 'min', 'max'] //url params
 
@@ -116,19 +127,11 @@ export default {
 			page: 0
 		}
 	},
-	storage: {
-		storage: cache(7 * 24 * 60 * 60 * 1000), //7days
-		namespace: 'Item',
-		data: {
-			items: null
-		}
-	},
 	async created() {
-		if (!this.items) {
+		if ((await db.items.count()) === 0) {
 			try {
-				this.items = await getAllItem()
-			}
-			catch (e) {
+				await db.items.bulkPut(await getAllItem())
+			} catch (e) {
 				this.error = true
 			}
 		}
@@ -136,15 +139,16 @@ export default {
 
 		if (this.$route.params.name) {
 			this.name = this.$route.params.name
-			let item = this.items.filter(i => i.name === this.name)[0]
+			let item = await db.items.get({ name: this.name })
 			if (!item) {
 				this.error = true
-			}
-			else {
+			} else {
 				this.item = item
 			}
+			return
 		}
 
+		this.items = await db.items.toArray()
 		this.filter.items = this.items //initial
 	},
 	mounted() {
@@ -164,11 +168,13 @@ export default {
 	methods: {
 		loadMore($state) {
 			setTimeout(() => {
-				if (this.page * 2 > this.filter.items.length && $state) {
+				if (this.page * 4 > this.filter.items.length && $state) {
 					$state.complete()
 					return
 				}
-				this.displayedItems = this.displayedItems.concat(this.filter.items.slice(this.page * 2, this.page * 2 + 2)) // 2 item per scroll
+				this.displayedItems = this.displayedItems.concat(
+					this.filter.items.slice(this.page * 2, this.page * 2 + 2)
+				) // 2 item per scroll
 				this.page++
 				if ($state) {
 					$state.loaded()
@@ -186,8 +192,8 @@ export default {
 			let reg
 			try {
 				reg = new RegExp(f.search, 'i')
-			}
-			catch (e) { //if not a vaild regex
+			} catch (e) {
+				//if not a vaild regex
 				reg = new RegExp(escRegex(f.search), 'i')
 			}
 
