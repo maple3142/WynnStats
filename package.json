@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"bootstrap": "4.0.0",
-		"bootstrap-vue": "^1.0.0",
+		"bootstrap-vue": "^2.0.0-rc.2",
 		"change-case": "^3.0.1",
 		"escape-string-regexp": "^1.0.5",
 		"font-awesome": "^4.7.0",

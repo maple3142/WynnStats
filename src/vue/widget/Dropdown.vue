@@ -43,3 +43,8 @@ export default {
 	}
 }
 </script>
+<style>
+.dropdown-toggle::after {
+	border: initial;
+}
+</style>

@@ -14,7 +14,9 @@
 					</b-row>
 					<b-row>
 						<b-col v-if="list" class="text-center">
-							<b-form-radio-group v-if="type==='pvp'" v-model="timeframe" :options="[{text: 'All Time',value: 'alltime'},{text: 'Weekly',value: 'week'}]" size="sm" @change="fetchdata" />
+							<b-form-group v-if="type==='pvp'">
+								<b-form-radio-group  v-model="timeframe" :options="[{text: 'All Time',value: 'alltime'},{text: 'Weekly',value: 'week'}]" size="sm" @change="fetchdata" />
+							</b-form-group>
 
 							<b-row align-h="center" class="p-2">
 								<b-col md="8">
@@ -77,8 +79,7 @@ export default {
 			if (!this.lists[name]) {
 				try {
 					this.$set(this.lists, name, await getLeaderBoard(this.type, this.timeframe))
-				}
-				catch (e) {
+				} catch (e) {
 					this.error = true
 				}
 			}
