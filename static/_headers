@@ -1,4 +1,4 @@
-*.js
+/*.js
 	Cache-Control: max-age=604800
-*.css
+/*.css
 	Cache-Control: max-age=604800
