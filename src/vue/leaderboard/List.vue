@@ -1,8 +1,8 @@
 <template>
 	<b-col>
 		<b-row>
-			<b-col>
-				<b-table responsive striped hover :items="list" :current-page="page" :per-page="10" :fields="field" :filter="filter" @filtered="filtered">
+			<b-col class="table-responsive">
+				<b-table striped hover :items="list" :current-page="page" :per-page="10" :fields="field" :filter="filter" @filtered="filtered">
 					<template slot="num" slot-scope="row">
 						<span v-if="row.value<=3" :class="`rank${row.value}`" aria-hidden="true">♛</span>
 						{{row.value}}

@@ -4,6 +4,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'font-awesome/css/font-awesome.min.css'
 import './style.css'
 
+import 'whatwg-fetch'
+import 'babel-polyfill'
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import vuejsStorage from 'vuejs-storage'
