@@ -52,16 +52,15 @@ export default {
 			type: this.$route.params.type,
 			error: false,
 			loading: true,
-			filter: ''
+			filter: '',
+			timeframe: 'alltime',
+			lists: {}
 		}
 	},
 	storage: {
 		storage: cache(),
 		namespace: 'LeaderBoard',
-		data: {
-			timeframe: 'alltime',
-			lists: {}
-		}
+		keys: ['timeframe', 'lists']
 	},
 	components: { PulseLoader, List, Clear },
 	created() {

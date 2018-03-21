@@ -53,15 +53,14 @@ export default {
 			search: this.$route.params.search,
 			error: false,
 			error2: false, //search string should be longer than 3 character
-			loading: true
+			loading: true,
+			results: {}
 		}
 	},
 	storage: {
 		storage: cache(60 * 1000),
 		namespace: 'Search',
-		data: {
-			results: {}
-		}
+		keys: ['results']
 	},
 	components: { PulseLoader, Id, PageList, Clear },
 	async created() {
@@ -73,8 +72,7 @@ export default {
 		if (!this.results[this.search]) {
 			try {
 				this.$set(this.results, this.search, await search(this.search))
-			}
-			catch (e) {
+			} catch (e) {
 				this.error = true
 			}
 		}

@@ -59,22 +59,20 @@ export default {
 		return {
 			id: this.$route.params.id,
 			error: false,
-			loading: true
+			loading: true,
+			players: {}
 		}
 	},
 	storage: {
 		storage: cache(),
 		namespace: 'Player',
-		data: {
-			players: {}
-		}
+		keys: ['players']
 	},
 	async created() {
 		if (!this.players[this.id]) {
 			try {
 				this.$set(this.players, this.id, await getPlayerStats(this.id))
-			}
-			catch (e) {
+			} catch (e) {
 				this.error = true
 			}
 		}
@@ -88,7 +86,7 @@ export default {
 	components: { PlayerInfo, Classes, PulseLoader, Ranking, Clear },
 	methods: {
 		clear() {
-			this.$delete(this.players,this.id)
+			this.$delete(this.players, this.id)
 			this.$router.go(0)
 		}
 	}

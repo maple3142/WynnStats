@@ -62,23 +62,21 @@ export default {
 		return {
 			name: this.$route.params.name,
 			error: false,
-			loading: true
+			loading: true,
+			guilds: {}
 		}
 	},
 	storage: {
 		storage: cache(),
 		namespace: 'Guild',
-		data: {
-			guilds: {}
-		}
+		keys: ['guilds']
 	},
 	components: { PulseLoader, GuildInfo, Member, Clear },
 	async created() {
 		if (!this.guilds[this.name]) {
 			try {
 				this.$set(this.guilds, this.name, await getGuildStats(this.name))
-			}
-			catch (e) {
+			} catch (e) {
 				this.error = true
 			}
 		}
@@ -91,7 +89,7 @@ export default {
 	},
 	methods: {
 		clear() {
-			this.$delete(this.guilds,this.name)
+			this.$delete(this.guilds, this.name)
 			this.$router.go(0)
 		}
 	}

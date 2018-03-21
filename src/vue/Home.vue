@@ -34,14 +34,13 @@ export default {
 	data() {
 		return {
 			id: '',
-			guild: ''
+			guild: '',
+			type: 'search'
 		}
 	},
 	storage: {
 		namespace: 'Home',
-		data: {
-			type: 'search'
-		}
+		keys: ['type']
 	},
 	methods: {
 		search() {

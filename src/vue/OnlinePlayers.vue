@@ -62,29 +62,31 @@ export default {
 		return {
 			error: false,
 			loading: true,
-			filter: ''
+			filter: '',
+			cur: '', //selected server name
+			result: null
 		}
 	},
 	storage: {
 		storage: cache(10 * 1000), //10sec
 		namespace: 'OnlinePlayers',
-		data: {
-			cur: '', //selected server name
-			result: null
-		}
+		keys: ['cur', 'result']
 	},
 	components: { PulseLoader, Id, PageList, Dropdown, Clear, DropdownSelect },
 	async created() {
 		if (!this.result) {
 			try {
 				this.result = await getOnlinePlayers()
-				this.result = _(this.result).toPairs().sortBy(0).fromPairs().value() //sort object keys
+				this.result = _(this.result)
+					.toPairs()
+					.sortBy(0)
+					.fromPairs()
+					.value() //sort object keys
 
 				if (!(this.cur in this.result)) {
 					this.cur = _.findKey(this.result, ar => ar.length > 0) //first server has player
 				}
-			}
-			catch (e) {
+			} catch (e) {
 				this.error = true
 			}
 		}
