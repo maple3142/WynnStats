@@ -14,17 +14,17 @@ import router from './router'
 Vue.use(BootstrapVue)
 Vue.use(vuejsStorage)
 
-
 // vue router #anchor
 Vue.mixin({
 	mounted() {
-		let hash, hs = location.hash.split('#')
+		let hash,
+			hs = location.hash.split('#')
 		if (hs.length >= 2) {
 			hash = hs.pop()
 			try {
 				let el = this.$el
-				if (el !== null && el.querySelector && (el = el.querySelector(`#${hash}`))) { //if exists
-
+				if (el !== null && el.querySelector && (el = el.querySelector(`#${hash}`))) {
+					//if exists
 
 					let bodyTop = document.body.getBoundingClientRect().top
 					let elemTop = el.getBoundingClientRect().top
@@ -32,13 +32,11 @@ Vue.mixin({
 					setTimeout(() => {
 						window.scrollTo(0, elemTop - bodyTop) //scroll to element
 					}, 100)
-				}
-				else {
+				} else {
 					window.scrollTo(0, 0)
 				}
-			}
-			catch (e) {
-				void (0) //empty statment for eslint
+			} catch (e) {
+				void 0 //empty statment for eslint
 			}
 		}
 	}
@@ -63,3 +61,23 @@ if ('rdr' in sessionStorage) {
 	app.$router.replace(rdr)
 }
 */
+
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker
+		.register('/service-worker.js')
+		.then(reg => {
+			reg.onupdatefound = () => {
+				const installing = reg.installing
+				installing.onstatechange = () => {
+					if (installing.state === 'installed') {
+						if (navigator.serviceWorker.controller) {
+							console.log('New content is available; please refresh.')
+						} else {
+							console.log('Content is cached for offline use.')
+						}
+					}
+				}
+			}
+		})
+		.catch(err => console.error('Service Worker register error:', err))
+}

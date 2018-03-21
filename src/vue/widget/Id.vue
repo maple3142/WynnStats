@@ -9,14 +9,13 @@
 export default {
 	data() {
 		return {
-			uuid: null
+			uuid: null,
+			uuids: {}
 		}
 	},
 	storage: {
-		data: {
-			uuids: {}
-		},
-		namespace: 'uuid-cache'
+		namespace: 'uuid-cache',
+		keys: ['uuid']
 	},
 	props: {
 		id: {

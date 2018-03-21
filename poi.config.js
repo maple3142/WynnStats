@@ -3,5 +3,6 @@ module.exports = {
 	html: {
 		title: 'WynnStats',
 		description: 'A browser client can view WynnCraft stats.'
-	}
+	},
+	presets: [require('./poi-preset-sw-precache')()]
 }
