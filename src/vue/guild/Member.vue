@@ -19,7 +19,7 @@
 				<!--chief-->
 				<h5 id="Chief">♕ Chief({{chief.length}})</h5>
 				<page-list :list="chief"
-				           size="sm">
+				           size="sm" class="member-block">
 					<template slot-scope="row">
 						<id :id="row.value" />
 					</template>
@@ -30,7 +30,7 @@
 				<!--captain-->
 				<h5 id="Captain">♖ Captain({{captain.length}})</h5>
 				<page-list :list="captain"
-				           size="sm">
+				           size="sm" class="member-block">
 					<template slot-scope="row">
 						<id :id="row.value" />
 					</template>
@@ -44,7 +44,7 @@
 				<!--recruiter-->
 				<h5 id="Recruiter">♘ Recruiter({{recruiter.length}})</h5>
 				<page-list :list="recruiter"
-				           size="sm">
+				           size="sm" class="member-block">
 					<template slot-scope="row">
 						<id :id="row.value" />
 					</template>
@@ -55,7 +55,7 @@
 				<!--recruit-->
 				<h5 id="Recruit">♙ Recruit({{recruit.length}})</h5>
 				<page-list :list="recruit"
-				           size="sm">
+				           size="sm" class="member-block">
 					<template slot-scope="row">
 						<id :id="row.value" />
 					</template>
@@ -100,4 +100,8 @@ export default {
 	}
 }
 </script>
-
+<style scoped>
+.member-block{
+	height: 550px;
+}
+</style>

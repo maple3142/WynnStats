@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="d-flex flex-column justify-content-between">
 		<b-row>
 			<b-col>
 				<b-list-group>
