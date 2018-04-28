@@ -3,15 +3,17 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const Home = () => import(/* webpackChunkName: "Home" */ '@/vue/Home').then(x => x.default)
-const Player = () => import(/* webpackChunkName: "Player" */ '@/vue/Player').then(x => x.default)
-const Guild = () => import(/* webpackChunkName: "Guild" */ '@/vue/Guild').then(x => x.default)
-const LeaderBoard = () => import(/* webpackChunkName: "LeaderBoard" */ '@/vue/LeaderBoard').then(x => x.default)
-const Search = () => import(/* webpackChunkName: "Search" */ '@/vue/Search').then(x => x.default)
-const OnlinePlayers = () => import(/* webpackChunkName: "OnlinePlayers" */ '@/vue/OnlinePlayers').then(x => x.default)
-const ItemList = () => import(/* webpackChunkName: "Item" */ '@/vue/ItemList').then(x => x.default)
-const Item = () => import(/* webpackChunkName: "Item" */ '@/vue/Item').then(x => x.default)
-const About = () => import(/* webpackChunkName: "About" */ '@/vue/About').then(x => x.default)
+const resolveDefault = x => x.default
+
+const Home = () => import(/* webpackChunkName: "Home" */ '@/vue/Home').then(resolveDefault)
+const Player = () => import(/* webpackChunkName: "Player" */ '@/vue/Player').then(resolveDefault)
+const Guild = () => import(/* webpackChunkName: "Guild" */ '@/vue/Guild').then(resolveDefault)
+const LeaderBoard = () => import(/* webpackChunkName: "LeaderBoard" */ '@/vue/LeaderBoard').then(resolveDefault)
+const Search = () => import(/* webpackChunkName: "Search" */ '@/vue/Search').then(resolveDefault)
+const OnlinePlayers = () => import(/* webpackChunkName: "OnlinePlayers" */ '@/vue/OnlinePlayers').then(resolveDefault)
+const ItemList = () => import(/* webpackChunkName: "ItemList" */ '@/vue/ItemList').then(resolveDefault)
+const Item = () => import(/* webpackChunkName: "Item" */ '@/vue/Item').then(resolveDefault)
+const About = () => import(/* webpackChunkName: "About" */ '@/vue/About').then(resolveDefault)
 
 const routes = [
 	{ path: '/', component: Home },
