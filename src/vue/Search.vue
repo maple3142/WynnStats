@@ -2,15 +2,21 @@
 	<div>
 		<b-row class="justify-content-md-center p-2">
 			<b-col md="8">
-				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
+				<pulse-loader class="text-center"
+				              :loading="loading"
+				              size="100px"></pulse-loader>
 
-				<b-alert :show="error" variant="danger">Search failed.</b-alert>
+				<b-alert :show="error"
+				         variant="danger">Search failed.</b-alert>
 
-				<b-alert :show="error2" variant="danger">Search string need to be longer than 3 character.</b-alert>
+				<b-alert :show="error2"
+				         variant="danger">Search string need to be longer than 3 character.</b-alert>
 
 				<div v-if="result">
 					<b-row class="justify-content-md-center p-2 text-center">
-						<b-col cols="12" md="6" v-if="result.guilds.length">
+						<b-col cols="12"
+						       md="6"
+						       v-if="result.guilds.length">
 							<h4>Guilds({{result.guilds.length}})</h4>
 							<page-list :list="result.guilds">
 								<template slot-scope="row">
@@ -18,7 +24,9 @@
 								</template>
 							</page-list>
 						</b-col>
-						<b-col cols="12" md="6" v-if="result.players.length">
+						<b-col cols="12"
+						       md="6"
+						       v-if="result.players.length">
 							<h4>Players({{result.players.length}})</h4>
 							<page-list :list="result.players">
 								<template slot-scope="row">
@@ -29,7 +37,7 @@
 					</b-row>
 					<b-row>
 						<b-col class="text-center">
-							<clear @clear="clear"/>
+							<clear @clear="clear" />
 						</b-col>
 					</b-row>
 				</div>

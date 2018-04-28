@@ -1,7 +1,10 @@
 <template>
 	<dropdown v-bind="$props">
-		<b-dropdown-item v-for="item in list" :key="item" @click="update(item)" :class="clazz(item)">
-			<slot :value="item"/>
+		<b-dropdown-item v-for="item in list"
+		                 :key="item"
+		                 @click="update(item)"
+		                 :class="clazz(item)">
+			<slot :value="item" />
 		</b-dropdown-item>
 	</dropdown>
 </template>
@@ -38,7 +41,7 @@ export default {
 		},
 		clazz(cur) {
 			let cls = {}
-			cls[this.activeClass] = (this.value === cur)
+			cls[this.activeClass] = this.value === cur
 			return cls
 		}
 	}

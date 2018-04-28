@@ -1,8 +1,14 @@
 <template>
 	<b-col>
 		<!--class tabs-->
-		<b-nav justified tabs class="pb-2">
-			<b-nav-item v-for="(cls,name) in classes" :key="name" :active="name===cur" @click="select(name)" class="capitalize">{{name | strip }} (Lv.{{classes[name].level}})</b-nav-item>
+		<b-nav justified
+		       tabs
+		       class="pb-2">
+			<b-nav-item v-for="(cls,name) in classes"
+			            :key="name"
+			            :active="name===cur"
+			            @click="select(name)"
+			            class="capitalize">{{name | strip }} (Lv.{{classes[name].level}})</b-nav-item>
 		</b-nav>
 
 		<!--xp-->
@@ -67,14 +73,16 @@
 			</b-list-group-item>
 			<b-list-group-item>
 				Dungeons({{data.dungeonsAmount}}):
-				<span v-for="(times,dungeon) in data.dungeons" :key="dungeon">
+				<span v-for="(times,dungeon) in data.dungeons"
+				      :key="dungeon">
 					<br>
 					<span class="pl-4">{{dungeon}}: {{times}}</span>
 				</span>
 			</b-list-group-item>
 			<b-list-group-item>
 				Quests({{data.questsAmount}}):
-				<span v-for="quest in data.quests" :key="quest">
+				<span v-for="quest in data.quests"
+				      :key="quest">
 					<br>
 					<span class="pl-4">
 						<BlankLink :href="`https://wynncraft.gamepedia.com/${quest}`">{{quest}}</BlankLink>
@@ -106,7 +114,8 @@ export default {
 	filters: {
 		strip(s) {
 			let lch = s.charCodeAt(s.length - 1)
-			if (lch >= 48 && lch <= 57) { //is number
+			if (lch >= 48 && lch <= 57) {
+				//is number
 				return s.slice(0, -1)
 			}
 			return s

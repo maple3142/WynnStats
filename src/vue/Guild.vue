@@ -1,10 +1,14 @@
 <template>
 	<div>
-		<b-row align-h="center" class="p-2">
+		<b-row align-h="center"
+		       class="p-2">
 			<b-col md="8">
-				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
+				<pulse-loader class="text-center"
+				              :loading="loading"
+				              size="100px"></pulse-loader>
 
-				<b-alert :show="error" variant="danger">
+				<b-alert :show="error"
+				         variant="danger">
 					Guild "{{name}}" not found.Try to
 					<b-link :to="`/search/${name}`">search</b-link> it?
 				</b-alert>
@@ -21,7 +25,8 @@
 					<b-row class="pb-2">
 						<b-col class="text-center">
 							<b-row>
-								<clear :href="`https://wynncraft.com/stats/guild/${name}`" @clear="clear" />
+								<clear :href="`https://wynncraft.com/stats/guild/${name}`"
+								       @clear="clear" />
 							</b-row>
 						</b-col>
 					</b-row>
@@ -37,8 +42,10 @@
 						</b-col>
 					</b-row>
 
-					<b-row align-h="center" class="pt-2">
-						<b-col lg="8" class="text-center">
+					<b-row align-h="center"
+					       class="pt-2">
+						<b-col lg="8"
+						       class="text-center">
 							<member :members="guild.members" />
 						</b-col>
 					</b-row>

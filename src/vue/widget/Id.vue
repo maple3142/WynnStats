@@ -1,7 +1,11 @@
 <template>
 	<div>
-		<b-img-lazy v-if="uuid!==null" fluid :src="`https://crafatar.com/avatars/${uuid}?size=20`" :rel="`${id}'s head'`" />
-		<b-link v-if="$slots.default==null" :to="`/player/${id}`">{{id}}</b-link>
+		<b-img-lazy v-if="uuid!==null"
+		            fluid
+		            :src="`https://crafatar.com/avatars/${uuid}?size=20`"
+		            :rel="`${id}'s head'`" />
+		<b-link v-if="$slots.default==null"
+		        :to="`/player/${id}`">{{id}}</b-link>
 		<slot v-else/>
 	</div>
 </template>

@@ -1,5 +1,7 @@
 <template>
-	<b-col class="item" :md="md" :cols="cols">
+	<b-col class="item"
+	       :md="md"
+	       :cols="cols">
 		<b-row class="p-4">
 			<b-col class="text-center">
 				<h3 :class="item.tier">{{item.name}}</h3>
@@ -23,29 +25,33 @@
 						Neutral Damage: {{item.damage}}
 					</b-col>
 				</b-row>
-				<b-row v-for="(v,el) in elDamages" :key="el">
+				<b-row v-for="(v,el) in elDamages"
+				       :key="el">
 					<b-col>
-						<span :class="el" class="capitalize">{{el}}</span>
+						<span :class="el"
+						      class="capitalize">{{el}}</span>
 						<span>Damage: {{v}}</span>
 					</b-col>
 				</b-row>
-				<b-row v-for="(v,el) in elDefences" :key="el">
+				<b-row v-for="(v,el) in elDefences"
+				       :key="el">
 					<b-col>
-						<span :class="el" class="capitalize">{{el}}</span>
+						<span :class="el"
+						      class="capitalize">{{el}}</span>
 						<span>Defense: {{v}}</span>
 					</b-col>
 				</b-row>
 				<b-row class="pt-2"></b-row>
 				<b-row v-if="['Wand','Bow','Dagger','Spear'].includes(item.type)">
 					<b-col class="requirement">
-						Class Req: 
+						Class Req:
 						<template v-if="item.type==='Wand'">Mage/Dark Wizard</template>
 						<template v-if="item.type==='Bow'">Archer/Hunter</template>
 						<template v-if="item.type==='Dagger'">Assassin/Ninja</template>
 						<template v-if="item.type==='Spear'">Warrior/Knight</template>
 					</b-col>
 				</b-row>
-				<b-row >
+				<b-row>
 					<b-col class="requirement">
 						Level: {{item.level}}
 					</b-col>
@@ -55,13 +61,15 @@
 						Quest Req: {{item.quest}}
 					</b-col>
 				</b-row>
-				<b-row v-for="(req,type) in reqPoints" :key="type">
+				<b-row v-for="(req,type) in reqPoints"
+				       :key="type">
 					<b-col class="requirement capitalize">
 						{{type}} Min: {{req}}
 					</b-col>
 				</b-row>
 				<b-row class="pt-2"></b-row>
-				<b-row v-for="(v,k) in positiveID" :key="k">
+				<b-row v-for="(v,k) in positiveID"
+				       :key="k">
 					<b-col class="capitalize">
 						<span>{{k | format}}:</span>
 						<template v-if="!item.identified">
@@ -69,10 +77,12 @@
 							~
 							<span class="positive">{{getFormat(k,v.max)}}</span>
 						</template>
-						<span v-else class="positive">{{getFormat(k,v.base)}}</span>
+						<span v-else
+						      class="positive">{{getFormat(k,v.base)}}</span>
 					</b-col>
 				</b-row>
-				<b-row v-for="(v,k) in negativeID" :key="k">
+				<b-row v-for="(v,k) in negativeID"
+				       :key="k">
 					<b-col class="capitalize">
 						<span>{{k | format}}:</span>
 						<template v-if="!item.identified">
@@ -80,10 +90,13 @@
 							~
 							<span class="negative">{{getFormat(k,v.max)}}</span>
 						</template>
-						<span v-else class="negative">{{getFormat(k,v.base)}}</span>
+						<span v-else
+						      class="negative">{{getFormat(k,v.base)}}</span>
 					</b-col>
 				</b-row>
-				<b-row v-for="(v,k) in bonusDamage" v-if="v.base" :key="k">
+				<b-row v-for="(v,k) in bonusDamage"
+				       v-if="v.base"
+				       :key="k">
 					<b-col class="capitalize">
 						<span :class="getClassFromBonus(k)">{{k | format}}</span>
 						<span>Damage:</span>
@@ -92,10 +105,13 @@
 							~
 							<span :class="v.max>0?'positive':'negative'">{{getFormat(k,v.max)}}</span>
 						</template>
-						<span v-else :class="v.base>0?'positive':'negative'">{{getFormat(k,v.base)}}</span>
+						<span v-else
+						      :class="v.base>0?'positive':'negative'">{{getFormat(k,v.base)}}</span>
 					</b-col>
 				</b-row>
-				<b-row v-for="(v,k) in bonusDefense" v-if="v.base" :key="k">
+				<b-row v-for="(v,k) in bonusDefense"
+				       v-if="v.base"
+				       :key="k">
 					<b-col class="capitalize">
 						<span :class="getClassFromBonus(k)">{{k | format}}</span>
 						<span>Defense:</span>
@@ -104,7 +120,8 @@
 							~
 							<span :class="v.max>0?'positive':'negative'">{{getFormat(k,v.max)}}</span>
 						</template>
-						<span v-else :class="v.base>0?'positive':'negative'">{{getFormat(k,v.base)}}</span>
+						<span v-else
+						      :class="v.base>0?'positive':'negative'">{{getFormat(k,v.base)}}</span>
 					</b-col>
 				</b-row>
 				<b-row class="pt-2"></b-row>
@@ -113,7 +130,7 @@
 						[0/{{item.sockets}}] Powder Slots
 					</b-col>
 				</b-row>
-				<b-row >
+				<b-row>
 					<b-col :class="item.tier">
 						{{item.tier}} Item
 					</b-col>
@@ -127,7 +144,8 @@
 				<b-row v-if="full && item.addedLore">
 					<b-col class="lore">{{item.addedLore}}</b-col>
 				</b-row>
-				<b-row v-if="!full" align-h="end">
+				<b-row v-if="!full"
+				       align-h="end">
 					<b-col cols="6">
 						<b-link :to="`/item/${item.name}`">show details...</b-link>
 					</b-col>
@@ -144,9 +162,113 @@ import changeCase from 'change-case'
 // provide by http://wynnapps.tk/
 const damage = ['bonusFireDamage', 'bonusWaterDamage', 'bonusThunderDamage', 'bonusEarthDamage', 'bonusAirDamage']
 const defense = ['bonusFireDefense', 'bonusWaterDefense', 'bonusThunderDefense', 'bonusEarthDefense', 'bonusAirDefense']
-const idlist = ['healthRegen', 'manaRegen', 'damageBonus', 'spellDamage', 'lifeSteal', 'manaSteal', 'xpBonus', 'lootBonus', 'reflection', 'thorns', 'exploding', 'speed', 'poison', 'healthBonus', 'soulPoints', 'emeraldStealing', 'strengthPoints', 'intelligencePoints', 'dexterityPoints', 'agilityPoints', 'defensePoints', 'healthRegenRaw', 'spellDamageRaw', 'damageBonusRaw', 'attackSpeedBonus']
-const formats = { 'healthRegen': '~%', 'manaRegen': '~/4s', 'damageBonus': '~%', 'spellDamage': '~%', 'lifeSteal': '~/4s', 'manaSteal': '~/4s', 'xpBonus': '~%', 'lootBonus': '~%', 'reflection': '~%', 'thorns': '~%', 'exploding': '~%', 'speed': '~%', 'attackSpeedBonus': '~ tier', 'poison': '~/3s', 'soulPoints': '~%', 'emeraldStealing': '~%', 'FireDefense': '~%', 'WaterDefense': '~%', 'AirDefense': '~%', 'ThunderDefense': '~%', 'EarthDefense': '~%', 'health': '~', 'strengthPoints': '~', 'dexterityPoints': '~', 'intelligencePoints': '~', 'agilityPoints': '~', 'defensePoints': '~', 'healthBonus': '~', 'damageBonusRaw': '~', 'spellDamageRaw': '~', 'bonusFireDefense': '~%', 'bonusWaterDefense': '~%', 'bonusThunderDefense': '~%', 'bonusEarthDefense': '~%', 'bonusAirDefense': '~%', 'bonusFireDamage': '~%', 'bonusWaterDamage': '~%', 'bonusThunderDamage': '~%', 'bonusEarthDamage': '~%', 'bonusAirDamage': '~%', 'healthRegenRaw': '~' }
-const text = { 'healthRegen': 'Health Regen', 'manaRegen': 'Mana Regen', 'damageBonus': 'Melee Damage', 'spellDamage': 'Spell Damage', 'lifeSteal': 'Life Steal', 'manaSteal': 'Mana Steal', 'xpBonus': 'XP Bonus', 'lootBonus': 'Loot Bonus', 'reflection': 'Reflection', 'thorns': 'Thorns', 'exploding': 'Exploding', 'speed': 'Speed', 'poison': 'Poison', 'healthBonus': 'Health Bonus', 'soulPoints': 'Soul Point Regen', 'emeraldStealing': 'Stealing', 'strengthPoints': 'Strength', 'intelligencePoints': 'Intelligence', 'dexterityPoints': 'Dexterity', 'agilityPoints': 'Agility', 'defensePoints': 'Defense', 'healthRegenRaw': 'Health Regen', 'spellDamageRaw': 'Spell Damage', 'damageBonusRaw': 'Melee Damage', 'attackSpeedBonus': 'Attack Speed', 'bonusFireDamage': 'Fire', 'bonusWaterDamage': 'Water', 'bonusThunderDamage': 'Thunder', 'bonusEarthDamage': 'Earth', 'bonusAirDamage': 'Air', 'bonusFireDefense': 'Fire', 'bonusWaterDefense': 'Water', 'bonusThunderDefense': 'Thunder', 'bonusEarthDefense': 'Earth', 'bonusAirDefense': 'Air' }
+const idlist = [
+	'healthRegen',
+	'manaRegen',
+	'damageBonus',
+	'spellDamage',
+	'lifeSteal',
+	'manaSteal',
+	'xpBonus',
+	'lootBonus',
+	'reflection',
+	'thorns',
+	'exploding',
+	'speed',
+	'poison',
+	'healthBonus',
+	'soulPoints',
+	'emeraldStealing',
+	'strengthPoints',
+	'intelligencePoints',
+	'dexterityPoints',
+	'agilityPoints',
+	'defensePoints',
+	'healthRegenRaw',
+	'spellDamageRaw',
+	'damageBonusRaw',
+	'attackSpeedBonus'
+]
+const formats = {
+	healthRegen: '~%',
+	manaRegen: '~/4s',
+	damageBonus: '~%',
+	spellDamage: '~%',
+	lifeSteal: '~/4s',
+	manaSteal: '~/4s',
+	xpBonus: '~%',
+	lootBonus: '~%',
+	reflection: '~%',
+	thorns: '~%',
+	exploding: '~%',
+	speed: '~%',
+	attackSpeedBonus: '~ tier',
+	poison: '~/3s',
+	soulPoints: '~%',
+	emeraldStealing: '~%',
+	FireDefense: '~%',
+	WaterDefense: '~%',
+	AirDefense: '~%',
+	ThunderDefense: '~%',
+	EarthDefense: '~%',
+	health: '~',
+	strengthPoints: '~',
+	dexterityPoints: '~',
+	intelligencePoints: '~',
+	agilityPoints: '~',
+	defensePoints: '~',
+	healthBonus: '~',
+	damageBonusRaw: '~',
+	spellDamageRaw: '~',
+	bonusFireDefense: '~%',
+	bonusWaterDefense: '~%',
+	bonusThunderDefense: '~%',
+	bonusEarthDefense: '~%',
+	bonusAirDefense: '~%',
+	bonusFireDamage: '~%',
+	bonusWaterDamage: '~%',
+	bonusThunderDamage: '~%',
+	bonusEarthDamage: '~%',
+	bonusAirDamage: '~%',
+	healthRegenRaw: '~'
+}
+const text = {
+	healthRegen: 'Health Regen',
+	manaRegen: 'Mana Regen',
+	damageBonus: 'Melee Damage',
+	spellDamage: 'Spell Damage',
+	lifeSteal: 'Life Steal',
+	manaSteal: 'Mana Steal',
+	xpBonus: 'XP Bonus',
+	lootBonus: 'Loot Bonus',
+	reflection: 'Reflection',
+	thorns: 'Thorns',
+	exploding: 'Exploding',
+	speed: 'Speed',
+	poison: 'Poison',
+	healthBonus: 'Health Bonus',
+	soulPoints: 'Soul Point Regen',
+	emeraldStealing: 'Stealing',
+	strengthPoints: 'Strength',
+	intelligencePoints: 'Intelligence',
+	dexterityPoints: 'Dexterity',
+	agilityPoints: 'Agility',
+	defensePoints: 'Defense',
+	healthRegenRaw: 'Health Regen',
+	spellDamageRaw: 'Spell Damage',
+	damageBonusRaw: 'Melee Damage',
+	attackSpeedBonus: 'Attack Speed',
+	bonusFireDamage: 'Fire',
+	bonusWaterDamage: 'Water',
+	bonusThunderDamage: 'Thunder',
+	bonusEarthDamage: 'Earth',
+	bonusAirDamage: 'Air',
+	bonusFireDefense: 'Fire',
+	bonusWaterDefense: 'Water',
+	bonusThunderDefense: 'Thunder',
+	bonusEarthDefense: 'Earth',
+	bonusAirDefense: 'Air'
+}
 
 export default {
 	props: {
@@ -211,52 +333,64 @@ export default {
 			return _.pickBy(this.item, (v, k) => idlist.includes(k))
 		},
 		positiveID() {
-			return _(this.ids).pickBy(v => v > 0).mapValues(v => {
-				return {
-					min: Math.ceil(v * 0.3),
-					base: v,
-					max: Math.ceil(v * 1.3)
-				}
-			}).value()
+			return _(this.ids)
+				.pickBy(v => v > 0)
+				.mapValues(v => {
+					return {
+						min: Math.ceil(v * 0.3),
+						base: v,
+						max: Math.ceil(v * 1.3)
+					}
+				})
+				.value()
 		},
 		negativeID() {
-			return _(this.ids).pickBy(v => v < 0).mapValues(v => {
-				return {
-					min: Math.floor(v * 0.7),
-					base: v,
-					max: Math.floor(v * 1.3)
-				}
-			}).value()
+			return _(this.ids)
+				.pickBy(v => v < 0)
+				.mapValues(v => {
+					return {
+						min: Math.floor(v * 0.7),
+						base: v,
+						max: Math.floor(v * 1.3)
+					}
+				})
+				.value()
 		},
 		bonusDamage() {
-			return _(this.item).pickBy((v, k) => damage.includes(k)).mapValues(v => {
-				return (v > 0 ?
-					{
-						min: Math.ceil(v * 0.3),
-						base: v,
-						max: Math.ceil(v * 1.3)
-					} :
-					{
-						min: Math.floor(v * 0.7),
-						base: v,
-						max: Math.floor(v * 1.3)
-					})
-			}).value()
+			return _(this.item)
+				.pickBy((v, k) => damage.includes(k))
+				.mapValues(v => {
+					return v > 0
+						? {
+							min: Math.ceil(v * 0.3),
+							base: v,
+							max: Math.ceil(v * 1.3)
+						}
+						: {
+							min: Math.floor(v * 0.7),
+							base: v,
+							max: Math.floor(v * 1.3)
+						}
+				})
+				.value()
 		},
 		bonusDefense() {
-			return _(this.item).pickBy((v, k) => defense.includes(k)).mapValues(v => {
-				return (v > 0 ?
-					{
-						min: Math.ceil(v * 0.3),
-						base: v,
-						max: Math.ceil(v * 1.3)
-					} :
-					{
-						min: Math.floor(v * 0.7),
-						base: v,
-						max: Math.floor(v * 1.3)
-					})
-			}).value()
+			return _(this.item)
+				.pickBy((v, k) => defense.includes(k))
+				.mapValues(v => {
+					return v > 0
+						? {
+							min: Math.ceil(v * 0.3),
+							base: v,
+							max: Math.ceil(v * 1.3)
+						}
+						: {
+							min: Math.floor(v * 0.7),
+							base: v,
+							max: Math.floor(v * 1.3)
+						}
+				})
+				.value()
 		}
 	},
 	methods: {

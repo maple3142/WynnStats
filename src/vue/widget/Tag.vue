@@ -1,5 +1,6 @@
 <template>
-	<span v-if="tagtext" :class="tagclass">
+	<span v-if="tagtext"
+	      :class="tagclass">
 		{{tagtext}}
 	</span>
 </template>

@@ -4,7 +4,8 @@
 			<!--owner-->
 			<b-col>
 				<h4 id="Owner">♔ Owner</h4>
-				<page-list :list="owner" size="sm">
+				<page-list :list="owner"
+				           size="sm">
 					<template slot-scope="row">
 						<id :id="row.value" />
 					</template>
@@ -13,19 +14,23 @@
 		</b-row>
 		<!--upper row-->
 		<b-row>
-			<b-col cols="12" md="6">
+			<b-col cols="12"
+			       md="6">
 				<!--chief-->
 				<h5 id="Chief">♕ Chief({{chief.length}})</h5>
-				<page-list :list="chief" size="sm">
+				<page-list :list="chief"
+				           size="sm">
 					<template slot-scope="row">
 						<id :id="row.value" />
 					</template>
 				</page-list>
 			</b-col>
-			<b-col cols="12" md="6">
+			<b-col cols="12"
+			       md="6">
 				<!--captain-->
 				<h5 id="Captain">♖ Captain({{captain.length}})</h5>
-				<page-list :list="captain" size="sm">
+				<page-list :list="captain"
+				           size="sm">
 					<template slot-scope="row">
 						<id :id="row.value" />
 					</template>
@@ -34,19 +39,23 @@
 		</b-row>
 		<!--bottom row-->
 		<b-row>
-			<b-col cols="12" md="6">
+			<b-col cols="12"
+			       md="6">
 				<!--recruiter-->
 				<h5 id="Recruiter">♘ Recruiter({{recruiter.length}})</h5>
-				<page-list :list="recruiter" size="sm">
+				<page-list :list="recruiter"
+				           size="sm">
 					<template slot-scope="row">
 						<id :id="row.value" />
 					</template>
 				</page-list>
 			</b-col>
-			<b-col cols="12" md="6">
+			<b-col cols="12"
+			       md="6">
 				<!--recruit-->
 				<h5 id="Recruit">♙ Recruit({{recruit.length}})</h5>
-				<page-list :list="recruit" size="sm">
+				<page-list :list="recruit"
+				           size="sm">
 					<template slot-scope="row">
 						<id :id="row.value" />
 					</template>
@@ -56,8 +65,6 @@
 	</b-col>
 </template>
 <script>
-import _ from 'lodash'
-
 import Id from '../widget/Id'
 import PageList from '../widget/PageList'
 
@@ -76,19 +83,19 @@ export default {
 	components: { Id, PageList },
 	computed: {
 		owner() {
-			return _(this.members).filter({ rank: 'OWNER' }).map('name').value()
+			return this.members.filter(x => x.rank === 'OWNER').map(x => x.name)
 		},
 		captain() {
-			return _(this.members).filter({ rank: 'CAPTAIN' }).map('name').value()
+			return this.members.filter(x => x.rank === 'CAPTAIN').map(x => x.name)
 		},
 		chief() {
-			return _(this.members).filter({ rank: 'CHIEF' }).map('name').value()
+			return this.members.filter(x => x.rank === 'CHIEF').map(x => x.name)
 		},
 		recruit() {
-			return _(this.members).filter({ rank: 'RECRUIT' }).map('name').value()
+			return this.members.filter(x => x.rank === 'RECRUIT').map(x => x.name)
 		},
 		recruiter() {
-			return _(this.members).filter({ rank: 'RECRUITER' }).map('name').value()
+			return this.members.filter(x => x.rank === 'RECRUITER').map(x => x.name)
 		}
 	}
 }

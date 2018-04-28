@@ -1,32 +1,44 @@
 <template>
 	<div>
-		<b-row align-h="center" class="p-2">
+		<b-row align-h="center"
+		       class="p-2">
 			<b-col md="8">
-				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
+				<pulse-loader class="text-center"
+				              :loading="loading"
+				              size="100px"></pulse-loader>
 
-				<b-alert :show="error" variant="danger">Getting onlineplayers failed.</b-alert>
+				<b-alert :show="error"
+				         variant="danger">Getting onlineplayers failed.</b-alert>
 
 				<div v-if="result">
-					<b-row align-h="center" class="p-2">
+					<b-row align-h="center"
+					       class="p-2">
 						<b-col md="8">
 							<b-input-group class="p-2">
-								<b-input-group-button>
+								<b-input-group-prepend>
 									<!--format: servername(server player count)-->
-									<dropdown-select :list="serverlist" :text="`${cur}(${result[cur].length})`" v-model="cur" variant="success">
+									<dropdown-select :list="serverlist"
+									                 :text="`${cur}(${result[cur].length})`"
+									                 v-model="cur"
+									                 variant="success">
 										<span slot-scope="row">{{row.value}}({{result[row.value].length}})</span>
 									</dropdown-select>
 
-								</b-input-group-button>
+								</b-input-group-prepend>
 
-								<b-form-input v-model="filter" placeholder="Filter"></b-form-input>
+								<b-form-input v-model="filter"
+								              placeholder="Filter"></b-form-input>
 							</b-input-group>
 						</b-col>
 					</b-row>
-					<b-row align-h="center" class="p-2">
-						<b-col md="6" class="text-center">
+					<b-row align-h="center"
+					       class="p-2">
+						<b-col md="6"
+						       class="text-center">
 							<b-row>
 								<b-col>
-									<page-list :list="result[cur]" :filter="filter">
+									<page-list :list="result[cur]"
+									           :filter="filter">
 										<template slot-scope="row">
 											<Id :id="row.value" />
 										</template>

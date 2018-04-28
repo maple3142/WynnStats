@@ -4,7 +4,9 @@
 			<blank-link :href="href">Official Stats</blank-link>
 		</div>
 		<div>
-			<a href="javascript:void(0)" @click="clear" v-html="text"></a>
+			<a href="javascript:void(0)"
+			   @click="clear"
+			   v-html="text"></a>
 		</div>
 	</b-col>
 </template>

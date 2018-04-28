@@ -9,7 +9,7 @@
 				<b-alert :show="error"
 				         variant="danger">Getting itemDB failed or item not found.</b-alert>
 
-				<b-row v-if="!loading"
+				<b-row v-if="!loading && item"
 				       align-h="center"
 				       class="p-2">
 					<item-info :item="item"
