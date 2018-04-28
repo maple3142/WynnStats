@@ -9,6 +9,7 @@ const Guild = () => import(/* webpackChunkName: "Guild" */ '@/vue/Guild').then(x
 const LeaderBoard = () => import(/* webpackChunkName: "LeaderBoard" */ '@/vue/LeaderBoard').then(x => x.default)
 const Search = () => import(/* webpackChunkName: "Search" */ '@/vue/Search').then(x => x.default)
 const OnlinePlayers = () => import(/* webpackChunkName: "OnlinePlayers" */ '@/vue/OnlinePlayers').then(x => x.default)
+const ItemList = () => import(/* webpackChunkName: "Item" */ '@/vue/ItemList').then(x => x.default)
 const Item = () => import(/* webpackChunkName: "Item" */ '@/vue/Item').then(x => x.default)
 const About = () => import(/* webpackChunkName: "About" */ '@/vue/About').then(x => x.default)
 
@@ -19,7 +20,7 @@ const routes = [
 	{ path: '/leaderboard/:type(player|guild|pvp)', component: LeaderBoard },
 	{ path: '/search/:search', component: Search },
 	{ path: '/online', component: OnlinePlayers },
-	{ path: '/item', component: Item },
+	{ path: '/item', component: ItemList },
 	{ path: '/item/:name', component: Item },
 	{ path: '/about', component: About }
 ]
