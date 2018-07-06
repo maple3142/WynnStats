@@ -52,7 +52,7 @@ import Clear from './widget/Clear'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
-import cache from '@/cacheStorage'
+import cache from '@/cachedriver'
 import { search } from '@/wynn'
 
 export default {
@@ -66,7 +66,7 @@ export default {
 		}
 	},
 	storage: {
-		storage: cache(60 * 1000),
+		driver: cache(60 * 1000),
 		namespace: 'Search',
 		keys: ['results']
 	},

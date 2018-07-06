@@ -8,7 +8,7 @@ import 'whatwg-fetch'
 import 'babel-polyfill'
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
-import vuejsStorage from 'vuejs-storage'
+import vuejsStorage from 'vuejs-storage/dist/vuejs-storage.js'
 import router from './router'
 
 Vue.use(BootstrapVue)

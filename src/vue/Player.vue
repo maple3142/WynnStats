@@ -66,7 +66,7 @@ import Clear from './widget/Clear'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
-import cache from '@/cacheStorage'
+import cache from '@/cachedriver'
 import { getPlayerStats } from '@/wynn'
 
 export default {
@@ -79,7 +79,7 @@ export default {
 		}
 	},
 	storage: {
-		storage: cache(),
+		//driver: cache(),
 		namespace: 'Player',
 		keys: ['players']
 	},

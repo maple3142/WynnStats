@@ -66,7 +66,7 @@ import DropdownSelect from './widget/DropdownSelect'
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
-import cache from '@/cacheStorage'
+import cache from '@/cachedriver'
 import { getOnlinePlayers } from '@/wynn'
 
 export default {
@@ -80,7 +80,7 @@ export default {
 		}
 	},
 	storage: {
-		storage: cache(10 * 1000), //10sec
+		driver: cache(10 * 1000), //10sec
 		namespace: 'OnlinePlayers',
 		keys: ['cur', 'result']
 	},

@@ -1,13 +1,14 @@
-/* simple cache storage */
 const ls = localStorage
 export class CacheStorage {
-	constructor({
-		expire = 10 * 60 * 1000, //10min
-	} = {}) {
+	constructor(
+		{
+			expire = 10 * 60 * 1000 //10min
+		} = {}
+	) {
 		this.expire = expire
 	}
 
-	hasItem(key) {
+	has(key) {
 		let item
 		if (ls.getItem(key) == null) {
 			return false
@@ -20,19 +21,16 @@ export class CacheStorage {
 		return true
 	}
 
-	setItem(key, value) {
+	set(key, value) {
 		ls.setItem(key, JSON.stringify({ time: Date.now(), value }))
 	}
 
-	getItem(key) {
+	get(key) {
 		if (this.hasItem(key)) {
 			return JSON.parse(ls.getItem(key)).value
 		}
 		return null
 	}
-
 }
 
-export default function create(expire) {
-	return new CacheStorage({ expire })
-}
+export default expire => new CacheStorage({ expire })
