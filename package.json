@@ -23,7 +23,8 @@
 		"vue-spinner": "^1.0.3",
 		"vuejs-storage": "^3.0.1",
 		"webpack": "^4.20.2",
-		"whatwg-fetch": "^2.0.3"
+		"whatwg-fetch": "^2.0.3",
+		"xfetch-js": "^0.1.6"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.1.2",

@@ -23,7 +23,7 @@
 						<!--skin-->
 						<b-row>
 							<b-col>
-								<b-img :src="`https://visage.surgeplay.com/bust/350/${id}.png`"
+								<b-img :src="`https://visage.surgeplay.com/bust/350/${player.uuid}.png`"
 								       fluid
 								       :alt="`${id} skin`"
 								       class="img-responsive" />
@@ -67,7 +67,7 @@ import Clear from './widget/Clear'
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 
 import cache from '@/cachedriver'
-import { getPlayerStats } from '@/wynn'
+import { getPlayerStats, getUUID } from '@/wynn'
 
 export default {
 	data() {
@@ -86,7 +86,10 @@ export default {
 	async created() {
 		if (!this.players[this.id]) {
 			try {
-				this.$set(this.players, this.id, await getPlayerStats(this.id))
+				const wynnres = await getPlayerStats(this.id)
+				const uuid = await getUUID(this.id)
+				wynnres.uuid = uuid
+				this.$set(this.players, this.id, wynnres)
 			} catch (e) {
 				this.error = true
 			}

@@ -1,7 +1,9 @@
+import xf from 'xfetch-js'
+
 export const APIURL = 'https://api.wynncraft.com/public_api.php'
 
 export async function get(action, command = '') {
-	return await fetch(`${APIURL}?action=${action}&command=${command}`).then(r => r.json())
+	return await xf.get(`${APIURL}?action=${action}&command=${command}`).json()
 }
 
 export async function getPlayerStats(player) {
@@ -25,23 +27,19 @@ export async function getOnlinePlayers() {
 }
 
 export async function getLeaderBoard(type, timeframe = 'alltime') {
-	return await fetch(`${APIURL}?action=statsLeaderboard&type=${type}&timeframe=${timeframe}`)
-		.then(r => r.json())
-		.then(j => j.data)
+	return await xf.get(`${APIURL}?action=statsLeaderboard&type=${type}&timeframe=${timeframe}`).json(r => r.data)
 }
 
 export async function search(str) {
-	return await fetch(`${APIURL}?action=statsSearch&search=${str}`).then(r => r.json())
+	return await xf.get(`${APIURL}?action=statsSearch&search=${str}`).json()
 }
 
 export async function getMyLocation() {
-	return await fetch('https://api.wynncraft.com/map/getMyLocation').then(r => r.json())
+	return await xf.get('https://api.wynncraft.com/map/getMyLocation').json()
 }
 
 export async function getAllItem() {
-	const r = await fetch(`${APIURL}?action=itemDB&category=all`)
-		.then(r => r.json())
-		.then(j => j.items)
+	const r = await xf.get(`${APIURL}?action=itemDB&category=all`).json(x => x.items)
 	return r.map(x => {
 		if (x.accessoryType) {
 			x.type = x.accessoryType
@@ -49,4 +47,8 @@ export async function getAllItem() {
 		}
 		return x
 	})
+}
+
+export async function getUUID(id) {
+	return xf.get(`https://api.minetools.eu/uuid/${id}`).json(({ id }) => (id === 'null' ? null : id))
 }
