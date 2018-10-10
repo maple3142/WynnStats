@@ -6766,9 +6766,9 @@ xdg-trashdir@^2.1.1:
     user-home "^2.0.0"
     xdg-basedir "^2.0.0"
 
-xfetch-js@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/xfetch-js/-/xfetch-js-0.1.6.tgz#728ec5ece504101b6f95ec240b5e60b65eb546dd"
+xfetch-js@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/xfetch-js/-/xfetch-js-0.2.0.tgz#745373dee5b3e1733a30bce5ca439f3560a4f454"
   dependencies:
     node-fetch "^2.2.0"
 
