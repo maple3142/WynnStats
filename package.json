@@ -28,7 +28,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.1.2",
-		"poi": "^10.2.10",
+		"poi": "^12.0.0",
 		"sw-precache-webpack-plugin": "^0.11.5"
 	}
 }
