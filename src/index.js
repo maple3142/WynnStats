@@ -53,31 +53,3 @@ const app = new Vue({
 	router,
 	render: h => h(App)
 })
-
-/* github pages spa polyfill
-if ('rdr' in sessionStorage) {
-	let rdr = sessionStorage.rdr
-	delete sessionStorage.rdr
-	app.$router.replace(rdr)
-}
-*/
-
-if ('serviceWorker' in navigator) {
-	navigator.serviceWorker
-		.register('/service-worker.js')
-		.then(reg => {
-			reg.onupdatefound = () => {
-				const installing = reg.installing
-				installing.onstatechange = () => {
-					if (installing.state === 'installed') {
-						if (navigator.serviceWorker.controller) {
-							console.log('New content is available; please refresh.')
-						} else {
-							console.log('Content is cached for offline use.')
-						}
-					}
-				}
-			}
-		})
-		.catch(err => console.error('Service Worker register error:', err))
-}

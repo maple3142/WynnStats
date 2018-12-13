@@ -1,8 +1,14 @@
+const path = require('path')
 module.exports = {
 	entry: './src/index.js',
-	html: {
-		title: 'WynnStats',
-		description: 'A browser client can view WynnCraft stats.'
+	output: {
+		html: {
+			title: 'WynnStats',
+			description: 'A browser client can view WynnCraft stats.'
+		}
 	},
-	presets: [require('./poi-preset-sw-precache')()]
+	chainWebpack: config => {
+		config.resolve.alias.set('@', path.join(__dirname, './src'))
+		config.resolve.extensions.add('.js').add('.vue')
+	}
 }

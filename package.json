@@ -4,8 +4,8 @@
 	"license": "MIT",
 	"main": "index.js",
 	"scripts": {
-		"build": "poi build",
-		"dev": "poi"
+		"build": "poi --prod",
+		"dev": "poi --serve"
 	},
 	"dependencies": {
 		"bootstrap": "4.1.0",
@@ -13,22 +13,29 @@
 		"change-case": "^3.0.1",
 		"dexie": "^2.0.2",
 		"escape-string-regexp": "^1.0.5",
-		"eslint": "^5.6.1",
-		"eslint-plugin-vue": "^4.3.0",
 		"font-awesome": "^4.7.0",
 		"lodash": "^4.17.4",
-		"vue": "^2.5.17",
+		"vue": "^2.5.21",
 		"vue-infinite-loading": "^2.2.1",
 		"vue-router": "^3.0.1",
 		"vue-spinner": "^1.0.3",
 		"vuejs-storage": "^3.0.1",
 		"webpack": "^4.20.2",
 		"whatwg-fetch": "^2.0.3",
-		"xfetch-js": "^0.1.6"
+		"xfetch-js": "^0.3.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.1.2",
-		"poi": "^10.2.10",
-		"sw-precache-webpack-plugin": "^0.11.5"
+		"babel-eslint": "^10.0.1",
+		"cache-loader": "^1.2.5",
+		"css-loader": "^2.0.0",
+		"eslint": "^5.10.0",
+		"eslint-plugin-vue": "^5.0.0",
+		"file-loader": "^2.0.0",
+		"html-webpack-plugin": "^3.2.0",
+		"poi": "^12.0.0",
+		"url-loader": "^1.1.2",
+		"vue-loader": "^15.4.2",
+		"vue-template-compiler": "^2.5.21"
 	}
 }

@@ -2,8 +2,8 @@ import xf from 'xfetch-js'
 
 export const APIURL = 'https://api.wynncraft.com/public_api.php'
 
-export async function get(action, command = '') {
-	return await xf.get(`${APIURL}?action=${action}&command=${command}`).json()
+export function get(action, command = '') {
+	return xf.get(`${APIURL}?action=${action}&command=${command}`).json()
 }
 
 export async function getPlayerStats(player) {
