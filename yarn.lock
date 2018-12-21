@@ -1380,9 +1380,10 @@ bootstrap-vue@^2.0.0-rc.2:
     popper.js "^1.12.9"
     vue-functional-data-merge "^2.0.5"
 
-bootstrap@4.1.0:
-  version "4.1.0"
-  resolved "http://registry.npmjs.org/bootstrap/-/bootstrap-4.1.0.tgz#110b05c31a236d56dbc9adcda6dd16f53738a28a"
+bootstrap@4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.2.1.tgz#8f8bdca024dbf0e8644da32e918c8a03a90a5757"
+  integrity sha512-tt/7vIv3Gm2mnd/WeDx36nfGGHleil0Wg8IeB7eMrVkY0fZ5iTaBisSh8oNANc2IBsCc6vCgCNTIM/IEN0+50Q==
 
 bootstrap@^4.1.1:
   version "4.1.3"
