@@ -1567,6 +1567,16 @@ cache-loader@^1.2.5:
     neo-async "^2.5.0"
     schema-utils "^0.4.2"
 
+cache-loader@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/cache-loader/-/cache-loader-2.0.0.tgz#75cad9eb1e1c882c2b8c31ea008b41ebb0787de0"
+  integrity sha512-zi4iyjWDs80PWRwFfIwcVSgRVIFX2PjyHH8YbsUGFH0U03oA5o80OEryZBCjfN+5tWYHFct1FXha8IhiIhaN6w==
+  dependencies:
+    loader-utils "^1.1.0"
+    mkdirp "^0.5.1"
+    neo-async "^2.5.0"
+    schema-utils "^1.0.0"
+
 caller-callsite@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/caller-callsite/-/caller-callsite-2.0.0.tgz#847e0fce0a223750a9a027c54b33731ad3154134"
