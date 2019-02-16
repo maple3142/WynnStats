@@ -8,7 +8,7 @@
 		"dev": "poi --serve"
 	},
 	"dependencies": {
-		"bootstrap": "4.1.0",
+		"bootstrap": "4.2.1",
 		"bootstrap-vue": "^2.0.0-rc.2",
 		"change-case": "^3.0.1",
 		"dexie": "^2.0.2",
