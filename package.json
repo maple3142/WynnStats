@@ -12,7 +12,7 @@
 		"bootstrap-vue": "^2.0.0-rc.2",
 		"change-case": "^3.0.1",
 		"dexie": "^2.0.2",
-		"escape-string-regexp": "^1.0.5",
+		"escape-string-regexp": "^2.0.0",
 		"font-awesome": "^4.7.0",
 		"lodash": "^4.17.4",
 		"vue": "^2.5.21",
