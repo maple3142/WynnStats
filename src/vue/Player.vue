@@ -44,11 +44,6 @@
 						</b-row>
 					</b-col>
 				</b-row>
-				<!--middle-->
-				<b-row v-if="player"
-				       class="text-center">
-					<ranking :rankings="player.rankings" />
-				</b-row>
 				<!--bottom-->
 				<b-row v-if="player">
 					<classes :classes="player.classes"

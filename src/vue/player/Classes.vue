@@ -4,17 +4,17 @@
 		<b-nav justified
 		       tabs
 		       class="pb-2">
-			<b-nav-item v-for="(cls,name) in classes"
-			            :key="name"
-			            :active="name===cur"
-			            @click="select(name)"
-			            class="capitalize">{{name | strip }} (Lv.{{classes[name].level}})</b-nav-item>
+			<b-nav-item v-for="(cls,idx) in classes"
+			            :key="cls.name"
+			            :active="idx===cur"
+			            @click="select(idx)"
+			            class="capitalize">{{ cls.name | strip }} (Lv.{{cls.level}})</b-nav-item>
 		</b-nav>
 
 		<!--xp-->
 		<b-progress :max="100">
-			<b-progress-bar :value="data.xp">
-				XP: {{ data.xp }}%
+			<b-progress-bar :value="data.professions.combat.xp">
+				XP: {{ data.professions.combat.xp }}%
 			</b-progress-bar>
 		</b-progress>
 
@@ -22,33 +22,33 @@
 		<b-list-group class="hl text-center pt-2">
 			<b-list-group-item>
 				✤Strength:
-				<b>{{data.skills.Strength}}</b>
+				<b>{{data.skills.strength}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
 				✦Dexterity:
-				<b>{{data.skills.Dexterity}}</b>
+				<b>{{data.skills.dexterity}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
 				❉Intelligence:
-				<b>{{data.skills.Intelligence}}</b>
+				<b>{{data.skills.intelligence}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
 				✹Defense:
-				<b>{{data.skills.Defense}}</b>
+				<b>{{data.skills.defense}}</b>
 			</b-list-group-item>
 			<b-list-group-item>
 				❋Agility:
-				<b>{{data.skills.Agility}}</b>
+				<b>{{data.skills.agility}}</b>
 			</b-list-group-item>
 		</b-list-group>
 
 		<!--statistics-->
 		<b-list-group>
 			<b-list-group-item>
-				Blocks walked: {{data.blocks_walked}}
+				Blocks walked: {{data.blocksWalked}}
 			</b-list-group-item>
 			<b-list-group-item>
-				Chests found: {{data.chests_found}}
+				Chests found: {{data.chestsFound}}
 			</b-list-group-item>
 			<b-list-group-item>
 				Deaths: {{data.deaths}}
@@ -60,28 +60,28 @@
 				Login counts: {{data.logins}}
 			</b-list-group-item>
 			<b-list-group-item>
-				Mobs killed: {{data.mobs_killed}}
+				Mobs killed: {{data.mobsKilled}}
 			</b-list-group-item>
 			<b-list-group-item>
 				Playtime: {{data.playtime | toHours}} hours
 			</b-list-group-item>
 			<b-list-group-item>
-				PvP killed: {{data.pvp_kills}}
+				PvP killed: {{data.pvp.kills}}
 			</b-list-group-item>
 			<b-list-group-item>
-				PvP deaths: {{data.pvp_deaths}}
+				PvP deaths: {{data.pvp.deaths}}
 			</b-list-group-item>
 			<b-list-group-item>
-				Dungeons({{data.dungeonsAmount}}):
-				<span v-for="(times,dungeon) in data.dungeons"
-				      :key="dungeon">
+				Dungeons({{data.dungeons.completed}}):
+				<span v-for="dungeon in data.dungeons.list"
+				      :key="dungeon.name">
 					<br>
-					<span class="pl-4">{{dungeon}}: {{times}}</span>
+					<span class="pl-4">{{dungeon.name}}: {{dungeon.completed}}</span>
 				</span>
 			</b-list-group-item>
 			<b-list-group-item>
-				Quests({{data.questsAmount}}):
-				<span v-for="quest in data.quests"
+				Quests({{data.quests.completed}}):
+				<span v-for="quest in data.quests.list"
 				      :key="quest">
 					<br>
 					<span class="pl-4">
@@ -96,19 +96,19 @@
 import BlankLink from '../widget/BlankLink'
 export default {
 	props: {
-		classes: Object
+		classes: Array
 	},
 	data() {
-		let cur = Object.keys(this.classes)[0]
+		let cur = 0
 		return {
 			cur,
 			data: this.classes[cur]
 		}
 	},
 	methods: {
-		select(name) {
-			this.cur = name
-			this.data = this.classes[name]
+		select(idx) {
+			this.cur = idx
+			this.data = this.classes[this.cur]
 		}
 	},
 	filters: {

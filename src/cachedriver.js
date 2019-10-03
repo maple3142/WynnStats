@@ -26,7 +26,7 @@ export class CacheStorage {
 	}
 
 	get(key) {
-		if (this.hasItem(key)) {
+		if (this.has(key)) {
 			return JSON.parse(ls.getItem(key)).value
 		}
 		return null

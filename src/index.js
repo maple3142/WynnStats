@@ -44,6 +44,9 @@ Vue.mixin({
 
 // custom globals
 Vue.filter('toHours', min => Math.round(min / 60))
+Vue.filter('lower', s => s.toLowerCase())
+Vue.filter('upper', s => s.toUpperCase())
+Vue.filter('capitalize', s => s[0].toUpperCase() + s.slice(1).toLowerCase())
 
 // app
 import App from './App'

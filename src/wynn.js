@@ -1,17 +1,22 @@
 import xf from 'xfetch-js'
 
+// old api
 export const APIURL = 'https://api.wynncraft.com/public_api.php'
-
 export function get(action, command = '') {
 	return xf.get(`${APIURL}?action=${action}&command=${command}`).json()
 }
 
+// new api
+export const instance = xf.extend({
+	baseURI: 'https://api.wynncraft.com/v2/'
+})
+
 export async function getPlayerStats(player) {
-	let res = await get('playerStats', player)
-	if (res.error) {
-		throw new Error(res.error)
+	let res = await instance.get(`player/${player}/stats`).json()
+	if (res.message != 'OK') {
+		throw new Error(res)
 	}
-	return res
+	return res.data[0]
 }
 
 export async function getGuildStats(guild) {
@@ -32,10 +37,6 @@ export async function getLeaderBoard(type, timeframe = 'alltime') {
 
 export async function search(str) {
 	return await xf.get(`${APIURL}?action=statsSearch&search=${str}`).json()
-}
-
-export async function getMyLocation() {
-	return await xf.get('https://api.wynncraft.com/map/getMyLocation').json()
 }
 
 export async function getAllItem() {
