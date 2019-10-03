@@ -12,7 +12,7 @@
 					<b-col md="9">
 						<b-row class="pb-2">
 							<b-col>
-								<b-form-input v-model="filter.search" placeholder="Item Name" />
+								<b-form-input v-model="filter.search" placeholder="Item Name" @keydown.enter="search" />
 							</b-col>
 						</b-row>
 						<b-row class="pb-2">
@@ -33,13 +33,25 @@
 							<b-col>
 								<b-input-group>
 									<b-input-group-text>Min lv.</b-input-group-text>
-									<b-form-input v-model="filter.min" type="number" min="0" :max="filter.max" />
+									<b-form-input
+										v-model="filter.min"
+										type="number"
+										min="0"
+										:max="filter.max"
+										@keydown.enter="search"
+									/>
 								</b-input-group>
 							</b-col>
 							<b-col>
 								<b-input-group>
 									<b-input-group-text>Max lv.</b-input-group-text>
-									<b-form-input v-model="filter.max" type="number" :min="filter.min" max="100" />
+									<b-form-input
+										v-model="filter.max"
+										type="number"
+										:min="filter.min"
+										max="100"
+										@keydown.enter="search"
+									/>
 								</b-input-group>
 							</b-col>
 						</b-row>
@@ -52,7 +64,7 @@
 						</b-row>
 						<b-row class="pb-2">
 							<b-col class="text-center">
-								Total {{ items.length }} Result{{ items.length > 1 ? 's' : '' }}
+								Total Result{{ items.length > 1 ? 's' : '' }}: {{ items.length }}
 							</b-col>
 						</b-row>
 					</b-col>
@@ -62,22 +74,20 @@
 						<div class="row">
 							<b-col cols="12" md="6">
 								<item-info
-									v-for="(i, idx) in displayedItems"
-									v-if="idx % 2 === 0"
-									:key="i.name"
+									v-for="it in evenDisplayedItems"
+									:key="it.name"
 									md="12"
 									class="mb-4"
-									:item="i"
+									:item="it"
 								/>
 							</b-col>
 							<b-col cols="12" md="6">
 								<item-info
-									v-for="(i, idx) in displayedItems"
-									v-if="idx % 2 === 1"
-									:key="i.name"
+									v-for="it in oddDisplayedItems"
+									:key="it.name"
 									md="12"
 									class="mb-4"
-									:item="i"
+									:item="it"
 								/>
 							</b-col>
 						</div>
@@ -168,6 +178,14 @@ export default {
 			this.items = await db.items.toArray()
 		}
 	},
+	computed: {
+		evenDisplayedItems() {
+			return this.displayedItems.filter((x, i) => i % 2 == 0)
+		},
+		oddDisplayedItems() {
+			return this.displayedItems.filter((x, i) => i % 2 == 1)
+		}
+	},
 	methods: {
 		loadMore($state) {
 			setTimeout(() => {
@@ -211,7 +229,7 @@ export default {
 
 			//generate querystring and append
 			let qs = params.map(p => `${p}=${this.filter[p]}`).join('&')
-			this.$router.push(`?${qs}`)
+			this.$router.push(`?${qs}`).catch(e => {}) // suppress NavigationDuplicated
 		}
 	}
 }
