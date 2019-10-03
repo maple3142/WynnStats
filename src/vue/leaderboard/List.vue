@@ -2,45 +2,36 @@
 	<b-col>
 		<b-row>
 			<b-col class="table-responsive">
-				<b-table striped
-				         hover
-				         :items="list"
-				         :current-page="page"
-				         :per-page="10"
-				         :fields="field"
-				         :filter="filter"
-				         @filtered="filtered">
-					<template slot="num"
-					          slot-scope="row">
-						<span v-if="row.value<=3"
-						      :class="`rank${row.value}`"
-						      aria-hidden="true">♛</span>
-						{{row.value}}
+				<b-table
+					striped
+					hover
+					:items="list"
+					:current-page="page"
+					:per-page="10"
+					:fields="field"
+					:filter="filter"
+					@filtered="filtered"
+				>
+					<template v-slot:cell(num)="data">
+						<span v-if="data.value <= 3" :class="`rank${data.value}`" aria-hidden="true">♛</span>
+						{{ data.value }}
 					</template>
-					<template slot="name"
-					          slot-scope="row">
-						<id v-if="type!=='guild'"
-						    :id="row.value" />
-						<b-link v-else
-						        :to="`/guild/${row.value}`">{{row.value}}</b-link>
+					<template v-slot:cell(name)="data">
+						<id v-if="type !== 'guild'" :id="data.value" />
+						<b-link v-else :to="`/guild/${data.value}`">{{ data.value }}</b-link>
 					</template>
-					<span slot="minPlayed"
-					      slot-scope="row">{{row.value | toHours}} hours</span>
-					<tag slot="tag"
-					     slot-scope="row"
-					     :tag="row.value"
-					     :rank="row.item.rank"
-					     :veteran="row.item.veteran" />
+					<template v-slot:cell(minPlayed)="data">
+						{{ data.value | toHours }} hours
+					</template>
+					<template v-slot:cell(tag)="data">
+						<tag :tag="data.value" :rank="data.item.rank" :veteran="data.item.veteran" />
+					</template>
 				</b-table>
 			</b-col>
 		</b-row>
 		<b-row>
 			<b-col>
-				<b-pagination align="center"
-				              size="md"
-				              :total-rows="rows"
-				              v-model="page"
-				              :per-page="10" />
+				<b-pagination align="center" size="md" :total-rows="rows" v-model="page" :per-page="10" />
 			</b-col>
 		</b-row>
 	</b-col>
@@ -78,7 +69,7 @@ export default {
 </script>
 <style scoped>
 .rank1 {
-	color: #F9FF00;
+	color: #f9ff00;
 }
 
 .rank2 {
@@ -86,6 +77,6 @@ export default {
 }
 
 .rank3 {
-	color: #A26A21;
+	color: #a26a21;
 }
 </style>

@@ -7,13 +7,16 @@
 			<b-collapse is-nav id="nav_collapse">
 				<b-navbar-nav>
 					<b-nav-item to="/online">OnlinePlayers</b-nav-item>
-					<dropdown text="LeaderBoard" nav>
+					<b-nav-item-dropdown text="LeaderBoard" :class="{ show: $route.path.startsWith('/leaderboard') }">
+						<!--the "show" class here means "active" for that internal a link-->
 						<b-dropdown-item to="/leaderboard/guild">Guild</b-dropdown-item>
 						<b-dropdown-item to="/leaderboard/player">Player</b-dropdown-item>
 						<b-dropdown-item to="/leaderboard/pvp">PVP</b-dropdown-item>
-					</dropdown>
+					</b-nav-item-dropdown>
 					<b-nav-item to="/item">ItemDB</b-nav-item>
-					<b-nav-item href="https://map.wynncraft.com/" target="_blank" rel="noopener noreferrer">Map</b-nav-item>
+					<b-nav-item href="https://map.wynncraft.com/" target="_blank" rel="noopener noreferrer"
+						>Map</b-nav-item
+					>
 					<b-nav-item to="/about">About</b-nav-item>
 				</b-navbar-nav>
 
@@ -33,7 +36,6 @@
 	</div>
 </template>
 <script>
-import Dropdown from './vue/widget/Dropdown'
 import BlankLink from './vue/widget/BlankLink'
 
 export default {
@@ -42,6 +44,6 @@ export default {
 			dropdown: false
 		}
 	},
-	components: { Dropdown, BlankLink }
+	components: { BlankLink }
 }
 </script>

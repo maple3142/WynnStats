@@ -53,7 +53,7 @@ export default {
 	}
 }
 </script>
-<style>
+<style scoped>
 .dropdown-toggle::after {
 	border: initial;
 }

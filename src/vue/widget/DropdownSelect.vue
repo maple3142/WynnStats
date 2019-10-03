@@ -1,12 +1,12 @@
 <template>
-	<dropdown v-bind="$props">
+	<b-dropdown v-bind="$props">
 		<b-dropdown-item v-for="item in list"
 		                 :key="item"
 		                 @click="update(item)"
-		                 :class="clazz(item)">
+		                 :active="value===item">
 			<slot :value="item" />
 		</b-dropdown-item>
-	</dropdown>
+	</b-dropdown>
 </template>
 <script>
 import Dropdown from './Dropdown'
@@ -28,21 +28,12 @@ export default {
 			type: String,
 			default: ''
 		},
-		activeClass: {
-			type: String,
-			default: 'active'
-		},
 		value: String
 	},
 	components: { Dropdown },
 	methods: {
 		update(item) {
 			this.$emit('input', item)
-		},
-		clazz(cur) {
-			let cls = {}
-			cls[this.activeClass] = this.value === cur
-			return cls
 		}
 	}
 }

@@ -1,71 +1,28 @@
 {
-	"guild": {
-		"num": {
-			"label": "#",
-			"sortable": true
-		},
-		"name": {},
-		"territories": {
-			"sortable": true
-		},
-		"level": {
-			"sortable": true
-		},
-		"prefix": {
-			"label": "Tag"
-		},
-		"membersCount": {
-			"label": "Members",
-			"sortable": true
-		}
-	},
-	"player": {
-		"num": {
-			"label": "#",
-			"sortable": true
-		},
-		"name": {},
-		"level": {
-			"label": "Lv. Total",
-			"sortable": true
-		},
-		"xp": {
-			"label": "Total XP",
-			"sortable": true
-		},
-		"minPlayed": {
-			"label": "Time Played",
-			"sortable": true
-		},
-		"tag": {
-			"label": "Tag"
-		},
-		"guildTag": {
-			"label": "Guild"
-		}
-	},
-	"pvp": {
-		"num": {
-			"label": "#",
-			"sortable": true
-		},
-		"name": {},
-		"kills": {
-			"sortable": true
-		},
-		"level": {
-			"label": "Lv. Total",
-			"sortable": true
-		},
-		"minPlayed": {
-			"label": "Time Played",
-			"sortable": true
-		},
-		"tag": {
-			"label": "Tag"
-		},
-		"guildTag": {
-			"label": "Guild"
-		}
-	}
+	"guild": [
+		{ "label": "#", "sortable": true, "key": "num" },
+		{ "key": "name" },
+		{ "sortable": true, "key": "territories" },
+		{ "sortable": true, "key": "level" },
+		{ "label": "Tag", "key": "prefix" },
+		{ "label": "Members", "sortable": true, "key": "membersCount" }
+	],
+	"player": [
+		{ "label": "#", "sortable": true, "key": "num" },
+		{ "key": "name" },
+		{ "label": "Lv. Total", "sortable": true, "key": "level" },
+		{ "label": "Total XP", "sortable": true, "key": "xp" },
+		{ "label": "Time Played", "sortable": true, "key": "minPlayed" },
+		{ "label": "Tag", "key": "tag" },
+		{ "label": "Guild", "key": "guildTag" }
+	],
+	"pvp": [
+		{ "label": "#", "sortable": true, "key": "num" },
+		{ "key": "name" },
+		{ "sortable": true, "key": "kills" },
+		{ "label": "Lv. Total", "sortable": true, "key": "level" },
+		{ "label": "Time Played", "sortable": true, "key": "minPlayed" },
+		{ "label": "Tag", "key": "tag" },
+		{ "label": "Guild", "key": "guildTag" }
+	]
 }

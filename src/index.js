@@ -5,7 +5,8 @@ import 'font-awesome/css/font-awesome.min.css'
 import './style.css'
 
 import 'whatwg-fetch'
-import 'babel-polyfill'
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import vuejsStorage from 'vuejs-storage/dist/vuejs-storage.js'
@@ -51,7 +52,7 @@ Vue.filter('capitalize', s => s[0].toUpperCase() + s.slice(1).toLowerCase())
 // app
 import App from './App'
 
-const app = new Vue({
+window.app = new Vue({
 	el: '#app',
 	router,
 	render: h => h(App)

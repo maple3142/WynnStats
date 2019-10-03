@@ -13,7 +13,7 @@
 				<b-input-group class="p-2">
 					<b-input-group-prepend>
 						<dropdown-select :list="['search','player','guild']"
-						                 :text="type"
+						                 :text="type | capitalize"
 						                 v-model="type"
 						                 variant="success">
 							<span slot-scope="row"
