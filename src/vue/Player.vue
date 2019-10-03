@@ -1,53 +1,47 @@
 <template>
 	<div>
-		<b-row align-h="center"
-		       class="p-2">
+		<b-row align-h="center" class="p-2">
 			<b-col md="8">
-				<pulse-loader class="text-center"
-				              :loading="loading"
-				              size="100px"></pulse-loader>
+				<pulse-loader class="text-center" :loading="loading" size="100px" />
 
-				<b-alert :show="error"
-				         variant="danger">
-					Player "{{id}}" not found.Try to
-					<b-link :to="`/search/${id}`">search</b-link> it?
+				<b-alert :show="error" variant="danger">
+					Player "{{ id }}" not found.Try to
+					<b-link :to="`/search/${id}`">
+						search
+					</b-link>
+					it?
 				</b-alert>
 
 				<!--top-->
-				<b-row v-if="player"
-				       class="pb-2">
+				<b-row v-if="player" class="pb-2">
 					<!--left-->
-					<b-col class="text-center"
-					       cols="12"
-					       md="6">
+					<b-col class="text-center" cols="12" md="6">
 						<!--skin-->
 						<b-row>
 							<b-col>
-								<b-img :src="`https://visage.surgeplay.com/bust/350/${player.uuid}.png`"
-								       fluid
-								       :alt="`${id} skin`"
-								       class="img-responsive" />
+								<b-img
+									:src="`https://visage.surgeplay.com/bust/350/${player.uuid}.png`"
+									fluid
+									:alt="`${id} skin`"
+									class="img-responsive"
+								/>
 							</b-col>
 						</b-row>
 					</b-col>
 					<!--right-->
-					<b-col class="text-center"
-					       md="6">
+					<b-col class="text-center" md="6">
 						<!--information-->
 						<b-row>
-							<player-info :player="player"
-							             class="p-2" />
+							<player-info :player="player" class="p-2" />
 						</b-row>
 						<b-row>
-							<Clear :href="`https://wynncraft.com/stats/player/${id}`"
-							       @clear="clear" />
+							<Clear :href="`https://wynncraft.com/stats/player/${id}`" @clear="clear" />
 						</b-row>
 					</b-col>
 				</b-row>
 				<!--bottom-->
 				<b-row v-if="player">
-					<classes :classes="player.classes"
-					         class="p-2" />
+					<classes :classes="player.classes" class="p-2" />
 				</b-row>
 			</b-col>
 		</b-row>
@@ -65,6 +59,7 @@ import cache from '@/cachedriver'
 import { getPlayerStats, getUUID } from '@/wynn'
 
 export default {
+	components: { PlayerInfo, Classes, PulseLoader, Ranking, Clear },
 	data() {
 		return {
 			id: this.$route.params.id,
@@ -77,6 +72,11 @@ export default {
 		//driver: cache(),
 		namespace: 'Player',
 		keys: ['players']
+	},
+	computed: {
+		player() {
+			return this.players[this.id]
+		}
 	},
 	async created() {
 		if (!this.players[this.id]) {
@@ -91,12 +91,6 @@ export default {
 		}
 		this.loading = false
 	},
-	computed: {
-		player() {
-			return this.players[this.id]
-		}
-	},
-	components: { PlayerInfo, Classes, PulseLoader, Ranking, Clear },
 	methods: {
 		clear() {
 			this.$delete(this.players, this.id)

@@ -1,18 +1,19 @@
 <template>
 	<b-col>
 		<div v-if="href">
-			<blank-link :href="href">Official Stats</blank-link>
+			<blank-link :href="href">
+				Official Stats
+			</blank-link>
 		</div>
 		<div>
-			<a href="javascript:void(0)"
-			   @click="clear"
-			   v-html="text"></a>
+			<a href="javascript:void(0)" @click="clear" v-html="text" />
 		</div>
 	</b-col>
 </template>
 <script>
 import BlankLink from './BlankLink'
 export default {
+	components: { BlankLink },
 	props: {
 		href: String,
 		text: {
@@ -24,7 +25,6 @@ export default {
 		clear() {
 			this.$emit('clear')
 		}
-	},
-	components: { BlankLink }
+	}
 }
 </script>

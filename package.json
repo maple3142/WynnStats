@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"build": "poi --prod",
-		"dev": "poi --serve"
+		"dev": "poi --serve",
+		"lint": "prettier src/*/**.{js,json,vue,css} --write"
 	},
 	"dependencies": {
 		"bootstrap": "4.3.1",
@@ -30,11 +31,11 @@
 		"cache-loader": "^4.1.0",
 		"core-js": "^3.2.1",
 		"css-loader": "^3.2.0",
-		"eslint": "^6.5.1",
 		"eslint-plugin-vue": "^5.0.0",
 		"file-loader": "^4.2.0",
 		"html-webpack-plugin": "^3.2.0",
 		"poi": "^12.7.2",
+		"prettier": "^1.18.2",
 		"regenerator-runtime": "^0.13.3",
 		"url-loader": "^2.1.0",
 		"vue-loader": "^15.4.2",

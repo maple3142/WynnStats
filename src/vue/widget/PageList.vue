@@ -3,20 +3,21 @@
 		<b-row>
 			<b-col>
 				<b-list-group>
-					<b-list-group-item v-for="item in items"
-					                   :key="item">
+					<b-list-group-item v-for="item in items" :key="item">
 						<slot :value="item" />
 					</b-list-group-item>
 				</b-list-group>
 			</b-col>
 		</b-row>
-		<b-row v-if="filtered.length>perpage">
+		<b-row v-if="filtered.length > perpage">
 			<b-col>
-				<b-pagination :size="size"
-				              :total-rows="filtered.length"
-				              v-model="page"
-				              :per-page="perpage"
-				              align="center" />
+				<b-pagination
+					v-model="page"
+					:size="size"
+					:total-rows="filtered.length"
+					:per-page="perpage"
+					align="center"
+				/>
 			</b-col>
 		</b-row>
 	</div>

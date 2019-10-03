@@ -2,18 +2,14 @@
 	<div>
 		<b-row class="justify-content-md-center p-2">
 			<b-col md="10">
-				<pulse-loader class="text-center"
-				              :loading="loading"
-				              size="100px"></pulse-loader>
+				<pulse-loader class="text-center" :loading="loading" size="100px" />
 
-				<b-alert :show="error"
-				         variant="danger">Getting itemDB failed or item not found.</b-alert>
+				<b-alert :show="error" variant="danger">
+					Getting itemDB failed or item not found.
+				</b-alert>
 
-				<b-row v-if="!loading && item"
-				       align-h="center"
-				       class="p-2">
-					<item-info :item="item"
-					           full></item-info>
+				<b-row v-if="!loading && item" align-h="center" class="p-2">
+					<item-info :item="item" full />
 				</b-row>
 			</b-col>
 		</b-row>
@@ -23,8 +19,10 @@
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 import db from '@/itemdb'
 import ItemInfo from './item/ItemInfo'
+import { getAllItem } from '@/wynn'
 
 export default {
+	components: { PulseLoader, ItemInfo },
 	data() {
 		return {
 			error: false,
@@ -51,7 +49,6 @@ export default {
 			this.item = item
 		}
 		return
-	},
-	components: { PulseLoader, ItemInfo }
+	}
 }
 </script>

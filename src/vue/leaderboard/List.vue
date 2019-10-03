@@ -18,7 +18,9 @@
 					</template>
 					<template v-slot:cell(name)="data">
 						<id v-if="type !== 'guild'" :id="data.value" />
-						<b-link v-else :to="`/guild/${data.value}`">{{ data.value }}</b-link>
+						<b-link v-else :to="`/guild/${data.value}`">
+							{{ data.value }}
+						</b-link>
 					</template>
 					<template v-slot:cell(minPlayed)="data">
 						{{ data.value | toHours }} hours
@@ -31,7 +33,7 @@
 		</b-row>
 		<b-row>
 			<b-col>
-				<b-pagination align="center" size="md" :total-rows="rows" v-model="page" :per-page="10" />
+				<b-pagination v-model="page" align="center" size="md" :total-rows="rows" :per-page="10" />
 			</b-col>
 		</b-row>
 	</b-col>
@@ -42,6 +44,7 @@ import Id from '../widget/Id'
 
 import fields from './fields.json'
 export default {
+	components: { Tag, Id },
 	props: {
 		list: Array,
 		type: String,
@@ -63,8 +66,7 @@ export default {
 			this.rows = data.length
 			this.page = 1
 		}
-	},
-	components: { Tag, Id }
+	}
 }
 </script>
 <style scoped>

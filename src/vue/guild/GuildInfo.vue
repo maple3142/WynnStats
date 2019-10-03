@@ -2,20 +2,12 @@
 	<b-col>
 		<b-list-group class="info">
 			<b-list-group-item>
-				<h3>{{guild.name}}[{{guild.prefix}}]</h3>
+				<h3>{{ guild.name }}[{{ guild.prefix }}]</h3>
 			</b-list-group-item>
-			<b-list-group-item>
-				Members: {{guild.members.length}}
-			</b-list-group-item>
-			<b-list-group-item>
-				Level: {{guild.level}}
-			</b-list-group-item>
-			<b-list-group-item>
-				Territories: {{guild.territories}}
-			</b-list-group-item>
-			<b-list-group-item>
-				Created: {{guild.createdFriendly}}
-			</b-list-group-item>
+			<b-list-group-item> Members: {{ guild.members.length }} </b-list-group-item>
+			<b-list-group-item> Level: {{ guild.level }} </b-list-group-item>
+			<b-list-group-item> Territories: {{ guild.territories }} </b-list-group-item>
+			<b-list-group-item> Created: {{ guild.createdFriendly }} </b-list-group-item>
 		</b-list-group>
 	</b-col>
 </template>

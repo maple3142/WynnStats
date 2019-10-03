@@ -20,10 +20,10 @@
 
 /*center table header*/
 
-.table th>div {
+.table th > div {
 	text-align: center !important;
 }
 
-.capitalize{
+.capitalize {
 	text-transform: capitalize;
 }

@@ -1,158 +1,142 @@
 <template>
-	<b-col class="item"
-	       :md="md"
-	       :cols="cols">
+	<b-col class="item" :md="md" :cols="cols">
 		<b-row class="p-4">
 			<b-col class="text-center">
-				<h3 :class="item.tier">{{item.name}}</h3>
+				<h3 :class="item.tier">
+					{{ item.name }}
+				</h3>
 			</b-col>
 		</b-row>
 		<b-row class="pl-4">
 			<b-col>
 				<b-row v-if="item.attackSpeed">
 					<b-col>
-						<span>{{item.attackSpeed | titleCase}} Attack Speed</span>
+						<span>{{ item.attackSpeed | titleCase }} Attack Speed</span>
 					</b-col>
 				</b-row>
-				<b-row class="pt-2"></b-row>
+				<b-row class="pt-2" />
 				<b-row v-if="item.health">
 					<b-col>
-						<span class="health">Health: {{item.health}}</span>
+						<span class="health">Health: {{ item.health }}</span>
 					</b-col>
 				</b-row>
-				<b-row v-if="item.damage&&item.damage!=='0-0'">
-					<b-col class="neutual">
-						Neutral Damage: {{item.damage}}
-					</b-col>
+				<b-row v-if="item.damage && item.damage !== '0-0'">
+					<b-col class="neutual"> Neutral Damage: {{ item.damage }} </b-col>
 				</b-row>
-				<b-row v-for="(v,el) in elDamages"
-				       :key="el">
+				<b-row v-for="(v, el) in elDamages" :key="el">
 					<b-col>
-						<span :class="el"
-						      class="capitalize">{{el}}</span>
-						<span>Damage: {{v}}</span>
+						<span :class="el" class="capitalize">{{ el }}</span>
+						<span>Damage: {{ v }}</span>
 					</b-col>
 				</b-row>
-				<b-row v-for="(v,el) in elDefences"
-				       :key="el">
+				<b-row v-for="(v, el) in elDefences" :key="el">
 					<b-col>
-						<span :class="el"
-						      class="capitalize">{{el}}</span>
-						<span>Defense: {{v}}</span>
+						<span :class="el" class="capitalize">{{ el }}</span>
+						<span>Defense: {{ v }}</span>
 					</b-col>
 				</b-row>
-				<b-row class="pt-2"></b-row>
-				<b-row v-if="['Wand','Bow','Dagger','Spear'].includes(item.type)">
+				<b-row class="pt-2" />
+				<b-row v-if="['Wand', 'Bow', 'Dagger', 'Spear'].includes(item.type)">
 					<b-col class="requirement">
 						Class Req:
-						<template v-if="item.type==='Wand'">Mage/Dark Wizard</template>
-						<template v-if="item.type==='Bow'">Archer/Hunter</template>
-						<template v-if="item.type==='Dagger'">Assassin/Ninja</template>
-						<template v-if="item.type==='Spear'">Warrior/Knight</template>
+						<template v-if="item.type === 'Wand'">
+							Mage/Dark Wizard
+						</template>
+						<template v-if="item.type === 'Bow'">
+							Archer/Hunter
+						</template>
+						<template v-if="item.type === 'Dagger'">
+							Assassin/Ninja
+						</template>
+						<template v-if="item.type === 'Spear'">
+							Warrior/Knight
+						</template>
 					</b-col>
 				</b-row>
 				<b-row>
-					<b-col class="requirement">
-						Level: {{item.level}}
-					</b-col>
+					<b-col class="requirement"> Level: {{ item.level }} </b-col>
 				</b-row>
 				<b-row v-if="item.quest">
-					<b-col class="requirement">
-						Quest Req: {{item.quest}}
-					</b-col>
+					<b-col class="requirement"> Quest Req: {{ item.quest }} </b-col>
 				</b-row>
-				<b-row v-for="(req,type) in reqPoints"
-				       :key="type">
-					<b-col class="requirement capitalize">
-						{{type}} Min: {{req}}
-					</b-col>
+				<b-row v-for="(req, type) in reqPoints" :key="type">
+					<b-col class="requirement capitalize"> {{ type }} Min: {{ req }} </b-col>
 				</b-row>
-				<b-row class="pt-2"></b-row>
-				<b-row v-for="(v,k) in positiveID"
-				       :key="k">
+				<b-row class="pt-2" />
+				<b-row v-for="(v, k) in positiveID" :key="k">
 					<b-col class="capitalize">
-						<span>{{k | format}}:</span>
+						<span>{{ k | format }}:</span>
 						<template v-if="!item.identified">
-							<span class="positive">{{getFormat(k,v.min)}}</span>
+							<span class="positive">{{ getFormat(k, v.min) }}</span>
 							~
-							<span class="positive">{{getFormat(k,v.max)}}</span>
+							<span class="positive">{{ getFormat(k, v.max) }}</span>
 						</template>
-						<span v-else
-						      class="positive">{{getFormat(k,v.base)}}</span>
+						<span v-else class="positive">{{ getFormat(k, v.base) }}</span>
 					</b-col>
 				</b-row>
-				<b-row v-for="(v,k) in negativeID"
-				       :key="k">
+				<b-row v-for="(v, k) in negativeID" :key="k">
 					<b-col class="capitalize">
-						<span>{{k | format}}:</span>
+						<span>{{ k | format }}:</span>
 						<template v-if="!item.identified">
-							<span class="negative">{{getFormat(k,v.min)}}</span>
+							<span class="negative">{{ getFormat(k, v.min) }}</span>
 							~
-							<span class="negative">{{getFormat(k,v.max)}}</span>
+							<span class="negative">{{ getFormat(k, v.max) }}</span>
 						</template>
-						<span v-else
-						      class="negative">{{getFormat(k,v.base)}}</span>
+						<span v-else class="negative">{{ getFormat(k, v.base) }}</span>
 					</b-col>
 				</b-row>
-				<b-row v-for="(v,k) in bonusDamage"
-				       v-if="v.base"
-				       :key="k">
+				<b-row v-for="(v, k) in bonusDamage" v-if="v.base" :key="k">
 					<b-col class="capitalize">
-						<span :class="getClassFromBonus(k)">{{k | format}}</span>
+						<span :class="getClassFromBonus(k)">{{ k | format }}</span>
 						<span>Damage:</span>
 						<template v-if="!item.identified">
-							<span :class="v.min>0?'positive':'negative'">{{getFormat(k,v.min)}}</span>
+							<span :class="v.min > 0 ? 'positive' : 'negative'">{{ getFormat(k, v.min) }}</span>
 							~
-							<span :class="v.max>0?'positive':'negative'">{{getFormat(k,v.max)}}</span>
+							<span :class="v.max > 0 ? 'positive' : 'negative'">{{ getFormat(k, v.max) }}</span>
 						</template>
-						<span v-else
-						      :class="v.base>0?'positive':'negative'">{{getFormat(k,v.base)}}</span>
+						<span v-else :class="v.base > 0 ? 'positive' : 'negative'">{{ getFormat(k, v.base) }}</span>
 					</b-col>
 				</b-row>
-				<b-row v-for="(v,k) in bonusDefense"
-				       v-if="v.base"
-				       :key="k">
+				<b-row v-for="(v, k) in bonusDefense" v-if="v.base" :key="k">
 					<b-col class="capitalize">
-						<span :class="getClassFromBonus(k)">{{k | format}}</span>
+						<span :class="getClassFromBonus(k)">{{ k | format }}</span>
 						<span>Defense:</span>
 						<template v-if="!item.identified">
-							<span :class="v.min>0?'positive':'negative'">{{getFormat(k,v.min)}}</span>
+							<span :class="v.min > 0 ? 'positive' : 'negative'">{{ getFormat(k, v.min) }}</span>
 							~
-							<span :class="v.max>0?'positive':'negative'">{{getFormat(k,v.max)}}</span>
+							<span :class="v.max > 0 ? 'positive' : 'negative'">{{ getFormat(k, v.max) }}</span>
 						</template>
-						<span v-else
-						      :class="v.base>0?'positive':'negative'">{{getFormat(k,v.base)}}</span>
+						<span v-else :class="v.base > 0 ? 'positive' : 'negative'">{{ getFormat(k, v.base) }}</span>
 					</b-col>
 				</b-row>
-				<b-row class="pt-2"></b-row>
+				<b-row class="pt-2" />
 				<b-row v-if="item.sockets">
-					<b-col>
-						[0/{{item.sockets}}] Powder Slots
-					</b-col>
+					<b-col> [0/{{ item.sockets }}] Powder Slots </b-col>
 				</b-row>
 				<b-row>
-					<b-col :class="item.tier">
-						{{item.tier}} Item
-					</b-col>
+					<b-col :class="item.tier"> {{ item.tier }} Item </b-col>
 				</b-row>
 				<b-row v-if="item.restrictions">
 					<b-col class="restrictions">
-						{{item.restrictions}}
+						{{ item.restrictions }}
 					</b-col>
 				</b-row>
-				<b-col class="pt-2"></b-col>
+				<b-col class="pt-2" />
 				<b-row v-if="full && item.addedLore">
-					<b-col class="lore">{{item.addedLore}}</b-col>
+					<b-col class="lore">
+						{{ item.addedLore }}
+					</b-col>
 				</b-row>
-				<b-row v-if="!full"
-				       align-h="end">
+				<b-row v-if="!full" align-h="end">
 					<b-col cols="6">
-						<b-link :to="`/item/${item.name}`">show details...</b-link>
+						<b-link :to="`/item/${item.name}`">
+							show details...
+						</b-link>
 					</b-col>
 				</b-row>
 			</b-col>
 		</b-row>
-		<b-row class="pb-4"></b-row>
+		<b-row class="pb-4" />
 	</b-col>
 </template>
 <script>
@@ -362,15 +346,15 @@ export default {
 				.mapValues(v => {
 					return v > 0
 						? {
-							min: Math.ceil(v * 0.3),
-							base: v,
-							max: Math.ceil(v * 1.3)
-						}
+								min: Math.ceil(v * 0.3),
+								base: v,
+								max: Math.ceil(v * 1.3)
+						  }
 						: {
-							min: Math.floor(v * 0.7),
-							base: v,
-							max: Math.floor(v * 1.3)
-						}
+								min: Math.floor(v * 0.7),
+								base: v,
+								max: Math.floor(v * 1.3)
+						  }
 				})
 				.value()
 		},
@@ -380,15 +364,15 @@ export default {
 				.mapValues(v => {
 					return v > 0
 						? {
-							min: Math.ceil(v * 0.3),
-							base: v,
-							max: Math.ceil(v * 1.3)
-						}
+								min: Math.ceil(v * 0.3),
+								base: v,
+								max: Math.ceil(v * 1.3)
+						  }
 						: {
-							min: Math.floor(v * 0.7),
-							base: v,
-							max: Math.floor(v * 1.3)
-						}
+								min: Math.floor(v * 0.7),
+								base: v,
+								max: Math.floor(v * 1.3)
+						  }
 				})
 				.value()
 		}
@@ -408,100 +392,100 @@ export default {
 </script>
 
 <style scoped>
-.item{
+.item {
 	/* item card style: https://wynndata.tk/ */
 	background-color: #110110;
-	color: #AAA;
-	border: 3px solid #2C0860;
+	color: #aaa;
+	border: 3px solid #2c0860;
 	box-shadow: 4px 0 0 #110110, -4px 0 #110110, 0 4px 0 #110110, 0 -4px 0 #110110;
 	font-family: Nunito, sans-serif;
 	font-weight: 700;
-	text-shadow: 2px 2px 0 #2A2A2A;
+	text-shadow: 2px 2px 0 #2a2a2a;
 }
-.itemimg{
+.itemimg {
 	width: 64px;
 }
 
-.Mythic{
-	color: #A0A;
+.Mythic {
+	color: #a0a;
 }
-.Legendary{
-	color: #5FF;
+.Legendary {
+	color: #5ff;
 }
-.Rare{
-	color: #F5F;
+.Rare {
+	color: #f5f;
 }
-.Set{
-	color: #0A0;
+.Set {
+	color: #0a0;
 }
-.Unique{
-	color: #FF5;
+.Unique {
+	color: #ff5;
 }
-.Normal{
-	color: #FFF;
+.Normal {
+	color: #fff;
 }
 
-.fire{
-	color: #F55;
+.fire {
+	color: #f55;
 }
-.fire::before{
+.fire::before {
 	content: '✹ ';
 }
-.water{
-	color: #5FF;
+.water {
+	color: #5ff;
 }
-.water::before{
+.water::before {
 	content: '❉ ';
 }
-.air{
-	color: #FFF;
+.air {
+	color: #fff;
 }
-.air::before{
+.air::before {
 	content: '❋ ';
 }
-.thunder{
-	color: #FF5;
+.thunder {
+	color: #ff5;
 }
-.thunder::before{
+.thunder::before {
 	content: '✦ ';
 }
-.earth{
-	color: #0A0;
+.earth {
+	color: #0a0;
 }
-.earth::before{
+.earth::before {
 	content: '✤ ';
 }
-.neutual{
-	color: #FA0;
+.neutual {
+	color: #fa0;
 }
-.neutual::before{
+.neutual::before {
 	content: '✤ ';
 }
 
-.requirement::before{
-	color: #5F5;
+.requirement::before {
+	color: #5f5;
 	content: '✔ ';
 }
 
-.positive{
-	color: #5F5;
+.positive {
+	color: #5f5;
 }
-.negative{
-	color: #F55;
-}
-
-.restrictions{
-	color: #F55;
+.negative {
+	color: #f55;
 }
 
-.health{
-	color: #A00;
+.restrictions {
+	color: #f55;
 }
-.health::before{
+
+.health {
+	color: #a00;
+}
+.health::before {
 	content: '❤ ';
 }
 
-.lore{
+.lore {
 	color: #555;
 	font-style: italic;
 }

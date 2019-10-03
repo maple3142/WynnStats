@@ -1,10 +1,8 @@
 const ls = localStorage
 export class CacheStorage {
-	constructor(
-		{
-			expire = 10 * 60 * 1000 //10min
-		} = {}
-	) {
+	constructor({
+		expire = 10 * 60 * 1000 //10min
+	} = {}) {
 		this.expire = expire
 	}
 

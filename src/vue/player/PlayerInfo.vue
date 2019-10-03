@@ -18,7 +18,9 @@
 				:to="`/guild/${player.guild.name}#${player.guild.rank.toLowerCase()}`"
 			>
 				{{ player.guild.rank | capitalize }} of
-				<b-link :to="`/guild/${player.guild.name}`">{{ player.guild.name }}</b-link>
+				<b-link :to="`/guild/${player.guild.name}`">
+					{{ player.guild.name }}
+				</b-link>
 			</b-list-group-item>
 		</b-list-group>
 	</b-col>
@@ -29,6 +31,7 @@ import Id from '../widget/Id'
 import { format } from 'date-fns'
 
 export default {
+	components: { Tag, Id },
 	props: {
 		player: Object
 	},
@@ -42,7 +45,6 @@ export default {
 		lastlogin() {
 			return format(new Date(this.player.meta.lastJoin), 'yyyy/MM/dd')
 		}
-	},
-	components: { Tag, Id }
+	}
 }
 </script>

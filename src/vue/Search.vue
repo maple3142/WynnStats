@@ -2,32 +2,30 @@
 	<div>
 		<b-row class="justify-content-md-center p-2">
 			<b-col md="8">
-				<pulse-loader class="text-center"
-				              :loading="loading"
-				              size="100px"></pulse-loader>
+				<pulse-loader class="text-center" :loading="loading" size="100px" />
 
-				<b-alert :show="error"
-				         variant="danger">Search failed.</b-alert>
+				<b-alert :show="error" variant="danger">
+					Search failed.
+				</b-alert>
 
-				<b-alert :show="error2"
-				         variant="danger">Search string need to be longer than 3 character.</b-alert>
+				<b-alert :show="error2" variant="danger">
+					Search string need to be longer than 3 character.
+				</b-alert>
 
 				<div v-if="result">
 					<b-row class="justify-content-md-center p-2 text-center">
-						<b-col cols="12"
-						       md="6"
-						       v-if="result.guilds.length">
-							<h4>Guilds({{result.guilds.length}})</h4>
+						<b-col v-if="result.guilds.length" cols="12" md="6">
+							<h4>Guilds({{ result.guilds.length }})</h4>
 							<page-list :list="result.guilds">
 								<template slot-scope="row">
-									<b-link :to="`/guild/${row.value}`">{{row.value}}</b-link>
+									<b-link :to="`/guild/${row.value}`">
+										{{ row.value }}
+									</b-link>
 								</template>
 							</page-list>
 						</b-col>
-						<b-col cols="12"
-						       md="6"
-						       v-if="result.players.length">
-							<h4>Players({{result.players.length}})</h4>
+						<b-col v-if="result.players.length" cols="12" md="6">
+							<h4>Players({{ result.players.length }})</h4>
 							<page-list :list="result.players">
 								<template slot-scope="row">
 									<Id :id="row.value" />
@@ -71,6 +69,11 @@ export default {
 		keys: ['results']
 	},
 	components: { PulseLoader, Id, PageList, Clear },
+	computed: {
+		result() {
+			return this.results[this.search]
+		}
+	},
 	async created() {
 		if (this.search.length < 3) {
 			this.loading = false
@@ -85,11 +88,6 @@ export default {
 			}
 		}
 		this.loading = false
-	},
-	computed: {
-		result() {
-			return this.results[this.search]
-		}
 	},
 	// async created() {
 	// 	let s = this.search

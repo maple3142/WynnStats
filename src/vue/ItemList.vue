@@ -2,36 +2,30 @@
 	<div>
 		<b-row class="justify-content-md-center p-2">
 			<b-col md="10">
-				<pulse-loader class="text-center"
-				              :loading="loading"
-				              size="100px"></pulse-loader>
+				<pulse-loader class="text-center" :loading="loading" size="100px" />
 
-				<b-alert :show="error"
-				         variant="danger">Getting itemDB failed or item not found.</b-alert>
+				<b-alert :show="error" variant="danger">
+					Getting itemDB failed or item not found.
+				</b-alert>
 
-				<b-row v-if="!loading"
-				       align-h="center"
-				       class="p-2">
+				<b-row v-if="!loading" align-h="center" class="p-2">
 					<b-col md="9">
 						<b-row class="pb-2">
 							<b-col>
-								<b-form-input v-model="filter.search"
-								              placeholder="Item Name" />
+								<b-form-input v-model="filter.search" placeholder="Item Name" />
 							</b-col>
 						</b-row>
 						<b-row class="pb-2">
 							<b-col>
 								<b-input-group>
 									<b-input-group-text>Rarity</b-input-group-text>
-									<b-form-select v-model="filter.rarity"
-									               :options="RARITY" />
+									<b-form-select v-model="filter.rarity" :options="RARITY" />
 								</b-input-group>
 							</b-col>
 							<b-col>
 								<b-input-group>
 									<b-input-group-text>Type</b-input-group-text>
-									<b-form-select v-model="filter.type"
-									               :options="TYPE" />
+									<b-form-select v-model="filter.type" :options="TYPE" />
 								</b-input-group>
 							</b-col>
 						</b-row>
@@ -39,66 +33,59 @@
 							<b-col>
 								<b-input-group>
 									<b-input-group-text>Min lv.</b-input-group-text>
-									<b-form-input type="number"
-									              min="0"
-									              :max="filter.max"
-									              v-model="filter.min" />
+									<b-form-input v-model="filter.min" type="number" min="0" :max="filter.max" />
 								</b-input-group>
 							</b-col>
 							<b-col>
 								<b-input-group>
 									<b-input-group-text>Max lv.</b-input-group-text>
-									<b-form-input type="number"
-									              :min="filter.min"
-									              max="100"
-									              v-model="filter.max" />
+									<b-form-input v-model="filter.max" type="number" :min="filter.min" max="100" />
 								</b-input-group>
 							</b-col>
 						</b-row>
 						<b-row class="pb-2">
 							<b-col>
-								<b-button class="w-100"
-								          variant="success"
-								          @click="search">Search</b-button>
+								<b-button class="w-100" variant="success" @click="search">
+									Search
+								</b-button>
 							</b-col>
 						</b-row>
 						<b-row class="pb-2">
 							<b-col class="text-center">
-								Total {{items.length}} Result{{items.length>1?'s':''}}
+								Total {{ items.length }} Result{{ items.length > 1 ? 's' : '' }}
 							</b-col>
 						</b-row>
 					</b-col>
 				</b-row>
-				<b-row align-h="center"
-				       class="p-2">
+				<b-row align-h="center" class="p-2">
 					<b-col md="9">
 						<div class="row">
-							<b-col cols="12"
-							       md="6">
-								<item-info md="12"
-								           v-for="(i,idx) in displayedItems"
-								           :key="i.name"
-								           v-if="idx%2===0"
-								           class="mb-4"
-								           :item="i"></item-info>
+							<b-col cols="12" md="6">
+								<item-info
+									v-for="(i, idx) in displayedItems"
+									v-if="idx % 2 === 0"
+									:key="i.name"
+									md="12"
+									class="mb-4"
+									:item="i"
+								/>
 							</b-col>
-							<b-col cols="12"
-							       md="6">
-								<item-info md="12"
-								           v-for="(i,idx) in displayedItems"
-								           :key="i.name"
-								           v-if="idx%2===1"
-								           class="mb-4"
-								           :item="i"></item-info>
+							<b-col cols="12" md="6">
+								<item-info
+									v-for="(i, idx) in displayedItems"
+									v-if="idx % 2 === 1"
+									:key="i.name"
+									md="12"
+									class="mb-4"
+									:item="i"
+								/>
 							</b-col>
 						</div>
 					</b-col>
 				</b-row>
 				<b-row>
 					<b-col>
-						<infinite-loading spinner="waveDots"
-						                  @infinite="loadMore"
-						                  ref="infiniteLoading">
+						<infinite-loading ref="infiniteLoading" spinner="waveDots" @infinite="loadMore">
 							<span slot="no-more">End of list</span>
 						</infinite-loading>
 					</b-col>
@@ -118,6 +105,7 @@ import escRegex from 'escape-string-regexp'
 const params = ['search', 'rarity', 'type', 'min', 'max'] //url params
 
 export default {
+	components: { PulseLoader, ItemInfo, InfiniteLoading },
 	data() {
 		return {
 			error: false,
@@ -180,7 +168,6 @@ export default {
 			this.items = await db.items.toArray()
 		}
 	},
-	components: { PulseLoader, ItemInfo, InfiniteLoading },
 	methods: {
 		loadMore($state) {
 			setTimeout(() => {

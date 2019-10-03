@@ -1,50 +1,46 @@
 <template>
 	<div>
-		<b-row align-h="center"
-		       class="p-2">
-			<b-col md="10"
-			       class="text-center">
-				<pulse-loader class="text-center"
-				              :loading="loading"
-				              size="100px"></pulse-loader>
+		<b-row align-h="center" class="p-2">
+			<b-col md="10" class="text-center">
+				<pulse-loader class="text-center" :loading="loading" size="100px" />
 
-				<b-alert :show="error"
-				         variant="danger">Fetching leaderboard error.</b-alert>
+				<b-alert :show="error" variant="danger">
+					Fetching leaderboard error.
+				</b-alert>
 
 				<div v-if="list">
 					<b-row>
 						<b-col>
-							<h3 class="capitalize">{{type}} LeaderBoard</h3>
+							<h3 class="capitalize">{{ type }} LeaderBoard</h3>
 						</b-col>
 					</b-row>
 					<b-row>
-						<b-col v-if="list"
-						       class="text-center">
-							<b-form-group v-if="type==='pvp'">
-								<b-form-radio-group v-model="timeframe"
-								                    :options="[{text: 'All Time',value: 'alltime'},{text: 'Weekly',value: 'week'}]"
-								                    size="sm"
-								                    @change="fetchdata" />
+						<b-col v-if="list" class="text-center">
+							<b-form-group v-if="type === 'pvp'">
+								<b-form-radio-group
+									v-model="timeframe"
+									:options="[
+										{ text: 'All Time', value: 'alltime' },
+										{ text: 'Weekly', value: 'week' }
+									]"
+									size="sm"
+									@change="fetchdata"
+								/>
 							</b-form-group>
 
-							<b-row align-h="center"
-							       class="p-2">
+							<b-row align-h="center" class="p-2">
 								<b-col md="8">
-									<b-form-input v-model="filter"
-									              type="text"
-									              placeholder="Filter" />
+									<b-form-input v-model="filter" type="text" placeholder="Filter" />
 								</b-col>
 							</b-row>
 
 							<b-row class="text-center">
-								<list v-if="list"
-								      v-bind="{list,type,filter}" />
+								<list v-if="list" v-bind="{ list, type, filter }" />
 							</b-row>
 						</b-col>
 					</b-row>
 					<b-row>
-						<clear href="https://wynncraft.com/stats/"
-						       @clear="clear" />
+						<clear href="https://wynncraft.com/stats/" @clear="clear" />
 					</b-row>
 				</div>
 			</b-col>
@@ -77,13 +73,18 @@ export default {
 		keys: ['timeframe', 'lists']
 	},
 	components: { PulseLoader, List, Clear },
-	created() {
-		this.fetchdata()
-	},
 	computed: {
 		list() {
 			return this.lists[this.type + (this.type === 'pvp' ? this.timeframe : '')]
 		}
+	},
+	watch: {
+		timeframe(v) {
+			this.fetchdata()
+		}
+	},
+	created() {
+		this.fetchdata()
 	},
 	methods: {
 		async fetchdata() {
@@ -101,11 +102,6 @@ export default {
 		clear() {
 			this.$delete(this.lists, this.type + (this.type === 'pvp' ? this.timeframe : ''))
 			this.$router.go(0)
-		}
-	},
-	watch: {
-		timeframe(v) {
-			this.fetchdata()
 		}
 	}
 }

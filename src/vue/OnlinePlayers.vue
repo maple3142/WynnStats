@@ -2,9 +2,11 @@
 	<div>
 		<b-row align-h="center" class="p-2">
 			<b-col md="8">
-				<pulse-loader class="text-center" :loading="loading" size="100px"></pulse-loader>
+				<pulse-loader class="text-center" :loading="loading" size="100px" />
 
-				<b-alert :show="error" variant="danger">Getting onlineplayers failed.</b-alert>
+				<b-alert :show="error" variant="danger">
+					Getting onlineplayers failed.
+				</b-alert>
 
 				<div v-if="result">
 					<b-row align-h="center" class="p-2">
@@ -13,16 +15,16 @@
 								<b-input-group-prepend>
 									<!--format: servername(server player count)-->
 									<dropdown-select
+										v-model="cur"
 										:list="serverlist"
 										:text="`${cur}(${result[cur].length})`"
-										v-model="cur"
 										variant="success"
 									>
 										<span slot-scope="row">{{ row.value }}({{ result[row.value].length }})</span>
 									</dropdown-select>
 								</b-input-group-prepend>
 
-								<b-form-input v-model="filter" placeholder="Filter"></b-form-input>
+								<b-form-input v-model="filter" placeholder="Filter" />
 							</b-input-group>
 						</b-col>
 					</b-row>
@@ -77,6 +79,16 @@ export default {
 		keys: ['cur', 'result']
 	},
 	components: { PulseLoader, Id, PageList, Dropdown, Clear, DropdownSelect },
+	computed: {
+		serverlist() {
+			return Object.keys(this.result).filter(s => this.result[s].length > 0)
+		}
+	},
+	watch: {
+		$route() {
+			this.updateCur()
+		}
+	},
 	async created() {
 		if (!this.result) {
 			try {
@@ -109,16 +121,6 @@ export default {
 				this.cur = this.$route.query.srv
 				this.$router.replace(this.$route.path) //remove query
 			}
-		}
-	},
-	computed: {
-		serverlist() {
-			return Object.keys(this.result).filter(s => this.result[s].length > 0)
-		}
-	},
-	watch: {
-		$route() {
-			this.updateCur()
 		}
 	}
 }

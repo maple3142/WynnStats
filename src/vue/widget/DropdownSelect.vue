@@ -1,9 +1,6 @@
 <template>
 	<b-dropdown v-bind="$props">
-		<b-dropdown-item v-for="item in list"
-		                 :key="item"
-		                 @click="update(item)"
-		                 :active="value===item">
+		<b-dropdown-item v-for="item in list" :key="item" :active="value === item" @click="update(item)">
 			<slot :value="item" />
 		</b-dropdown-item>
 	</b-dropdown>
@@ -11,6 +8,7 @@
 <script>
 import Dropdown from './Dropdown'
 export default {
+	components: { Dropdown },
 	props: {
 		list: {
 			type: Array,
@@ -30,7 +28,6 @@ export default {
 		},
 		value: String
 	},
-	components: { Dropdown },
 	methods: {
 		update(item) {
 			this.$emit('input', item)
