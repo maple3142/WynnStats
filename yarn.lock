@@ -7187,10 +7187,10 @@ ws@^6.2.1:
   dependencies:
     async-limiter "~1.0.0"
 
-xfetch-js@^0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/xfetch-js/-/xfetch-js-0.3.4.tgz#05068c9dc6f0fb27e1003ebb23eec8f2663c1dc8"
-  integrity sha512-esk8J1YBLNHxYPkmzEEFZFo7oGnZI0inMcaj2zFq5J4XwebjM1+rBtNPVhfIy1BIUqP24OQlZiu5JsscT9pllg==
+xfetch-js@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/xfetch-js/-/xfetch-js-0.4.0.tgz#24ee4f8d4296d6d87557af0250be7d4b6b952ffa"
+  integrity sha512-pWRy26WoajDPWrUBvIyDk+jpQNWX9F1ZnwmisQD6avX4BP3rS640JedJucXI02sw8c7a07hzj2Fv3b3vH/yadA==
   dependencies:
     form-data "^2.3.3"
     node-fetch "^2.2.0"
