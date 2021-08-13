@@ -13,7 +13,7 @@ export const instance = xf.extend({
 
 export async function getPlayerStats(player) {
 	let res = await instance.get(`player/${player}/stats`).json()
-	if (res.message != 'OK') {
+	if (res.code !== 200) {
 		throw new Error(res)
 	}
 	return res.data[0]
